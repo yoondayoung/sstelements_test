@@ -138,6 +138,7 @@ struct ArielCommand {
             uint32_t instClass;
             uint32_t simdElemCount;
             uint8_t  payload[ARIEL_MAX_PAYLOAD_SIZE];
+            bool isWeight; // for identify weight allocation
         } inst;
         struct {
             uint64_t vaddr;

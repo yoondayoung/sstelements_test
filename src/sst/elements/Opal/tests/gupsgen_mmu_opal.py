@@ -34,7 +34,10 @@ ariel.addParams({
     "arielmode" : 0,
     "appargcount" : 0,
     "max_insts" : 10000,
-    "executable" : "./app/opal_test",
+#     "executable" : "./app/inference_test",
+#     "executable" : "./app/cpu-rnn-inference-int8-cpp",
+#     "executable" : "./app/opal_test",
+    "executable" : "./app/cnn-inference-f32-c",
     "node" : 0,
     "launchparamcount" : 1,
     "launchparam0" : "-ifeellucky",
@@ -118,13 +121,17 @@ opal.addParams({
 	"num_nodes"			: 1,
 	"verbose"  			: 1,
 	"max_inst" 			: 32,
-	"shared_mempools" 		: 1,
+	"shared_mempools" 		: 2,
 	"shared_mem.mempool0.start"	: local_memory_capacity*1024*1024,
 	"shared_mem.mempool0.size"	: shared_memory_capacity*1024,
 	"shared_mem.mempool0.frame_size": page_size,
 	"shared_mem.mempool0.mem_type"	: 0,
+    "shared_mem.mempool1.start"	: (local_memory_capacity*1024*1024)*2,
+	"shared_mem.mempool1.size"	: shared_memory_capacity*1024,
+	"shared_mem.mempool1.frame_size": page_size,
+	"shared_mem.mempool1.mem_type"	: 0,
 	"node0.cores" 			: cores//2,
-	"node0.allocation_policy" 	: 1,
+	"node0.allocation_policy" 	: 2,
 	"node0.page_migration" 		: 0,
 	"node0.page_migration_policy" 	: 0,
 	"node0.num_pages_to_migrate" 	: 0,
@@ -143,6 +150,7 @@ l1_params = {
         "cache_size": "32KiB",
         "associativity": 8,
         "access_latency_cycles": 4,
+        "prefetcher" : "cassini.StridePrefetcher",
        	"L1": 1,
         "verbose": 30,
         "maxRequestDelay" : "1000000",
@@ -275,6 +283,7 @@ l3_ring_link.connect( (l3_link, "port", "300ps"), (internal_network.rtr, "port%d
 mem = sst.Component("local_memory", "memHierarchy.MemController")	
 mem.addParams({
 	"clock"   : "1.2GHz",
+      "prefetcher" : "cassini.StridePrefetcher",
 	"backing" : "none",
 	"backend" : "memHierarchy.timingDRAM",
 	"backend.id" : 0,
@@ -400,8 +409,6 @@ extmemLink.connect( (ext_dc_memlink, "port", "500ps"), (ext_mem_link, "port", "5
 ext_dcLink = sst.Link("External_mem_link")
 ext_dcLink.connect( (ext_dc_cpulink, "port", "500ps"), (external_network.rtr, "port%d"%port, "500ps") )
 
-
-
 # Connecting Internal and External network
 def bridge(net0, net1):
     net0port = net0.getNextPort()
@@ -417,9 +424,10 @@ def bridge(net0, net1):
     link = sst.Link("B1-%s"%name)
     link.connect( (bridge, "network1", "500ps"), (net1.rtr, "port%d"%net1port, "500ps") )
 
+bridge(internal_network, external_network)
 
-midnet = Network("Bridge",3,"50ps","50ps")
-bridge(internal_network, midnet)
-bridge(external_network, midnet)
+# midnet = Network("Bridge",3,"50ps","50ps")
+# bridge(internal_network, midnet)
+# bridge(external_network, midnet)
 
 sst.setStatisticOutput("sst.statOutputCSV")

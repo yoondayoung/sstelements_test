@@ -81,10 +81,10 @@ void ArielMemoryManagerSimple::allocate(const uint64_t size, const uint32_t leve
 
         output->verbose(CALL_INFO, 4, 0, "Allocating memory page, physical page=%" PRIu64 ", virtual page=%" PRIu64 "\n",
                 nextPhysPage, nextVirtPage);
-
+        // printf("Allocating memory page, physical page=%d, virtual page=%d \n",nextPhysPage, nextVirtPage);
         nextVirtPage += pageSize;
     }
-
+    // printf("use this allocate!!\n");
     output->verbose(CALL_INFO, 4, 0, "Request leaves: %" PRIu32 " free pages\n",
         (uint32_t) freePages.size());
 

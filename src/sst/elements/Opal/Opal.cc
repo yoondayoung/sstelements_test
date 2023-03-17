@@ -58,7 +58,7 @@ Opal::Opal(SST::ComponentId_t id, SST::Params& params): Component(id) {
 	/*----------------------------------------------------------------------------------------*/
 	num_shared_mempools = params.find<uint32_t>("shared_mempools", 0);
 	std::cerr << getName().c_str() << "Number of Shared Memory Pools: "<< num_shared_mempools << endl;
-
+    
 	Params sharedMemParams = params.get_scoped_params("shared_mem");
 	shared_mem_size = 0;
 
@@ -104,6 +104,7 @@ Opal::Opal(SST::ComponentId_t id, SST::Params& params): Component(id) {
 		nodeInfo[i]->statLocalMemUsage = registerStatistic<uint64_t>("local_mem_usage", subID );
 		nodeInfo[i]->statSharedMemUsage = registerStatistic<uint64_t>("shared_mem_usage", subID );
 		free(subID);
+		printf("allocation policy: %d\n", nodeInfo[i]->memoryAllocationPolicy);
 	}
 
 	free(buffer);
@@ -128,6 +129,8 @@ void Opal::setNextMemPool( int node, int fault_level )
 {
 	switch(nodeInfo[node]->memoryAllocationPolicy)
 	{
+	case 9:
+		// weight에 해당하는 data일 경우에만 local memory
 	case 8:
 		//alternate allocation policy 1:16
 		nodeInfo[node]->nextallocmem = ( nodeInfo[node]->nextallocmem + 1 ) % 17;
@@ -189,7 +192,7 @@ void Opal::setNextMemPool( int node, int fault_level )
 		break;
 
 	}
-
+	
 }
 
 void Opal::processHint(int node, int fileId, uint64_t vAddress, int size)
@@ -452,6 +455,7 @@ bool Opal::processRequest(int node, int coreId, uint64_t vAddress, int fault_lev
 			response = allocateFromReservedMemory(node, response.address, vAddress, pages);
 
 		else {
+			// todo: weight 메모리인지 아닌지 확인
 			if( !nodeInfo[node]->allocatedmempool ) {
 				response = allocateLocalMemory(node, coreId, vAddress, fault_level, pages);
 				//std::cerr << getName() << " Node: " << node << " core " << coreId << " response page address: " << vAddress << " allocated local address: " << response.address << " pages: "<< pages << " level: " << fault_level  << std::endl;

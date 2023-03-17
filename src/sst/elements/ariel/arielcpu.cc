@@ -268,6 +268,7 @@ void ArielCPU::finish() {
     }
 
     memmgr->printStats();
+    
     frontend->finish();
 }
 

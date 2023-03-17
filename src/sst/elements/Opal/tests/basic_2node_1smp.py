@@ -211,10 +211,10 @@ for node in range(nodes):
 	mmu.addParams(mmuParams)
 
 	# MMU uses this page fault handler
-        pagefaulthandler = mmu.setSubComponent("pagefaulthandler", "Opal.PageFaultHandler")
-        pagefaulthandler.addParams({
-            "opal_latency" : "30ps"
-        })
+	pagefaulthandler = mmu.setSubComponent("pagefaulthandler", "Opal.PageFaultHandler")
+	pagefaulthandler.addParams({
+		"opal_latency" : "30ps"
+		})
 
 	mmu.enableAllStatistics({"type":"sst.AccumulatorStatistic"})
 
@@ -243,17 +243,26 @@ for node in range(nodes):
 
 		arielMMULink = sst.Link("node"+str(node)+"_cpu_mmu_link_" + str(next_core))
 		MMUCacheLink = sst.Link("node"+str(node)+"_mmu_cache_link_" + str(next_core))
-		PTWMemLink = sst.Link("node"+str(node)+"_ptw_mem_link_" + str(next_core))
+		# PTWMemLink = sst.Link("node"+str(node)+"_ptw_mem_link_" + str(next_core))
 		PTWOpalLink = sst.Link("node"+str(node)+"_ptw_opal_" + str(next_core))
 		ArielOpalLink = sst.Link("node"+str(node)+"_ariel_opal_" + str(next_core))
 
+		arielMMULink.connect((ariel, "cache_link_%d"%next_core, "300ps"), (mmu, "cpu_to_mmu%d"%next_core, "300ps"))
 		if next_core < cores//2:
-			arielMMULink.connect((ariel, "cache_link_%d"%next_core, "300ps"), (mmu, "cpu_to_mmu%d"%next_core, "300ps"))
 			ArielOpalLink.connect((memmgr, "opal_link_%d"%next_core, "300ps"), (opal, "coreLink%d"%(next_core + node*(cores//2)), "300ps"))
-			MMUCacheLink.connect((mmu, "mmu_to_cache%d"%next_core, "300ps"), (l1_cpulink, "port", "300ps"))
 			PTWOpalLink.connect( (pagefaulthandler, "opal_link_%d"%next_core, "300ps"), (opal, "mmuLink%d"%(next_core + node*(cores//2)), "300ps") )
-		else:
-			PTWMemLink.connect((mmu, "ptw_to_mem%d"%(next_core-cores//2), "300ps"), (l1_cpulink, "port", "300ps"))
+		# ArielOpalLink.connect((memmgr, "opal_link_%d"%next_core, "300ps"), (opal, "coreLink%d"%(next_core), "300ps"))
+		# ArielOpalLink.connect((memmgr, "opal_link_%d"%next_core, "300ps"), (opal, "coreLink%d"%(next_core + node*(cores//2)), "300ps"))
+		MMUCacheLink.connect((mmu, "mmu_to_cache%d"%next_core, "300ps"), (l1_cpulink, "port", "300ps"))
+		
+		
+  		# if next_core < cores//2:
+		# 	arielMMULink.connect((ariel, "cache_link_%d"%next_core, "300ps"), (mmu, "cpu_to_mmu%d"%next_core, "300ps"))
+		# 	ArielOpalLink.connect((memmgr, "opal_link_%d"%next_core, "300ps"), (opal, "coreLink%d"%(next_core + node*(cores//2)), "300ps"))
+		# 	MMUCacheLink.connect((mmu, "mmu_to_cache%d"%next_core, "300ps"), (l1_cpulink, "port", "300ps"))
+		# 	PTWOpalLink.connect( (pagefaulthandler, "opal_link_%d"%next_core, "300ps"), (opal, "mmuLink%d"%(next_core + node*(cores//2)), "300ps") )
+		# else:
+		# 	PTWMemLink.connect((mmu, "ptw_to_mem%d"%(next_core-cores//2), "300ps"), (l1_cpulink, "port", "300ps"))
 
 		l2_core_link = sst.Link("node"+str(node)+"_l2cache_" + str(next_core) + "_link")
 		l2_core_link.connect((l1_memlink, "port", "300ps"), (l2_cpulink, "port", "300ps"))				
@@ -428,4 +437,5 @@ for node in range(nodes):
 	bridge(internal_network_map[str(node)], midnet)
 	bridge(external_network, midnet)
 
+sst.setStatisticOutput("sst.statOutputCSV")
 

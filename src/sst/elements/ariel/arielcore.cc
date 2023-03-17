@@ -685,11 +685,14 @@ void ArielCore::createReadEvent(uint64_t address, uint32_t length) {
 }
 
 void ArielCore::createAllocateEvent(uint64_t vAddr, uint64_t length, uint32_t level, uint64_t instPtr) {
-    ArielAllocateEvent* ev = new ArielAllocateEvent(vAddr, length, level, instPtr);
+    // printf( "Generated an allocate event, vAddr(map)=%ld, length=%ld in level %d from IP %ld\n",
+    //                 vAddr, length, level, instPtr);
+    ArielAllocateEvent* ev = new ArielAllocateEvent(vAddr, length, level, instPtr, false);
     coreQ->push(ev);
 
     ARIEL_CORE_VERBOSE(2, output->verbose(CALL_INFO, 2, 0, "Generated an allocate event, vAddr(map)=%" PRIu64 ", length=%" PRIu64 " in level %" PRIu32 " from IP %" PRIx64 "\n",
                     vAddr, length, level, instPtr));
+    
 }
 
 void ArielCore::createMmapEvent(uint32_t fileID, uint64_t vAddr, uint64_t length, uint32_t level, uint64_t instPtr) {
@@ -707,10 +710,9 @@ void ArielCore::createFreeEvent(uint64_t vAddr) {
     ARIEL_CORE_VERBOSE(2, output->verbose(CALL_INFO, 2, 0, "Generated a free event for virtual address=%" PRIu64 "\n", vAddr));
 }
 
-void ArielCore::createWriteEvent(uint64_t address, uint32_t length, const uint8_t* payload) {
-    ArielWriteEvent* ev = new ArielWriteEvent(address, length, payload);
-    coreQ->push(ev);
-
+void ArielCore::createWriteEvent(uint64_t address, uint32_t length, const uint8_t* payload, bool isWeightWrite) {
+    ArielWriteEvent* ev = new ArielWriteEvent(address, length, payload, isWeightWrite);
+    coreQ->push(ev); // todo : weight allocation인거 알리기
     ARIEL_CORE_VERBOSE(4, output->verbose(CALL_INFO, 4, 0, "Generated a WRITE event, addr=%" PRIu64 ", length=%" PRIu32 "\n", address, length));
 }
 
@@ -891,8 +893,8 @@ bool ArielCore::refillQueue() {
                                     createReadEvent(ac.inst.addr, ac.inst.size);
                                     break;
 
-                            case ARIEL_PERFORM_WRITE:
-                                    createWriteEvent(ac.inst.addr, ac.inst.size, &ac.inst.payload[0]);
+                            case ARIEL_PERFORM_WRITE: // to do: weight allocation인거 알리기
+                                    createWriteEvent(ac.inst.addr, ac.inst.size, &ac.inst.payload[0], ac.inst.isWeight);
                                     break;
 
                             case ARIEL_END_INSTRUCTION:
@@ -1042,6 +1044,7 @@ void ArielCore::handleReadRequest(ArielReadEvent* rEv) {
     statReadRequestSizes->addData(readLength);
 }
 
+// to do: 여기서 opal base requestQ 안에 넣어야함
 void ArielCore::handleWriteRequest(ArielWriteEvent* wEv) {
     ARIEL_CORE_VERBOSE(4, output->verbose(CALL_INFO, 4, 0, "Core %" PRIu32 " processing a write event...\n", coreID));
 
@@ -1409,7 +1412,6 @@ void ArielCore::printCoreStatistics() {
 }
 
 bool ArielCore::processNextEvent() {
-
     // Upon every call, check if the core is drained and we are fenced. If so, unfence
     // return true; /* Todo: reevaluate if this is needed */
     // Attempt to refill the queue

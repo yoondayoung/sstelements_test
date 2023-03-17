@@ -174,6 +174,7 @@ void ArielMemoryManagerMalloc::allocate(const uint64_t size, const uint32_t leve
  */
 bool ArielMemoryManagerMalloc::allocateMalloc(const uint64_t size, const uint32_t level, const uint64_t virtualAddress, const uint64_t instructionPointer, const uint32_t thread) {
     output->verbose(CALL_INFO, 4, 0, "Allocate malloc received. VA: %" PRIu64 ". Size: %" PRIu64 ". Level: %" PRIu32 ".\n", virtualAddress, size, level);
+    printf("Allocate malloc received. VA: %" PRIu64 ". Size: %" PRIu64 ". Level: %" PRIu32 ".\n", virtualAddress, size, level);
 
     // Check whether a malloc mapping already exists (i.e., we missed a free)
     std::map<uint64_t, uint64_t>::iterator it = mallocTranslations.upper_bound(virtualAddress);

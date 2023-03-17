@@ -1,0 +1,40 @@
+No protocol specified
+No protocol specified
+SST-Core: Configuration Library Path will read from: /home/ydy/local/sst-core/lib/sst:/home/ydy/local/sst-core/lib/sstcore:/home/ydy/local/sst-elements/lib/sst-elements-library:/home/ydy/scratch/src/sst-elements/src/sst/elements/osseous
+SSTPythonModel: Creating config graph for SST using Python model...
+SSTPythonModel: Construction of config graph with Python is complete.
+ SST Core: #main() My rank is (0.0), on 1/1 nodes/threads
+ SST Core: # ------------------------------------------------------------
+ SST Core: # Graph construction took 0.024130 seconds.
+ SST Core: # Graph contains 4 components
+ SST Core: # Graph partitioning took 1.00136e-05 seconds.
+ SST Core: # Graph construction and partition raised RSS by 12508 KB
+ SST Core: # ------------------------------------------------------------
+ SST Core: Signal handlers will be registered for USR1, USR2, INT and TERM...
+ SST Core: Signal handler registration is completed
+ SST Core:  : StatisticOutputConsole enabled...
+ SST Core:  Warning: Load Level 4 is too low to enable Statistic 'default_stat' with Enable Level 7, statistic will not be enabled...
+ SST Core:  Warning: Load Level 4 is too low to enable Statistic 'Put_uncache_recv' with Enable Level 6, statistic will not be enabled...
+ SST Core:  Warning: Load Level 4 is too low to enable Statistic 'Get_uncache_recv' with Enable Level 6, statistic will not be enabled...
+ SST Core:  Warning: Load Level 4 is too low to enable Statistic 'AckMove_uncache_recv' with Enable Level 6, statistic will not be enabled...
+memory, WARNING: loading backend in legacy mode (from parameter set). Instead, load backend into this controller's 'backend' slot via ctrl.setSubComponent() in configuration.
+memory, WARNING: Memories no longer inherit address regions from directories and no region parameters (addr_range_start, addr_range_end, interleave_size, interleave_step) were detected. All addresses will map to this memory: if this is intended, you may ignore this warning or set addr_range_start to 0 in your input deck to eliminate this warning.
+memory, ** Found deprecated parameter: do_not_back ** Use 'backing' parameter instead and specify 'none', 'malloc', or 'mmap'. Remove this parameter from your input deck to eliminate this message.
+The value of tRCD is 300
+After initialization 
+[eclgpu4:2688825] *** Process received signal ***
+[eclgpu4:2688825] Signal: Segmentation fault (11)
+[eclgpu4:2688825] Signal code: Address not mapped (1)
+[eclgpu4:2688825] Failing at address: 0x32
+[eclgpu4:2688825] [ 0] /lib/x86_64-linux-gnu/libpthread.so.0(+0x14420)[0x7fabffa55420]
+[eclgpu4:2688825] [ 1] sst(_ZN3SST4Link9send_implEmPNS_5EventE+0x2b)[0x55902ba6191b]
+[eclgpu4:2688825] [ 2] /home/ydy/local/sst-elements/lib/sst-elements-library/libmemHierarchy.so(_ZN3SST12MemHierarchy7Messier12issueRequestEmmbj+0xe9)[0x7fabf4488239]
+[eclgpu4:2688825] [ 3] /home/ydy/local/sst-elements/lib/sst-elements-library/libmemHierarchy.so(_ZN3SST12MemHierarchy19MemBackendConvertor5clockEm+0xba)[0x7fabf446a7da]
+[eclgpu4:2688825] [ 4] /home/ydy/local/sst-elements/lib/sst-elements-library/libmemHierarchy.so(_ZN3SST12MemHierarchy13MemController5clockEm+0x3c)[0x7fabf441a24c]
+[eclgpu4:2688825] [ 5] sst(_ZN3SST5Clock7executeEv+0x1f2)[0x55902ba13d22]
+[eclgpu4:2688825] [ 6] sst(_ZN3SST15Simulation_impl3runEv+0x20b)[0x55902ba8d0eb]
+[eclgpu4:2688825] [ 7] sst(+0xfc998)[0x55902b9fa998]
+[eclgpu4:2688825] [ 8] sst(main+0x92d)[0x55902b9dc02d]
+[eclgpu4:2688825] [ 9] /lib/x86_64-linux-gnu/libc.so.6(__libc_start_main+0xf3)[0x7fabff3a9083]
+[eclgpu4:2688825] [10] sst(_start+0x2e)[0x55902b9f994e]
+[eclgpu4:2688825] *** End of error message ***

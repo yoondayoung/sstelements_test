@@ -146,7 +146,8 @@ namespace SST
 				void setOwner(OpalBase *base) { opalBase = base; }
 
 				void handleRequest(SST::Event* e)
-				{
+				{	
+					// to do: 여기서 weight allocation이라는걸 알아야함
 					OpalEvent *ev =  static_cast<OpalComponent::OpalEvent*> (e);
 					ev->setNodeId(nodeId);
 					ev->setCoreId(coreId);

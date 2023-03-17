@@ -118,13 +118,17 @@ opal.addParams({
 	"num_nodes"			: 1,
 	"verbose"  			: 1,
 	"max_inst" 			: 32,
-	"shared_mempools" 		: 1,
+	"shared_mempools" 		: 2,
 	"shared_mem.mempool0.start"	: local_memory_capacity*1024*1024,
 	"shared_mem.mempool0.size"	: shared_memory_capacity*1024,
 	"shared_mem.mempool0.frame_size": page_size,
 	"shared_mem.mempool0.mem_type"	: 0,
+    "shared_mem.mempool1.start"	: (local_memory_capacity*1024*1024)*2,
+	"shared_mem.mempool1.size"	: shared_memory_capacity*1024,
+	"shared_mem.mempool1.frame_size": page_size,
+	"shared_mem.mempool1.mem_type"	: 0,
 	"node0.cores" 			: cores//2,
-	"node0.allocation_policy" 	: 1,
+	"node0.allocation_policy" 	: 2,
 	"node0.page_migration" 		: 0,
 	"node0.page_migration_policy" 	: 0,
 	"node0.num_pages_to_migrate" 	: 0,
@@ -143,6 +147,7 @@ l1_params = {
         "cache_size": "32KiB",
         "associativity": 8,
         "access_latency_cycles": 4,
+        "prefetcher" : "cassini.StridePrefetcher",
        	"L1": 1,
         "verbose": 30,
         "maxRequestDelay" : "1000000",
@@ -399,8 +404,6 @@ extmemLink.connect( (ext_dc_memlink, "port", "500ps"), (ext_mem_link, "port", "5
 
 ext_dcLink = sst.Link("External_mem_link")
 ext_dcLink.connect( (ext_dc_cpulink, "port", "500ps"), (external_network.rtr, "port%d"%port, "500ps") )
-
-
 
 # Connecting Internal and External network
 def bridge(net0, net1):

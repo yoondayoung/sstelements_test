@@ -366,10 +366,12 @@ VOID WriteInstructionRead(ADDRINT* address, UINT32 readSize, THREADID thr, ADDRI
     ac.inst.size = readSize;
     ac.inst.instClass = instClass;
     ac.inst.simdElemCount = simdOpWidth;
+    ac.inst.isWeight = false; // todo: is this right??
 
     tunnel->writeMessage(thr, ac);
 }
 
+// to do: identify weight mem write
 VOID WriteInstructionWrite(ADDRINT* address, UINT32 writeSize, THREADID thr, ADDRINT ip,
             UINT32 instClass, UINT32 simdOpWidth)
 {
@@ -383,6 +385,7 @@ VOID WriteInstructionWrite(ADDRINT* address, UINT32 writeSize, THREADID thr, ADD
     ac.inst.size = writeSize;
     ac.inst.instClass = instClass;
     ac.inst.simdElemCount = simdOpWidth;
+    ac.inst.isWeight = false;
 
     if( writeTrace ) {
 //      if( writeSize > ARIEL_MAX_PAYLOAD_SIZE ) {
@@ -641,6 +644,16 @@ VOID InstrumentInstruction(INS ins, VOID *v)
         INS_InsertPredicatedCall(ins, IPOINT_BEFORE, (AFUNPTR) IncrementFunctionRecord,
                 IARG_PTR, (void*) funcRecord, IARG_END);
     }
+}
+
+void mapped_weight_pre_malloc(){
+     /* LOCK */
+    THREADID thr = PIN_ThreadId();
+    PIN_GetLock(&mainLock, thr);
+    // to do: weight 변수
+    PIN_ReleaseLock(&mainLock);
+    printf("ARIEL: weight premalloc executed!\n");
+    return;
 }
 
 /* Intercept ariel_enable() in application & start simulating instructions */
@@ -1662,6 +1675,11 @@ VOID InstrumentRoutine(RTN rtn, VOID* args)
             enable_output = false;
         }
         return;
+    } else if (RTN_Name(rtn) == "weight_pre_malloc" || RTN_Name(rtn) == "_weight_pre_malloc") {
+        fprintf(stderr,"Identified routine: weight_pre_malloc, replacing with Ariel equivalent...\n");
+        RTN_Replace(rtn, (AFUNPTR) mapped_weight_pre_malloc);
+        fprintf(stderr,"Replacement complete.\n");
+        return;
     } else if (RTN_Name(rtn) == "gettimeofday" || RTN_Name(rtn) == "_gettimeofday") {
         fprintf(stderr,"Identified routine: gettimeofday, replacing with Ariel equivalent...\n");
         RTN_Replace(rtn, (AFUNPTR) mapped_gettimeofday);
@@ -1996,8 +2014,10 @@ int main(int argc, char *argv[])
         }
     }
 
-    fprintf(stderr, "ARIEL: Starting program.\n");
+    fprintf(stderr, "ARIEL: Starting program. (with pin3)\n");
+    fprintf(stderr, "keepMallocstrackTrace: %d\n", KeepMallocStackTrace.Value());
     fflush(stdout);
+    
     PIN_StartProgram();
 
     return 0;

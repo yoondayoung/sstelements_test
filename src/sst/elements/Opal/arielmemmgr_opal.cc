@@ -24,7 +24,7 @@ using namespace SST::OpalComponent;
 
 MemoryManagerOpal::MemoryManagerOpal(ComponentId_t id, Params& params) :
             ArielComponent::ArielMemoryManager(id, params) {
-
+    printf("arielmemmgr opal is used!\n");
     // Find links
     std::string linkprefix = "opal_link_";
     std::string linkname = linkprefix + "0";
@@ -80,7 +80,7 @@ void MemoryManagerOpal::handleInterrupt(SST::Event *event) {
 bool MemoryManagerOpal::allocateMalloc(const uint64_t size, const uint32_t level, const uint64_t addr, const uint64_t ip, const uint32_t thread) {
     OpalEvent * tse = new OpalEvent(OpalComponent::EventType::HINT, level, addr, size, thread);
     opalLink[thread]->send(tse);
-
+    // printf("**OPal****what is temp_translator??\n");
     return temp_translator->allocateMalloc(size, level, addr, ip, thread);
 }
 
@@ -89,6 +89,7 @@ bool MemoryManagerOpal::allocateMMAP(const uint64_t size, const uint32_t level, 
     tse->setFileId(file);
     output->output("Before sending to Opal.. file ID is: %" PRIu32 "\n", file);
     opalLink[thread]->send(tse);
+    // printf("**OPal****allocateMMAP used!\n");
     return true;
 }
 
