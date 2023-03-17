@@ -10,10 +10,10 @@ WARNING: Link name 'B1-internal_network-Ext_Mem_Net' is not valid
 SSTPythonModel: Construction of config graph with Python is complete.
  SST Core: #main() My rank is (0.0), on 1/1 nodes/threads
  SST Core: # ------------------------------------------------------------
- SST Core: # Graph construction took 0.041687 seconds.
+ SST Core: # Graph construction took 0.041423 seconds.
  SST Core: # Graph contains 20 components
- SST Core: # Graph partitioning took 7.86781e-06 seconds.
- SST Core: # Graph construction and partition raised RSS by 15992 KB
+ SST Core: # Graph partitioning took 9.05991e-06 seconds.
+ SST Core: # Graph construction and partition raised RSS by 16036 KB
  SST Core: # ------------------------------------------------------------
  SST Core: Signal handlers will be registered for USR1, USR2, INT and TERM...
  SST Core: Signal handler registration is completed
@@ -27,8 +27,8 @@ ArielComponent[arielcpu.cc:133:ArielCPU] Memory manager construction is complete
 Pin3Frontend[frontend/pin3/pin3frontend.cc:81:Pin3Frontend] Model specifies that there are 0 application arguments
 Pin3Frontend[frontend/pin3/pin3frontend.cc:88:Pin3Frontend] Interception and instrumentation of multi-level memory and malloc/free calls is DISABLED.
 Pin3Frontend[frontend/pin3/pin3frontend.cc:96:Pin3Frontend] Tracking the stack and dumping on malloc calls is ENABLED.
-Pin3Frontend[frontend/pin3/pin3frontend.cc:101:Pin3Frontend] Malloc map file is DISABLED
-Pin3Frontend[frontend/pin3/pin3frontend.cc:110:Pin3Frontend] Base pipe name: /tmp/sst_shmem_869611-0-1804289383
+Pin3Frontend[frontend/pin3/pin3frontend.cc:103:Pin3Frontend] Malloc map file is ENABLED, using file '/home/ydy/scratch/src/sst-elements/src/sst/elements/Opal/tests/mallocmap.txt'
+Pin3Frontend[frontend/pin3/pin3frontend.cc:110:Pin3Frontend] Base pipe name: /tmp/sst_shmem_890786-0-1804289383
 Pin3Frontend[frontend/pin3/pin3frontend.cc:134:Pin3Frontend] Processing application arguments...
 Pin3Frontend[frontend/pin3/pin3frontend.cc:264:Pin3Frontend] Completed processing application arguments.
 Pin3Frontend[frontend/pin3/pin3frontend.cc:269:Pin3Frontend] Completed initialization of the Ariel CPU.
@@ -79,7 +79,7 @@ ExternalNVMmemContr, WARNING: Memories no longer inherit address regions from di
 ExtMemDc, Warning: getting region parameters (addr_range_start/end, interleave_step/size) from link subcomponent. In the future this will not be supported and region parameters should be declared in the directory's parameters instead.
 The value of tRCD is 300
 After initialization 
-SSTARIEL: Loading Ariel Tool to connect to SST on pipe: /tmp/sst_shmem_869611-0-1804289383 max core count: 2
+SSTARIEL: Loading Ariel Tool to connect to SST on pipe: /tmp/sst_shmem_890786-0-1804289383 max core count: 2
 SSTARIEL: Function profiling is disabled.
 ARIEL-SST: Did not find ARIEL_OVERRIDE_POOL in the environment, no override applies.
 ARIEL-SST PIN tool activating with 2 threads
@@ -92,13 +92,14 @@ Identified routine: ariel_enable, replacing with Ariel equivalent...
 Replacement complete.
 Identified routine: weight_pre_malloc, replacing with Ariel equivalent...
 Replacement complete.
+Identified routine: ariel_malloc_flag, replacing with Ariel equivalent..
 Identified routine: clock_gettime, replacing with Ariel equivalent...
 Replacement complete.
 Identified routine: clock_gettime, replacing with Ariel equivalent...
 Replacement complete.
-ARIEL: Enabling memory and instruction tracing from program control at simulated Ariel cycle 2649992.
+ARIEL: Enabling memory and instruction tracing from program control at simulated Ariel cycle 2607255.
 Allocating arrays of size 2000 elements.
-allocated address: a:35cef558 b:35cef560 c:35cef568
+allocated address: a:ce5e3218 b:ce5e3220 c:ce5e3228
 Done allocating arrays.
 Sum of arrays is: 6999500.000000
 Freeing arrays...
@@ -106,47 +107,47 @@ Done.
 ARIEL: weight premalloc executed!
 SSTARIEL: Execution completed, shutting down.
  SST Core: # Starting main event loop
- SST Core: # Start time: 2023/03/17 at: 15:54:51
+ SST Core: # Start time: 2023/03/17 at: 17:03:17
 Pin3Frontend[frontend/pin3/pin3frontend.cc:276:init] Launching PIN...
-Pin3Frontend[frontend/pin3/pin3frontend.cc:332:forkPINChild] Executing PIN command: /home/ydy/local/packages/pin-3.22-98547-g7a303a835-gcc-linux/pin -follow_execv -ifeellucky -t /home/ydy/local/sst-elements/libexec/fesimple.so -w 1 -E 1 -p /tmp/sst_shmem_869611-0-1804289383 -v 1 -t 0 -c 2 -s 0 -m 0 -k 1 -d 0 -- ./app/opal_test
+Pin3Frontend[frontend/pin3/pin3frontend.cc:332:forkPINChild] Executing PIN command: /home/ydy/local/packages/pin-3.22-98547-g7a303a835-gcc-linux/pin -follow_execv -ifeellucky -t /home/ydy/local/sst-elements/libexec/fesimple.so -w 1 -E 1 -p /tmp/sst_shmem_890786-0-1804289383 -v 1 -t 0 -c 2 -s 0 -m 0 -k 1 -u /home/ydy/scratch/src/sst-elements/src/sst/elements/Opal/tests/mallocmap.txt -d 0 -- ./app/opal_test
 Pin3Frontend[frontend/pin3/pin3frontend.cc:281:init] Returned from launching PIN.  Waiting for child to attach.
 Pin3Frontend[frontend/pin3/pin3frontend.cc:284:init] Child has attached!
 CORE ID: 0 PROCESSED AN EXIT EVENT
 ArielComponent[arielcpu.cc:263:finish] Ariel Processor Information:
-ArielComponent[arielcpu.cc:264:finish] Completed at: 1881746 nanoseconds.
+ArielComponent[arielcpu.cc:264:finish] Completed at: 1867796 nanoseconds.
 ArielComponent[arielcpu.cc:265:finish] Ariel Component Statistics (By Core)
 
 Ariel Memory Management Statistics:
 ---------------------------------------------------------------------
 Page Table Sizes:
-- Map entries         61
+- Map entries         62
 Page Table Coverages:
-- Bytes               249856
+- Bytes               253952
 
 
 ------------------------------------------------------------
 Simulation Timing Information (Wall Clock Times):
-  Build time:                      0.236240 seconds
-  Run loop time:                   4.560023 seconds
-  Total time:                      4.972383 seconds
+  Build time:                      0.234805 seconds
+  Run loop time:                   4.577225 seconds
+  Total time:                      4.993884 seconds
 
-Simulated time:                    1.88175 ms
+Simulated time:                    1.8678 ms
 
 Simulation Resource Information:
-  Max Resident Set Size:           144.572 MB
-  Approx. Global Max RSS Size:     144.572 MB
+  Max Resident Set Size:           144.584 MB
+  Approx. Global Max RSS Size:     144.584 MB
   Max Local Page Faults:           1 faults
   Global Page Faults:              1 faults
   Max Output Blocks:               536 blocks
   Max Input Blocks:                0 blocks
   Max mempool usage:               34.3409 MB
   Global mempool usage:            34.3409 MB
-  Global active activities:        3190 activities
+  Global active activities:        3217 activities
   Current global TimeVortex depth: 4 entries
-  Max TimeVortex depth:            31 entries
+  Max TimeVortex depth:            33 entries
   Max Sync data size:              0 B
   Global Sync data size:           0 B
 ------------------------------------------------------------
 
 
-Simulation is complete, simulated time: 1.88175 ms
+Simulation is complete, simulated time: 1.8678 ms

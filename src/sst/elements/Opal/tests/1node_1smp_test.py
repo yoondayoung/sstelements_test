@@ -35,7 +35,7 @@ ariel.addParams({
     "arielstack" : 1, # Should keep shadow stack and dump on malloc calls. 1 = enabled, 0 = disabled
     "writepayloadtrace": 1, # Perform write tracing (i.e copy values directly into SST memory operations) (0 = disabled, 1 = enabled)
 #     "arielinterceptcalls": 1,  # Should intercept multi-level memory allocations, mallocs, and frees, 1 = start enabled, 0 = start disabled
-#     "mallocmapfile" : "/home/ydy/scratch/src/sst-elements/src/sst/elements/Opal/tests/mallocmap.txt", #Should intercept ariel_malloc_flag() and interpret using a malloc map: specify filename or leave blank for disabled
+    "mallocmapfile" : "/home/ydy/scratch/src/sst-elements/src/sst/elements/Opal/tests/mallocmap.txt", #Should intercept ariel_malloc_flag() and interpret using a malloc map: specify filename or leave blank for disabled
     "appargcount" : 0,
 #     "max_insts" : 10000,
 #     "executable" : "./app/inference_test",

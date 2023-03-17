@@ -102,6 +102,9 @@ typedef struct {
 } ArielFunctionRecord;
 std::map<std::string, ArielFunctionRecord*> funcProfile;
 
+// for tracking weight malloc
+bool isWeightFlag = false;
+
 // Malloc interception/MLM support
 UINT32 default_pool;
 UINT32 overridePool;
@@ -385,7 +388,7 @@ VOID WriteInstructionWrite(ADDRINT* address, UINT32 writeSize, THREADID thr, ADD
     ac.inst.size = writeSize;
     ac.inst.instClass = instClass;
     ac.inst.simdElemCount = simdOpWidth;
-    ac.inst.isWeight = false;
+    ac.inst.isWeight = isWeightFlag;
 
     if( writeTrace ) {
 //      if( writeSize > ARIEL_MAX_PAYLOAD_SIZE ) {
@@ -403,6 +406,7 @@ VOID WriteInstructionWrite(ADDRINT* address, UINT32 writeSize, THREADID thr, ADD
     printf("\n");
 */
     tunnel->writeMessage(thr, ac);
+    isWeightFlag = false;
 }
 
 VOID WriteStartInstructionMarker(UINT32 thr, ADDRINT ip)
@@ -653,6 +657,7 @@ void mapped_weight_pre_malloc(){
     // to do: weight 변수
     PIN_ReleaseLock(&mainLock);
     printf("ARIEL: weight premalloc executed!\n");
+    isWeightFlag = true;
     return;
 }
 
@@ -1071,7 +1076,7 @@ VOID ariel_postmalloc_instrument(ADDRINT allocLocation)
             ac.mlm_map.alloc_level = allocationLevel;
             tunnel->writeMessage(thr, ac);
         }
-
+        printf("ARIEL: Created a malloc of size: %ld in Ariel\n", allocationLength);
         /*printf("ARIEL: Created a malloc of size: %" PRIu64 " in Ariel\n",
          * (UINT64) allocationLength);*/
     }

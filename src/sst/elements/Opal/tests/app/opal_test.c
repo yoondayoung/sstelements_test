@@ -17,8 +17,9 @@
 #include <stdlib.h>
 
 extern "C" {
-        void ariel_enable() { printf("Inside Ariel\n"); }
-        void weight_pre_malloc() { printf("weight pre malloc calling in opal_test.c"); }
+        void ariel_enable() { printf("Inside Ariel"); }
+        void weight_pre_malloc() { printf("weight pre malloc calling in opal_test.c\n"); }
+        void ariel_malloc_flag() { printf("malloc ariel execution\n"); }
 }
 
 
@@ -31,6 +32,7 @@ int main(int argc, char* argv[]) {
         printf("Allocating arrays of size %d elements.\n", LENGTH);
         weight_pre_malloc();
         double* a = (double*) malloc(sizeof(double) * LENGTH);
+        ariel_malloc_flag();
         double* b = (double*) malloc(sizeof(double) * LENGTH);
         double* c = (double*) malloc(sizeof(double) * LENGTH);
         printf("allocated address: a:%x b:%x c:%x\n", &a, &b, &c);

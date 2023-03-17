@@ -16,7 +16,8 @@ ariel_enable:
 	movq	%rsp, %rbp
 	.cfi_def_cfa_register 6
 	leaq	.LC0(%rip), %rdi
-	call	puts@PLT
+	movl	$0, %eax
+	call	printf@PLT
 	nop
 	popq	%rbp
 	.cfi_def_cfa 7, 8
@@ -41,8 +42,7 @@ weight_pre_malloc:
 	movq	%rsp, %rbp
 	.cfi_def_cfa_register 6
 	leaq	.LC1(%rip), %rdi
-	movl	$0, %eax
-	call	printf@PLT
+	call	puts@PLT
 	nop
 	popq	%rbp
 	.cfi_def_cfa 7, 8
@@ -51,25 +51,49 @@ weight_pre_malloc:
 .LFE16:
 	.size	weight_pre_malloc, .-weight_pre_malloc
 	.section	.rodata
-	.align 8
 .LC2:
-	.string	"Allocating arrays of size %d elements.\n"
+	.string	"malloc ariel execution"
+	.text
+	.globl	ariel_malloc_flag
+	.type	ariel_malloc_flag, @function
+ariel_malloc_flag:
+.LFB17:
+	.cfi_startproc
+	endbr64
+	pushq	%rbp
+	.cfi_def_cfa_offset 16
+	.cfi_offset 6, -16
+	movq	%rsp, %rbp
+	.cfi_def_cfa_register 6
+	leaq	.LC2(%rip), %rdi
+	call	puts@PLT
+	nop
+	popq	%rbp
+	.cfi_def_cfa 7, 8
+	ret
+	.cfi_endproc
+.LFE17:
+	.size	ariel_malloc_flag, .-ariel_malloc_flag
+	.section	.rodata
 	.align 8
 .LC3:
-	.string	"allocated address: a:%x b:%x c:%x\n"
+	.string	"Allocating arrays of size %d elements.\n"
+	.align 8
 .LC4:
+	.string	"allocated address: a:%x b:%x c:%x\n"
+.LC5:
 	.string	"Done allocating arrays."
-.LC7:
-	.string	"Sum of arrays is: %f\n"
 .LC8:
-	.string	"Freeing arrays..."
+	.string	"Sum of arrays is: %f\n"
 .LC9:
+	.string	"Freeing arrays..."
+.LC10:
 	.string	"Done."
 	.text
 	.globl	main
 	.type	main, @function
 main:
-.LFB17:
+.LFB18:
 	.cfi_startproc
 	endbr64
 	pushq	%rbp
@@ -86,13 +110,14 @@ main:
 	movl	$2000, -44(%rbp)
 	call	ariel_enable
 	movl	$2000, %esi
-	leaq	.LC2(%rip), %rdi
+	leaq	.LC3(%rip), %rdi
 	movl	$0, %eax
 	call	printf@PLT
 	call	weight_pre_malloc
 	movl	$16000, %edi
 	call	malloc@PLT
 	movq	%rax, -40(%rbp)
+	call	ariel_malloc_flag
 	movl	$16000, %edi
 	call	malloc@PLT
 	movq	%rax, -32(%rbp)
@@ -103,15 +128,15 @@ main:
 	leaq	-32(%rbp), %rdx
 	leaq	-40(%rbp), %rax
 	movq	%rax, %rsi
-	leaq	.LC3(%rip), %rdi
+	leaq	.LC4(%rip), %rdi
 	movl	$0, %eax
 	call	printf@PLT
-	leaq	.LC4(%rip), %rdi
+	leaq	.LC5(%rip), %rdi
 	call	puts@PLT
 	movl	$0, -48(%rbp)
-.L5:
+.L6:
 	cmpl	$1999, -48(%rbp)
-	jg	.L4
+	jg	.L5
 	movq	-40(%rbp), %rax
 	movl	-48(%rbp), %edx
 	movslq	%edx, %rdx
@@ -137,12 +162,12 @@ main:
 	pxor	%xmm0, %xmm0
 	movsd	%xmm0, (%rax)
 	addl	$1, -48(%rbp)
-	jmp	.L5
-.L4:
+	jmp	.L6
+.L5:
 	movl	$0, -48(%rbp)
-.L7:
+.L8:
 	cmpl	$1999, -48(%rbp)
-	jg	.L6
+	jg	.L7
 	movq	-40(%rbp), %rax
 	movl	-48(%rbp), %edx
 	movslq	%edx, %rdx
@@ -157,7 +182,7 @@ main:
 	salq	$3, %rdx
 	addq	%rdx, %rax
 	movsd	(%rax), %xmm2
-	movsd	.LC6(%rip), %xmm0
+	movsd	.LC7(%rip), %xmm0
 	mulsd	%xmm2, %xmm0
 	movq	-24(%rbp), %rax
 	movl	-48(%rbp), %edx
@@ -167,14 +192,14 @@ main:
 	addsd	%xmm1, %xmm0
 	movsd	%xmm0, (%rax)
 	addl	$1, -48(%rbp)
-	jmp	.L7
-.L6:
+	jmp	.L8
+.L7:
 	pxor	%xmm0, %xmm0
 	movsd	%xmm0, -16(%rbp)
 	movl	$0, -48(%rbp)
-.L9:
+.L10:
 	cmpl	$1999, -48(%rbp)
-	jg	.L8
+	jg	.L9
 	movq	-24(%rbp), %rax
 	movl	-48(%rbp), %edx
 	movslq	%edx, %rdx
@@ -185,14 +210,14 @@ main:
 	addsd	%xmm1, %xmm0
 	movsd	%xmm0, -16(%rbp)
 	addl	$1, -48(%rbp)
-	jmp	.L9
-.L8:
+	jmp	.L10
+.L9:
 	movq	-16(%rbp), %rax
 	movq	%rax, %xmm0
-	leaq	.LC7(%rip), %rdi
+	leaq	.LC8(%rip), %rdi
 	movl	$1, %eax
 	call	printf@PLT
-	leaq	.LC8(%rip), %rdi
+	leaq	.LC9(%rip), %rdi
 	call	puts@PLT
 	movq	-40(%rbp), %rax
 	movq	%rax, %rdi
@@ -203,23 +228,23 @@ main:
 	movq	-24(%rbp), %rax
 	movq	%rax, %rdi
 	call	free@PLT
-	leaq	.LC9(%rip), %rdi
+	leaq	.LC10(%rip), %rdi
 	call	puts@PLT
 	movl	$0, %eax
 	movq	-8(%rbp), %rsi
 	xorq	%fs:40, %rsi
-	je	.L11
+	je	.L12
 	call	__stack_chk_fail@PLT
-.L11:
+.L12:
 	leave
 	.cfi_def_cfa 7, 8
 	ret
 	.cfi_endproc
-.LFE17:
+.LFE18:
 	.size	main, .-main
 	.section	.rodata
 	.align 8
-.LC6:
+.LC7:
 	.long	0
 	.long	1073217536
 	.ident	"GCC: (Ubuntu 9.4.0-1ubuntu1~20.04.1) 9.4.0"
