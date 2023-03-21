@@ -193,7 +193,7 @@ void ArielCore::commitReadEvent(const uint64_t address,
 }
 
 void ArielCore::commitWriteEvent(const uint64_t address,
-        const uint64_t virtAddress, const uint32_t length, const uint8_t* payload) {
+        const uint64_t virtAddress, const uint32_t length, const uint8_t* payload, bool weightWriteFlag) {
 
     if(length > 0) {
         std::vector<uint8_t> data;
@@ -218,7 +218,8 @@ void ArielCore::commitWriteEvent(const uint64_t address,
             data.resize(length, 0);
         }
         
-        StandardMem::Write *req = new StandardMem::Write(address, length, data, false, 0, virtAddress);
+        // to do: 여기에 weight malloc flag를 추가해야됨
+        StandardMem::Write *req = new StandardMem::Write(address, length, data, false, 0, virtAddress, 0, 0, weightWriteFlag);
 
 #ifdef HAVE_CUDA
         if(isGpuEx()){
@@ -236,6 +237,7 @@ void ArielCore::commitWriteEvent(const uint64_t address,
         }
 
         // Actually send the event to the cache
+        // to do: req에 isWeight 정보 담기
         cacheLink->send(req);
     }
 }
@@ -1050,6 +1052,8 @@ void ArielCore::handleWriteRequest(ArielWriteEvent* wEv) {
 
     const uint64_t writeAddress = wEv->getAddress();
     const uint64_t writeLength  = std::min((uint64_t) wEv->getLength(), cacheLineSize); // Trim to cacheline size (occurs rarely for instructions such as xsave and fxsave)
+    // weight flag 정보
+    bool weightWriteFlag = wEv->getIsWeight();
 
     // No longer neccessary due to trimming above
 /*    if(writeLength > cacheLineSize) {
@@ -1080,9 +1084,9 @@ void ArielCore::handleWriteRequest(ArielWriteEvent* wEv) {
 
         if( writePayloads ) {
             uint8_t* payloadPtr = wEv->getPayload();
-            commitWriteEvent(physAddr, writeAddress, (uint32_t) writeLength, payloadPtr);
+            commitWriteEvent(physAddr, writeAddress, (uint32_t) writeLength, payloadPtr, weightWriteFlag);
         } else {
-            commitWriteEvent(physAddr, writeAddress, (uint32_t) writeLength, NULL);
+            commitWriteEvent(physAddr, writeAddress, (uint32_t) writeLength, NULL, weightWriteFlag);
         }
     } else {
         ARIEL_CORE_VERBOSE(4, output->verbose(CALL_INFO, 4, 0, "Core %" PRIu32 " generating a split write request: Addr=%" PRIu64 " Length=%" PRIu64 "\n",
@@ -1120,11 +1124,11 @@ void ArielCore::handleWriteRequest(ArielWriteEvent* wEv) {
 
         if( writePayloads ) {
             uint8_t* payloadPtr = wEv->getPayload();
-            commitWriteEvent(physLeftAddr, leftAddr, (uint32_t) leftSize, payloadPtr);
-            commitWriteEvent(physRightAddr, rightAddr, (uint32_t) rightSize, &payloadPtr[leftSize]);
+            commitWriteEvent(physLeftAddr, leftAddr, (uint32_t) leftSize, payloadPtr, weightWriteFlag);
+            commitWriteEvent(physRightAddr, rightAddr, (uint32_t) rightSize, &payloadPtr[leftSize], weightWriteFlag);
         } else {
-            commitWriteEvent(physLeftAddr, leftAddr, (uint32_t) leftSize, NULL);
-            commitWriteEvent(physRightAddr, rightAddr, (uint32_t) rightSize, NULL);
+            commitWriteEvent(physLeftAddr, leftAddr, (uint32_t) leftSize, NULL, weightWriteFlag);
+            commitWriteEvent(physRightAddr, rightAddr, (uint32_t) rightSize, NULL, weightWriteFlag);
         }
         statSplitWriteRequests->addData(1);
     }
@@ -1467,6 +1471,7 @@ bool ArielCore::processNextEvent() {
                     statInstructionCount->addData(1);
                     inst_count++;
                             removeEvent = true;
+                    // to do: add the weight malloc flag info
                     handleWriteRequest(dynamic_cast<ArielWriteEvent*>(nextEvent));
                 } else {
                     ARIEL_CORE_VERBOSE(16, output->verbose(CALL_INFO, 16, 0, "Pending transaction queue is currently full for core %" PRIu32 ", core will stall for new events\n", coreID));

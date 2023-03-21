@@ -372,6 +372,8 @@ SST::Event* StandardInterface::MemEventConverter::convert(StandardMem::Write* re
     write->setDst(iface->link_->getTargetDestination(bAddr));
     write->setVirtualAddress(req->vAddr);
     write->setInstructionPointer(req->iPtr);
+    // for weight allocation
+    write->setWeightFlag(req->weightFlag);
     
     if (noncacheable)    
         write->setFlag(MemEvent::F_NONCACHEABLE);
@@ -389,6 +391,7 @@ SST::Event* StandardInterface::MemEventConverter::convert(StandardMem::Write* re
     } 
     debugChecks(write);
 #endif
+    // printf("~!!this memory converter interface is used!!\n");
     return write;
 }
 

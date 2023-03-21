@@ -182,7 +182,7 @@ class ArielCore : public ComponentExtension {
         bool handleInterrupt(ArielMemoryManager::InterruptAction action);
 
         void commitReadEvent(const uint64_t address, const uint64_t virtAddr, const uint32_t length);
-        void commitWriteEvent(const uint64_t address, const uint64_t virtAddr, const uint32_t length, const uint8_t* payload);
+        void commitWriteEvent(const uint64_t address, const uint64_t virtAddr, const uint32_t length, const uint8_t* payload, bool weightWriteFlag);
         void commitFlushEvent(const uint64_t address, const uint64_t virtAddr, const uint32_t length);
 
         // Setting the max number of instructions to be simulated

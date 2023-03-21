@@ -142,6 +142,7 @@ public:
 	instPtr_	    = 0;
 	vAddr_		    = 0;
         isEvict_            = false;
+        isWeight_           = false;
     }
 
     /** return the original event that caused a NACK */
@@ -166,6 +167,12 @@ public:
     void setVirtualAddress(Addr newVA) { vAddr_ = newVA; }
     /** Gets the virtual address of this MemEvent */
     uint64_t getVirtualAddress() const { return vAddr_; }
+
+    // for weight allocation
+    /** Sets the virtual address of this MemEvent */
+    void setWeightFlag(bool wFlag) { isWeight_ = wFlag; }
+    /** Gets the virtual address of this MemEvent */
+    bool getWeightFlag() const { return isWeight_; }
 
     /** Sets the instruction pointer of that caused this MemEvent */
     void setInstructionPointer(Addr newIP) { instPtr_ = newIP; }
@@ -273,6 +280,7 @@ public:
         str << " VA: 0x" << vAddr_ << " IP: 0x" << instPtr_;
         str << std::dec << " Size: " << size_;
         str << " Prf: " << (prefetch_ ? "T" : "F");
+        str << " info for WEIGHT ALLOC: " << isWeight_; 
         return MemEventBase::getVerboseString(level) + str.str();
     }
 
@@ -309,6 +317,7 @@ private:
     bool            isEvict_;           // Whether an event is an eviction
     Addr	    instPtr_;           // Instruction pointer associated with the request
     Addr 	    vAddr_;             // Virtual address associated with the request
+    bool           isWeight_;       // for weight allocation
 
     MemEvent() : MemEventBase() {} // For serialization only
 
@@ -327,6 +336,7 @@ public:
         ser & isEvict_;
         ser & instPtr_;
         ser & vAddr_;
+        ser & isWeight_;
     }
 
     ImplementSerializable(SST::MemHierarchy::MemEvent);
