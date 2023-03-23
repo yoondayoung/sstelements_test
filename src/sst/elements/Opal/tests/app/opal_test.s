@@ -50,13 +50,9 @@ weight_pre_malloc:
 	.cfi_endproc
 .LFE16:
 	.size	weight_pre_malloc, .-weight_pre_malloc
-	.section	.rodata
-.LC2:
-	.string	"malloc ariel execution"
-	.text
-	.globl	ariel_malloc_flag
-	.type	ariel_malloc_flag, @function
-ariel_malloc_flag:
+	.globl	weight_post_malloc
+	.type	weight_post_malloc, @function
+weight_post_malloc:
 .LFB17:
 	.cfi_startproc
 	endbr64
@@ -65,29 +61,27 @@ ariel_malloc_flag:
 	.cfi_offset 6, -16
 	movq	%rsp, %rbp
 	.cfi_def_cfa_register 6
-	leaq	.LC2(%rip), %rdi
-	call	puts@PLT
 	nop
 	popq	%rbp
 	.cfi_def_cfa 7, 8
 	ret
 	.cfi_endproc
 .LFE17:
-	.size	ariel_malloc_flag, .-ariel_malloc_flag
+	.size	weight_post_malloc, .-weight_post_malloc
 	.section	.rodata
 	.align 8
-.LC3:
+.LC2:
 	.string	"Allocating arrays of size %d elements.\n"
 	.align 8
-.LC4:
+.LC3:
 	.string	"allocated address: a:%x b:%x c:%x\n"
-.LC5:
+.LC4:
 	.string	"Done allocating arrays."
-.LC8:
+.LC7:
 	.string	"Sum of arrays is: %f\n"
-.LC9:
+.LC8:
 	.string	"Freeing arrays..."
-.LC10:
+.LC9:
 	.string	"Done."
 	.text
 	.globl	main
@@ -110,28 +104,28 @@ main:
 	movl	$2000, -44(%rbp)
 	call	ariel_enable
 	movl	$2000, %esi
-	leaq	.LC3(%rip), %rdi
+	leaq	.LC2(%rip), %rdi
 	movl	$0, %eax
 	call	printf@PLT
 	call	weight_pre_malloc
 	movl	$16000, %edi
 	call	malloc@PLT
 	movq	%rax, -40(%rbp)
-	call	ariel_malloc_flag
 	movl	$16000, %edi
 	call	malloc@PLT
 	movq	%rax, -32(%rbp)
 	movl	$16000, %edi
 	call	malloc@PLT
 	movq	%rax, -24(%rbp)
+	call	weight_post_malloc
 	leaq	-24(%rbp), %rcx
 	leaq	-32(%rbp), %rdx
 	leaq	-40(%rbp), %rax
 	movq	%rax, %rsi
-	leaq	.LC4(%rip), %rdi
+	leaq	.LC3(%rip), %rdi
 	movl	$0, %eax
 	call	printf@PLT
-	leaq	.LC5(%rip), %rdi
+	leaq	.LC4(%rip), %rdi
 	call	puts@PLT
 	movl	$0, -48(%rbp)
 .L6:
@@ -182,7 +176,7 @@ main:
 	salq	$3, %rdx
 	addq	%rdx, %rax
 	movsd	(%rax), %xmm2
-	movsd	.LC7(%rip), %xmm0
+	movsd	.LC6(%rip), %xmm0
 	mulsd	%xmm2, %xmm0
 	movq	-24(%rbp), %rax
 	movl	-48(%rbp), %edx
@@ -214,10 +208,10 @@ main:
 .L9:
 	movq	-16(%rbp), %rax
 	movq	%rax, %xmm0
-	leaq	.LC8(%rip), %rdi
+	leaq	.LC7(%rip), %rdi
 	movl	$1, %eax
 	call	printf@PLT
-	leaq	.LC9(%rip), %rdi
+	leaq	.LC8(%rip), %rdi
 	call	puts@PLT
 	movq	-40(%rbp), %rax
 	movq	%rax, %rdi
@@ -228,7 +222,7 @@ main:
 	movq	-24(%rbp), %rax
 	movq	%rax, %rdi
 	call	free@PLT
-	leaq	.LC10(%rip), %rdi
+	leaq	.LC9(%rip), %rdi
 	call	puts@PLT
 	movl	$0, %eax
 	movq	-8(%rbp), %rsi
@@ -244,7 +238,7 @@ main:
 	.size	main, .-main
 	.section	.rodata
 	.align 8
-.LC7:
+.LC6:
 	.long	0
 	.long	1073217536
 	.ident	"GCC: (Ubuntu 9.4.0-1ubuntu1~20.04.1) 9.4.0"

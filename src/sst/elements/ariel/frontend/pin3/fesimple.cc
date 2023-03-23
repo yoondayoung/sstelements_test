@@ -389,6 +389,7 @@ VOID WriteInstructionWrite(ADDRINT* address, UINT32 writeSize, THREADID thr, ADD
     ac.inst.instClass = instClass;
     ac.inst.simdElemCount = simdOpWidth;
     ac.inst.isWeight = isWeightFlag;
+    // printf("this time is Weight:%d\n", isWeightFlag);
 
     if( writeTrace ) {
 //      if( writeSize > ARIEL_MAX_PAYLOAD_SIZE ) {
@@ -406,7 +407,7 @@ VOID WriteInstructionWrite(ADDRINT* address, UINT32 writeSize, THREADID thr, ADD
     printf("\n");
 */
     tunnel->writeMessage(thr, ac);
-    isWeightFlag = false;
+    // isWeightFlag = false;
 }
 
 VOID WriteStartInstructionMarker(UINT32 thr, ADDRINT ip)
@@ -655,9 +656,20 @@ void mapped_weight_pre_malloc(){
     THREADID thr = PIN_ThreadId();
     PIN_GetLock(&mainLock, thr);
     // to do: weight 변수
+    isWeightFlag = true;
     PIN_ReleaseLock(&mainLock);
     printf("ARIEL: weight premalloc executed!\n");
-    isWeightFlag = true;
+    return;
+}
+
+void mapped_weight_post_malloc(){
+     /* LOCK */
+    THREADID thr = PIN_ThreadId();
+    PIN_GetLock(&mainLock, thr);
+    // to do: weight 변수
+    isWeightFlag = false;
+    PIN_ReleaseLock(&mainLock);
+    printf("ARIEL: weight postalloc executed!\n");
     return;
 }
 
@@ -1076,7 +1088,7 @@ VOID ariel_postmalloc_instrument(ADDRINT allocLocation)
             ac.mlm_map.alloc_level = allocationLevel;
             tunnel->writeMessage(thr, ac);
         }
-        printf("ARIEL: Created a malloc of size: %ld in Ariel\n", allocationLength);
+        printf("ARIEL: Created a malloc of size: %ld in Ariel (weight flag=%d)\n", allocationLength, isWeightFlag);
         /*printf("ARIEL: Created a malloc of size: %" PRIu64 " in Ariel\n",
          * (UINT64) allocationLength);*/
     }
@@ -1683,6 +1695,12 @@ VOID InstrumentRoutine(RTN rtn, VOID* args)
     } else if (RTN_Name(rtn) == "weight_pre_malloc" || RTN_Name(rtn) == "_weight_pre_malloc") {
         fprintf(stderr,"Identified routine: weight_pre_malloc, replacing with Ariel equivalent...\n");
         RTN_Replace(rtn, (AFUNPTR) mapped_weight_pre_malloc);
+        fprintf(stderr,"Replacement complete.\n");
+        return;
+    }
+    else if (RTN_Name(rtn) == "weight_post_malloc" || RTN_Name(rtn) == "_weight_pre_malloc") {
+        fprintf(stderr,"Identified routine: weight_post_malloc, replacing with Ariel equivalent...\n");
+        RTN_Replace(rtn, (AFUNPTR) mapped_weight_post_malloc);
         fprintf(stderr,"Replacement complete.\n");
         return;
     } else if (RTN_Name(rtn) == "gettimeofday" || RTN_Name(rtn) == "_gettimeofday") {

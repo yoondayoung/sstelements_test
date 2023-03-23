@@ -148,10 +148,10 @@ namespace SST
 				void handleRequest(SST::Event* e)
 				{	
 					// to do: 여기서 weight allocation이라는걸 알아야함
-					// SST::MemHierarchy::MemEvent *event = static_cast<SST::MemHierarchy::MemEvent*> (e);
-					// printf("get weight flag of mem event opal.h handleRequest : %s\n", event->getWeightFlag());
 					OpalEvent *ev =  static_cast<OpalComponent::OpalEvent*> (e);
-					printf("get event type opal.h handleRequest : %s\n", ev->getType());
+					// SST::MemHierarchy::MemEventBase *ev2 =  static_cast<SST::MemHierarchy::MemEventBase*> (e);
+					// printf("opal event type: %d\n", ev->getType());
+					printf("opal weight flag: %d, allc size: %d\n", ev->getWeightFlag(), ev->getSize());
 					ev->setNodeId(nodeId);
 					ev->setCoreId(coreId);
 					opalBase->requestQ.push(ev);

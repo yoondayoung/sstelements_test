@@ -19,7 +19,7 @@
 extern "C" {
         void ariel_enable() { printf("Inside Ariel"); }
         void weight_pre_malloc() { printf("weight pre malloc calling in opal_test.c\n"); }
-        void ariel_malloc_flag() { printf("malloc ariel execution\n"); }
+        void weight_post_malloc() {}
 }
 
 
@@ -32,9 +32,10 @@ int main(int argc, char* argv[]) {
         printf("Allocating arrays of size %d elements.\n", LENGTH);
         weight_pre_malloc();
         double* a = (double*) malloc(sizeof(double) * LENGTH);
-        ariel_malloc_flag();
         double* b = (double*) malloc(sizeof(double) * LENGTH);
         double* c = (double*) malloc(sizeof(double) * LENGTH);
+        weight_post_malloc();
+        
         printf("allocated address: a:%x b:%x c:%x\n", &a, &b, &c);
         printf("Done allocating arrays.\n");
 
@@ -44,7 +45,7 @@ int main(int argc, char* argv[]) {
                 b[i] = LENGTH - i;
                 c[i] = 0;
         }
-
+       
 
         // printf("Perfoming the fast_c compute loop...\n");
         // #pragma omp parallel num_threads(2)

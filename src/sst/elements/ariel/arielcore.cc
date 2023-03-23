@@ -238,6 +238,7 @@ void ArielCore::commitWriteEvent(const uint64_t address,
 
         // Actually send the event to the cache
         // to do: req에 isWeight 정보 담기
+        // printf("cur weight flag:::%d, original::::%d\n", req->getWeightFlag(), weightWriteFlag);
         cacheLink->send(req);
     }
 }
@@ -687,8 +688,8 @@ void ArielCore::createReadEvent(uint64_t address, uint32_t length) {
 }
 
 void ArielCore::createAllocateEvent(uint64_t vAddr, uint64_t length, uint32_t level, uint64_t instPtr) {
-    // printf( "Generated an allocate event, vAddr(map)=%ld, length=%ld in level %d from IP %ld\n",
-    //                 vAddr, length, level, instPtr);
+    printf( "[ArielCore::createAllocateEvent]Generated an allocate event, vAddr(map)=%ld, length=%ld in level %d from IP %ld\n",
+                    vAddr, length, level, instPtr);
     ArielAllocateEvent* ev = new ArielAllocateEvent(vAddr, length, level, instPtr, false);
     coreQ->push(ev);
 
@@ -1049,7 +1050,7 @@ void ArielCore::handleReadRequest(ArielReadEvent* rEv) {
 // to do: 여기서 opal base requestQ 안에 넣어야함
 void ArielCore::handleWriteRequest(ArielWriteEvent* wEv) {
     ARIEL_CORE_VERBOSE(4, output->verbose(CALL_INFO, 4, 0, "Core %" PRIu32 " processing a write event...\n", coreID));
-
+    // printf("Core %d processing a write event... in arielcore.cc/handleWriteRequest\n", coreID);
     const uint64_t writeAddress = wEv->getAddress();
     const uint64_t writeLength  = std::min((uint64_t) wEv->getLength(), cacheLineSize); // Trim to cacheline size (occurs rarely for instructions such as xsave and fxsave)
     // weight flag 정보
@@ -1147,7 +1148,7 @@ void ArielCore::handleMmapEvent(ArielMmapEvent* aEv) {
 void ArielCore::handleAllocationEvent(ArielAllocateEvent* aEv) {
     output->verbose(CALL_INFO, 2, 0, "Handling a memory allocation event, vAddr=%" PRIu64 ", length=%" PRIu64 ", at level=%" PRIu32 " with malloc ID=%" PRIu64 "\n",
                 aEv->getVirtualAddress(), aEv->getAllocationLength(), aEv->getAllocationLevel(), aEv->getInstructionPointer());
-
+    printf("handleAllocationEvent is used!\n");
     memmgr->allocateMalloc(aEv->getAllocationLength(), aEv->getAllocationLevel(), aEv->getVirtualAddress(), aEv->getInstructionPointer(), coreID);
 }
 

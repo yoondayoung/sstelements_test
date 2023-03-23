@@ -49,7 +49,7 @@ class PageFaultHandler : public SambaComponent::PageFaultHandler {
         ~PageFaultHandler();
 
         void handleEvent(SST::Event * event);
-        void allocatePage(const uint32_t thread, const uint32_t level, const uint64_t virtualAddress, const uint64_t size);
+        void allocatePage(const uint32_t thread, const uint32_t level, const uint64_t virtualAddress, const uint64_t size, bool weightFlag);
 
     private:
 

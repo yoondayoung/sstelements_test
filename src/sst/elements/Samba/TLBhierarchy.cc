@@ -177,9 +177,11 @@ void TLBhierarchy::handleEvent_CACHE( SST::Event * ev )
 
 void TLBhierarchy::handleEvent_CPU(SST::Event* event)
 {
+	SST::MemHierarchy::MemEventBase *ev2 =  static_cast<SST::MemHierarchy::MemEventBase*> (event);
+	// printf("opal weight flag in TLBhierarchy.cc: %d\n", ev2->getWeightFlag());
 	// Push the request to the L1 TLB and time-stamp it
 	time_tracker[event]= curr_time;
-        MemEventBase* mEvent = static_cast<MemEventBase*>(event);
+    MemEventBase* mEvent = static_cast<MemEventBase*>(event);
 	TLB_CACHE[1]->push_request(mEvent);
 
 

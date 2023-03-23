@@ -80,7 +80,7 @@ void MemoryManagerOpal::handleInterrupt(SST::Event *event) {
 bool MemoryManagerOpal::allocateMalloc(const uint64_t size, const uint32_t level, const uint64_t addr, const uint64_t ip, const uint32_t thread) {
     OpalEvent * tse = new OpalEvent(OpalComponent::EventType::HINT, level, addr, size, thread);
     opalLink[thread]->send(tse);
-    // printf("**OPal****what is temp_translator??\n");
+    printf("**OPal****what is temp_translator??\n");
     return temp_translator->allocateMalloc(size, level, addr, ip, thread);
 }
 

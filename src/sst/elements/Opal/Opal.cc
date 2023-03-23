@@ -458,11 +458,11 @@ bool Opal::processRequest(int node, int coreId, uint64_t vAddress, int fault_lev
 			// todo: weight 메모리인지 아닌지 확인
 			if( !nodeInfo[node]->allocatedmempool ) {
 				response = allocateLocalMemory(node, coreId, vAddress, fault_level, pages);
-				//std::cerr << getName() << " Node: " << node << " core " << coreId << " response page address: " << vAddress << " allocated local address: " << response.address << " pages: "<< pages << " level: " << fault_level  << std::endl;
+				std::cerr << getName() << " Node: " << node << " core " << coreId << " response page address: " << vAddress << " allocated local address: " << response.address << " pages: "<< pages << " level: " << fault_level  << std::endl;
 			}
 			else {
 				response = allocateSharedMemory(node, coreId, vAddress, fault_level, pages);
-				//std::cerr << getName() << " Node: " << node << " core " << coreId << " response page address: " << vAddress << " allocated shared address: " << response.address << " pages: " << " level: " << fault_level << std::endl;
+				std::cerr << getName() << " Node: " << node << " core " << coreId << " response page address: " << vAddress << " allocated shared address: " << response.address << " pages: " << " level: " << fault_level << std::endl;
 			}
 		}
 	}

@@ -139,7 +139,7 @@ uint64_t ArielMemoryManagerSimple::translateAddress(uint64_t virtAddr) {
 
         // Perform an allocation so we can then re-find the address
         allocate(8, 0, virtAddr - offset);
-
+        // printf("this is allocate in memmgr_simple\n");
         // Now attempt to refind it
         const uint64_t newPhysAddr = translateAddress(virtAddr);
 

@@ -34,8 +34,8 @@ ariel.addParams({
     "arielmode" : 0,
     "arielstack" : 1, # Should keep shadow stack and dump on malloc calls. 1 = enabled, 0 = disabled
     "writepayloadtrace": 1, # Perform write tracing (i.e copy values directly into SST memory operations) (0 = disabled, 1 = enabled)
-#     "arielinterceptcalls": 1,  # Should intercept multi-level memory allocations, mallocs, and frees, 1 = start enabled, 0 = start disabled
-    "mallocmapfile" : "/home/ydy/scratch/src/sst-elements/src/sst/elements/Opal/tests/mallocmap.txt", #Should intercept ariel_malloc_flag() and interpret using a malloc map: specify filename or leave blank for disabled
+    "arielinterceptcalls": 1,  # Should intercept multi-level memory allocations, mallocs, and frees, 1 = start enabled, 0 = start disabled
+#     "mallocmapfile" : "/home/ydy/scratch/src/sst-elements/src/sst/elements/Opal/tests/mallocmap.txt", #Should intercept ariel_malloc_flag() and interpret using a malloc map: specify filename or leave blank for disabled
     "appargcount" : 0,
 #     "max_insts" : 10000,
 #     "executable" : "./app/inference_test",
@@ -246,6 +246,7 @@ for next_core in range(cores):
 
         # modified code
         arielMMULink.connect((ariel, "cache_link_%d"%next_core, "300ps"), (mmu, "cpu_to_mmu%d"%next_core, "300ps"))
+        # ArielOpalLink.connect((memmgr, "opal_link_%d"%next_core, "300ps"), (opal, "coreLink%d"%(next_core), "300ps"))
         ArielOpalLink.connect((memmgr, "opal_link_%d"%next_core, "300ps"), (opal, "coreLink%d"%(next_core), "300ps"))
         MMUCacheLink.connect((mmu, "mmu_to_cache%d"%next_core, "300ps"), (l1_cpulink, "port", "300ps"))
         PTWOpalLink.connect( (pagefaulthandler, "opal_link_%d"%next_core, "300ps"), (opal, "mmuLink%d"%(next_core), "300ps") )
