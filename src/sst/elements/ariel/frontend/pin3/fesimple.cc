@@ -378,7 +378,7 @@ VOID WriteInstructionRead(ADDRINT* address, UINT32 readSize, THREADID thr, ADDRI
 VOID WriteInstructionWrite(ADDRINT* address, UINT32 writeSize, THREADID thr, ADDRINT ip,
             UINT32 instClass, UINT32 simdOpWidth)
 {
-
+    // std::cout << "[WriteInstructionWrite] createWrite size:" << writeSize << std::endl;
     const uint64_t addr64 = (uint64_t) address;
     ArielCommand ac;
 
@@ -388,7 +388,7 @@ VOID WriteInstructionWrite(ADDRINT* address, UINT32 writeSize, THREADID thr, ADD
     ac.inst.size = writeSize;
     ac.inst.instClass = instClass;
     ac.inst.simdElemCount = simdOpWidth;
-    ac.inst.isWeight = isWeightFlag;
+    // ac.inst.isWeight = isWeightFlag;
     // printf("this time is Weight:%d\n", isWeightFlag);
 
     if( writeTrace ) {
@@ -472,11 +472,11 @@ VOID WriteNoOp(THREADID thr, ADDRINT ip)
 VOID WriteInstructionWriteOnly(THREADID thr, ADDRINT* writeAddr, UINT32 writeSize, ADDRINT ip,
             UINT32 instClass, UINT32 simdOpWidth, BOOL first, BOOL last)
 {
-
     if(enable_output) {
         if(thr < core_count) {
             if (first)
                 WriteStartInstructionMarker(thr, ip);
+            // if (isWeightFlag==true) std::cout << "[WriteInstructionWriteOnly]write addr: " << writeAddr << " size: " << writeSize << std::endl;
             WriteInstructionWrite(writeAddr, writeSize,  thr, ip, instClass, simdOpWidth);
             if (last)
                 WriteEndInstructionMarker(thr, ip);
@@ -504,7 +504,6 @@ VOID InstrumentInstruction(INS ins, VOID *v)
     UINT32 maxSIMDRegWidth = 1;
 
     std::string instCode = INS_Mnemonic(ins);
-
     for(UINT32 i = 0; i < INS_MaxNumRRegs(ins); i++) {
         if( REG_is_xmm(INS_RegR(ins, i)) ) {
                 maxSIMDRegWidth = ARIEL_MAX(maxSIMDRegWidth, (UINT32) 2);
@@ -573,6 +572,7 @@ VOID InstrumentInstruction(INS ins, VOID *v)
                     IARG_BOOL, last,
                     IARG_END);
         } else {
+            // if (isWeightFlag==true) std::cout << "inst code: " << instCode << std::endl;
             INS_InsertPredicatedCall(ins, IPOINT_BEFORE, (AFUNPTR)
                     WriteInstructionWriteOnly,
                     IARG_THREAD_ID,
@@ -586,7 +586,7 @@ VOID InstrumentInstruction(INS ins, VOID *v)
 
         }
     }
-
+    // if (isWeightFlag==true) std::cout << "***" << std::endl;
     if (operands == 0) {
         INS_InsertPredicatedCall(ins, IPOINT_BEFORE, (AFUNPTR)
                 WriteNoOp,
@@ -975,6 +975,7 @@ void* ariel_mlm_malloc(size_t size, int level) {
     ac.command = ARIEL_ISSUE_TLM_MAP;
     ac.mlm_map.vaddr = virtualAddress;
     ac.mlm_map.alloc_len = allocationLength;
+    ac.mlm_map.isWeight = isWeightFlag;
 
     if(shouldOverride) {
         ac.mlm_map.alloc_level = overridePool;
@@ -1068,6 +1069,7 @@ VOID ariel_postmalloc_instrument(ADDRINT allocLocation)
         ac.instPtr = myIndex;
         ac.mlm_map.vaddr = virtualAddress;
         ac.mlm_map.alloc_len = allocationLength;
+        ac.mlm_map.isWeight = isWeightFlag;
 
 
         if (UseMallocMap.Value() != "") {
@@ -1088,7 +1090,7 @@ VOID ariel_postmalloc_instrument(ADDRINT allocLocation)
             ac.mlm_map.alloc_level = allocationLevel;
             tunnel->writeMessage(thr, ac);
         }
-        printf("ARIEL: Created a malloc of size: %ld in Ariel (weight flag=%d)\n", allocationLength, isWeightFlag);
+        // printf("ARIEL: Created a malloc of size: %ld in Ariel (weight flag=%d)\n", allocationLength, isWeightFlag);
         /*printf("ARIEL: Created a malloc of size: %" PRIu64 " in Ariel\n",
          * (UINT64) allocationLength);*/
     }
@@ -2042,6 +2044,8 @@ int main(int argc, char *argv[])
     fflush(stdout);
     
     PIN_StartProgram();
+
+    sleep(2);
 
     return 0;
 }

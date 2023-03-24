@@ -1,0 +1,395 @@
+No protocol specified
+No protocol specified
+SST-Core: Configuration Library Path will read from: /home/ydy/local/sst-core/lib/sst:/home/ydy/local/sst-core/lib/sstcore:/home/ydy/local/sst-elements/lib/sst-elements-library:/home/ydy/scratch/src/sst-elements/src/sst/elements/osseous
+SSTPythonModel: Creating config graph for SST using Python model...
+WARNING: Component name 'Bridge:internal_network-Ext_Mem_Net' is not valid
+WARNING: Link name 'B0-internal_network-Ext_Mem_Net' is not valid
+WARNING: Link name 'B0-internal_network-Ext_Mem_Net' is not valid
+WARNING: Link name 'B1-internal_network-Ext_Mem_Net' is not valid
+WARNING: Link name 'B1-internal_network-Ext_Mem_Net' is not valid
+SSTPythonModel: Construction of config graph with Python is complete.
+ SST Core: #main() My rank is (0.0), on 1/1 nodes/threads
+ SST Core: # ------------------------------------------------------------
+ SST Core: # Graph construction took 0.040690 seconds.
+ SST Core: # Graph contains 20 components
+ SST Core: # Graph partitioning took 8.10623e-06 seconds.
+ SST Core: # Graph construction and partition raised RSS by 16160 KB
+ SST Core: # ------------------------------------------------------------
+ SST Core: Signal handlers will be registered for USR1, USR2, INT and TERM...
+ SST Core: Signal handler registration is completed
+ SST Core:  : StatisticOutputCSV enabled...
+ArielComponent[arielcpu.cc:37:ArielCPU] Creating Ariel component...
+ArielComponent[arielcpu.cc:43:ArielCPU] Configuring for 2 cores...
+ArielComponent[arielcpu.cc:46:ArielCPU] Configuring for check addresses = no
+arielmemmgr opal is used!
+ArielComponent[arielcpu.cc:119:ArielCPU] Loaded memory manager: cpu:memmgr
+ArielComponent[arielcpu.cc:133:ArielCPU] Memory manager construction is completed.
+Pin3Frontend[frontend/pin3/pin3frontend.cc:81:Pin3Frontend] Model specifies that there are 0 application arguments
+Pin3Frontend[frontend/pin3/pin3frontend.cc:91:Pin3Frontend] Interception and instrumentation of multi-level memory and malloc/free calls is ENABLED.
+Pin3Frontend[frontend/pin3/pin3frontend.cc:96:Pin3Frontend] Tracking the stack and dumping on malloc calls is ENABLED.
+Pin3Frontend[frontend/pin3/pin3frontend.cc:101:Pin3Frontend] Malloc map file is DISABLED
+Pin3Frontend[frontend/pin3/pin3frontend.cc:110:Pin3Frontend] Base pipe name: /tmp/sst_shmem_1861825-0-1804289383
+Pin3Frontend[frontend/pin3/pin3frontend.cc:134:Pin3Frontend] Processing application arguments...
+Pin3Frontend[frontend/pin3/pin3frontend.cc:264:Pin3Frontend] Completed processing application arguments.
+Pin3Frontend[frontend/pin3/pin3frontend.cc:269:Pin3Frontend] Completed initialization of the Ariel CPU.
+ArielComponent[arielcpu.cc:169:ArielCPU] Registering ArielCPU clock at 2GHz
+ArielComponent[arielcpu.cc:173:ArielCPU] Clocks registered.
+ArielComponent[arielcpu.cc:175:ArielCPU] Creating core to cache links...
+ArielComponent[arielcpu.cc:177:ArielCPU] Creating processor cores and cache links...
+ArielComponent[arielcpu.cc:179:ArielCPU] Configuring cores and cache links...
+ArielComponent[arielcpu.cc:233:ArielCPU] Completed initialization of the Ariel RTL Link.
+ArielComponent[arielcpu.cc:233:ArielCPU] Completed initialization of the Ariel RTL Link.
+ArielComponent[arielcpu.cc:245:ArielCPU] Completed initialization of the Ariel CPU.
+Initialized with 2 cores
+Before initialization 
+Assigning the PTW correctly
+mmu:pagefaulthandler register handler
+Assigning the PTW correctly
+mmu:pagefaulthandler register handler
+After initialization 
+opalNumber of Shared Memory Pools: 2
+Pool start: 134217728 size: 2097152 frame size: 4 mem tech: 0
+opalConfiguring Shared mempool0
+Pool start: 268435456 size: 2097152 frame size: 4 mem tech: 0
+opalConfiguring Shared mempool1
+Pool start: 0 size: 131072 frame size: 4 mem tech: 0
+allocation policy: 2
+clock: 2GHz
+l2cache_0: No MSHR lookup latency provided (mshr_latency_cycles)...intrapolated to 2 cycles.
+l2cache_1: No MSHR lookup latency provided (mshr_latency_cycles)...intrapolated to 2 cycles.
+l2cache_2: No MSHR lookup latency provided (mshr_latency_cycles)...intrapolated to 2 cycles.
+l2cache_3: No MSHR lookup latency provided (mshr_latency_cycles)...intrapolated to 2 cycles.
+l3cache: No MSHR lookup latency provided (mshr_latency_cycles)...intrapolated to 3 cycles.
+local_memory, WARNING: loading backend in legacy mode (from parameter set). Instead, load backend into this controller's 'backend' slot via ctrl.setSubComponent() in configuration.
+0:TimingDRAM::TimingDRAM():52:mc=0: number of channels: 2
+0:TimingDRAM::TimingDRAM():53:mc=0: address mapper:     memHierarchy.roundRobinAddrMapper
+0:TimingDRAM:Channel:Channel():111:mc=0:chan=0: max pending trans: 32
+0:TimingDRAM:Channel:Channel():112:mc=0:chan=0: number of ranks:   2
+0:TimingDRAM:Rank:Rank():221:mc=0:chan=0:rank=0: number of banks: 16
+0:TimingDRAM:Bank:Bank():289:mc=0:chan=0:rank=0:bank=0: CL:           14
+0:TimingDRAM:Bank:Bank():290:mc=0:chan=0:rank=0:bank=0: CL_WR:        12
+0:TimingDRAM:Bank:Bank():291:mc=0:chan=0:rank=0:bank=0: RCD:          14
+0:TimingDRAM:Bank:Bank():292:mc=0:chan=0:rank=0:bank=0: TRP:          14
+0:TimingDRAM:Bank:Bank():293:mc=0:chan=0:rank=0:bank=0: dataCycles:   2
+0:TimingDRAM:Bank:Bank():294:mc=0:chan=0:rank=0:bank=0: transactionQ: memHierarchy.fifoTransactionQ
+0:TimingDRAM:Bank:Bank():295:mc=0:chan=0:rank=0:bank=0: pagePolicy:   memHierarchy.simplePagePolicy
+local_memory, WARNING: Memories no longer inherit address regions from directories and no region parameters (addr_range_start, addr_range_end, interleave_size, interleave_step) were detected. All addresses will map to this memory: if this is intended, you may ignore this warning or set addr_range_start to 0 in your input deck to eliminate this warning.
+dc, Warning: getting region parameters (addr_range_start/end, interleave_step/size) from link subcomponent. In the future this will not be supported and region parameters should be declared in the directory's parameters instead.
+ExternalNVMmemContr, WARNING: Memories no longer inherit address regions from directories and no region parameters (addr_range_start, addr_range_end, interleave_size, interleave_step) were detected. All addresses will map to this memory: if this is intended, you may ignore this warning or set addr_range_start to 0 in your input deck to eliminate this warning.
+ExtMemDc, Warning: getting region parameters (addr_range_start/end, interleave_step/size) from link subcomponent. In the future this will not be supported and region parameters should be declared in the directory's parameters instead.
+The value of tRCD is 300
+After initialization 
+SSTARIEL: Loading Ariel Tool to connect to SST on pipe: /tmp/sst_shmem_1861825-0-1804289383 max core count: 2
+SSTARIEL: Function profiling is disabled.
+ARIEL-SST: Did not find ARIEL_OVERRIDE_POOL in the environment, no override applies.
+ARIEL-SST PIN tool activating with 2 threads
+SSTARIEL: Performing write tracing (this is an expensive operation.)
+ARIEL: Default memory pool set to 0
+ARIEL: Tool is configured to suspend profiling until program control
+ARIEL: Starting program. (with pin3)
+keepMallocstrackTrace: 1
+Identified routine: ariel_enable, replacing with Ariel equivalent...
+Replacement complete.
+Identified routine: weight_pre_malloc, replacing with Ariel equivalent...
+Replacement complete.
+Identified routine: weight_post_malloc, replacing with Ariel equivalent...
+Replacement complete.
+Identified routine: mlm_malloc, replacing with Ariel equivalent...
+Replacement complete. (0x562d5138c227)
+Identified routine: malloc/_malloc, replacing with Ariel equivalent...
+Identified routine: free/_free, replacing with Ariel equivalent...
+Identified routine: clock_gettime, replacing with Ariel equivalent...
+Replacement complete.
+ SST Core: # Starting main event loop
+ SST Core: # Start time: 2023/03/24 at: 14:29:53
+Pin3Frontend[frontend/pin3/pin3frontend.cc:276:init] Launching PIN...
+Pin3Frontend[frontend/pin3/pin3frontend.cc:332:forkPINChild] Executing PIN command: /home/ydy/local/packages/pin-3.22-98547-g7a303a835-gcc-linux/pin -follow_execv -ifeellucky -t /home/ydy/local/sst-elements/libexec/fesimple.so -w 1 -E 1 -p /tmp/sst_shmem_1861825-0-1804289383 -v 1 -t 0 -c 2 -s 0 -m 1 -k 1 -d 0 -- ./app/opal_test
+Pin3Frontend[frontend/pin3/pin3frontend.cc:281:init] Returned from launching PIN.  Waiting for child to attach.
+Pin3Frontend[frontend/pin3/pin3frontend.cc:284:init] Child has attached!
+[ArielCore::createAllocateEvent]Generated an allocate event, vAddr(map)=140188081369488, length=1441 in level 0 from IP 0
+opal node: 0 core: 0 request page address: 140188081369488 hint
+[ArielCore::createAllocateEvent]Generated an allocate event, vAddr(map)=140188081370944, length=1185 in level 0 from IP 1
+opal node: 0 core: 0 request page address: 140188081370944 hint
+[ArielCore::createAllocateEvent]Generated an allocate event, vAddr(map)=140188081372144, length=16 in level 0 from IP 2
+opal node: 0 core: 0 request page address: 140188081372144 hint
+[ArielCore::createAllocateEvent]Generated an allocate event, vAddr(map)=140188081372160, length=334 in level 0 from IP 3
+opal node: 0 core: 0 request page address: 140188081372160 hint
+[ArielCore::createAllocateEvent]Generated an allocate event, vAddr(map)=140188081372496, length=40 in level 0 from IP 4
+opal node: 0 core: 0 request page address: 140188081372496 hint
+[ArielCore::createAllocateEvent]Generated an allocate event, vAddr(map)=140188081372544, length=480 in level 0 from IP 5
+opal node: 0 core: 0 request page address: 140188081372544 hint
+[ArielCore::createAllocateEvent]Generated an allocate event, vAddr(map)=140188081373024, length=104 in level 0 from IP 6
+opal node: 0 core: 0 request page address: 140188081373024 hint
+[ArielCore::createAllocateEvent]Generated an allocate event, vAddr(map)=140187736715264, length=60 in level 0 from IP 7
+opal node: 0 core: 0 request page address: 140187736715264 hint
+[ArielCore::createAllocateEvent]Generated an allocate event, vAddr(map)=140187736715328, length=165 in level 0 from IP 8
+opal node: 0 core: 0 request page address: 140187736715328 hint
+[ArielCore::createAllocateEvent]Generated an allocate event, vAddr(map)=140187736715504, length=54 in level 0 from IP 9
+opal node: 0 core: 0 request page address: 140187736715504 hint
+[ArielCore::createAllocateEvent]Generated an allocate event, vAddr(map)=140187736715568, length=159 in level 0 from IP 10
+opal node: 0 core: 0 request page address: 140187736715568 hint
+[ArielCore::createAllocateEvent]Generated an allocate event, vAddr(map)=140187736715728, length=37 in level 0 from IP 11
+opal node: 0 core: 0 request page address: 140187736715728 hint
+[ArielCore::createAllocateEvent]Generated an allocate event, vAddr(map)=140187736715776, length=142 in level 0 from IP 12
+opal node: 0 core: 0 request page address: 140187736715776 hint
+[ArielCore::createAllocateEvent]Generated an allocate event, vAddr(map)=140187736715920, length=105 in level 0 from IP 13
+opal node: 0 core: 0 request page address: 140187736715920 hint
+[ArielCore::createAllocateEvent]Generated an allocate event, vAddr(map)=140187736716032, length=27 in level 0 from IP 14
+opal node: 0 core: 0 request page address: 140187736716032 hint
+[ArielCore::createAllocateEvent]Generated an allocate event, vAddr(map)=140187736716064, length=132 in level 0 from IP 15
+opal node: 0 core: 0 request page address: 140187736716064 hint
+[ArielCore::createAllocateEvent]Generated an allocate event, vAddr(map)=140187736716208, length=32 in level 0 from IP 16
+opal node: 0 core: 0 request page address: 140187736716208 hint
+[ArielCore::createAllocateEvent]Generated an allocate event, vAddr(map)=140187736716240, length=1194 in level 0 from IP 17
+opal node: 0 core: 0 request page address: 140187736716240 hint
+[ArielCore::createAllocateEvent]Generated an allocate event, vAddr(map)=140187736717440, length=32 in level 0 from IP 18
+opal node: 0 core: 0 request page address: 140187736717440 hint
+[ArielCore::createAllocateEvent]Generated an allocate event, vAddr(map)=140187736717472, length=40 in level 0 from IP 19
+opal node: 0 core: 0 request page address: 140187736717472 hint
+[ArielCore::createAllocateEvent]Generated an allocate event, vAddr(map)=140187736717520, length=56 in level 0 from IP 20
+opal node: 0 core: 0 request page address: 140187736717520 hint
+[ArielCore::createAllocateEvent]Generated an allocate event, vAddr(map)=140187736717584, length=96 in level 0 from IP 21
+opal node: 0 core: 0 request page address: 140187736717584 hint
+[ArielCore::createAllocateEvent]Generated an allocate event, vAddr(map)=140187736717680, length=72 in level 0 from IP 22
+opal node: 0 core: 0 request page address: 140187736717680 hint
+[ArielCore::createAllocateEvent]Generated an allocate event, vAddr(map)=140187736717760, length=840 in level 0 from IP 23
+opal node: 0 core: 0 request page address: 140187736717760 hint
+[ArielCore::createAllocateEvent]Generated an allocate event, vAddr(map)=140187736718608, length=144 in level 0 from IP 24
+opal node: 0 core: 0 request page address: 140187736718608 hint
+[ArielCore::createAllocateEvent]Generated an allocate event, vAddr(map)=140187736718752, length=1040 in level 0 from IP 25
+opal node: 0 core: 0 request page address: 140187736718752 hint
+[ArielCore::createAllocateEvent]Generated an allocate event, vAddr(map)=140187734618112, length=4232 in level 0 from IP 26
+opal node: 0 core: 0 request page address: 140187734618112 hint
+[ArielCore::createAllocateEvent]Generated an allocate event, vAddr(map)=140187734622352, length=272 in level 0 from IP 27
+opal node: 0 core: 0 request page address: 140187734622352 hint
+Identified routine: malloc/_malloc, replacing with Ariel equivalent...
+Identified routine: free/_free, replacing with Ariel equivalent...
+Identified routine: malloc/_malloc, replacing with Ariel equivalent...
+Identified routine: clock_gettime, replacing with Ariel equivalent...
+Replacement complete.
+ARIEL: Enabling memory and instruction tracing from program control at simulated Ariel cycle 2795349.
+ARIEL: weight premalloc executed!
+***
+inst code: CALL_NEAR
+***
+[WriteInstructionWriteOnly]write addr: 0x00007ffc24450068
+***
+***
+***
+***
+inst code: PUSH
+***
+inst code: PUSH
+***
+***
+inst code: PUSH
+***
+***
+***
+***
+***
+***
+***
+***
+***
+***
+[WriteInstructionWriteOnly]write addr: 0x00007ffc24450060
+[WriteInstructionWriteOnly]write addr: 0x00007ffc24450058
+[WriteInstructionWriteOnly]write addr: 0x00007ffc24450050
+***
+***
+***
+***
+***
+***
+***
+***
+***
+***
+***
+***
+***
+***
+***
+inst code: CALL_NEAR
+***
+[WriteInstructionWriteOnly]write addr: 0x00007ffc24450048
+[WriteInstructionWriteOnly]write addr: 0x00007ffc24450040
+[WriteInstructionWriteOnly]write addr: 0x00007ffc24450038
+[WriteInstructionWriteOnly]write addr: 0x00007ffc24450030
+[WriteInstructionWriteOnly]write addr: 0x00007ffc24450028
+[WriteInstructionWriteOnly]write addr: 0x00007ffc24450020
+[WriteInstructionWriteOnly]write addr: 0x00007ffc24450018
+[WriteInstructionWriteOnly]write addr: 0x00007ffc2444ffe8
+[WriteInstructionWriteOnly]write addr: 0x00007ffc2444fff0
+[WriteInstructionWriteOnly]write addr: 0x00007ffc2444ffd0
+[WriteInstructionWriteOnly]write addr: 0x00007ffc2444ffe0
+[WriteInstructionWriteOnly]write addr: 0x00007ffc2444ffdc
+[WriteInstructionWriteOnly]write addr: 0x00007ffc2444fff8
+[WriteInstructionWriteOnly]write addr: 0x00007ffc2444fffc
+[WriteInstructionWriteOnly]write addr: 0x00007ffc24450000
+[WriteInstructionWriteOnly]write addr: 0x00007ffc24450004
+[WriteInstructionWriteOnly]write addr: 0x00007ffc2444ffb8
+[WriteInstructionWriteOnly]write addr: 0x00007ffc2444ffb8
+[WriteInstructionWriteOnly]write addr: 0x00007ffc2444ffb8
+***
+***
+***
+***
+***
+inst code: CALL_NEAR
+***
+[WriteInstructionWriteOnly]write addr: 0x00007ffc2444ff98
+[WriteInstructionWriteOnly]write addr: 0x00007ffc2444ff98
+[WriteInstructionWriteOnly]write addr: 0x00007ffc2444ff90
+[WriteInstructionWriteOnly]write addr: 0x00007ffc2444ffb0
+[WriteInstructionWriteOnly]write addr: 0x00007ffc2444ffd8
+[WriteInstructionWriteOnly]write addr: 0x00007f800004ebe0
+[WriteInstructionWriteOnly]write addr: 0x0000562d522182a8
+[WriteInstructionWriteOnly]write addr: 0x0000562d5221c138
+***
+***
+***
+***
+***
+***
+***
+***
+***
+***
+***
+***
+***
+[ArielCore::createAllocateEvent]Generated an allocate event, vAddr(map)=94752651444912, length=16000 in level 0 from IP 28
+opal node: inst code: MOV
+0 core: 0***
+ request page address: ***
+94752651444912 hintinst code: CALL_NEAR
+
+***
+[WriteInstructionWriteOnly]write addr: 0x00007ffc24450088
+[WriteInstructionWriteOnly]write addr: 0x00007ffc24450068
+[WriteInstructionWriteOnly]write addr: 0x00007ffc24450060
+[WriteInstructionWriteOnly]write addr: 0x00007ffc24450058
+[WriteInstructionWriteOnly]write addr: 0x00007ffc24450050
+[WriteInstructionWriteOnly]write addr: 0x00007ffc24450048
+[WriteInstructionWriteOnly]write addr: 0x00007ffc24450040
+[WriteInstructionWriteOnly]write addr: 0x00007ffc24450038
+[WriteInstructionWriteOnly]write addr: 0x00007ffc24450030
+[WriteInstructionWriteOnly]write addr: 0x00007ffc24450028
+[WriteInstructionWriteOnly]write addr: 0x00007ffc24450020
+[WriteInstructionWriteOnly]write addr: 0x00007ffc24450018
+[WriteInstructionWriteOnly]write addr: 0x00007ffc2444ffe8
+[WriteInstructionWriteOnly]write addr: 0x00007ffc2444fff0
+[WriteInstructionWriteOnly]write addr: 0x00007ffc2444ffd0
+[WriteInstructionWriteOnly]write addr: 0x00007ffc2444ffe0
+[WriteInstructionWriteOnly]write addr: 0x00007ffc2444ffdc
+[WriteInstructionWriteOnly]write addr: 0x00007ffc2444fff8
+[WriteInstructionWriteOnly]write addr: 0x00007ffc2444fffc
+[WriteInstructionWriteOnly]write addr: 0x00007ffc24450000
+[WriteInstructionWriteOnly]write addr: 0x00007ffc24450004
+[WriteInstructionWriteOnly]write addr: 0x00007ffc2444ffb8
+[WriteInstructionWriteOnly]write addr: 0x00007ffc2444ffb8
+[WriteInstructionWriteOnly]write addr: 0x00007ffc2444ffb8
+[WriteInstructionWriteOnly]write addr: 0x00007ffc2444ff98
+[WriteInstructionWriteOnly]write addr: 0x00007ffc2444ff98
+[WriteInstructionWriteOnly]write addr: 0x00007ffc2444ff90
+[WriteInstructionWriteOnly]write addr: 0x00007ffc2444ffb0
+[WriteInstructionWriteOnly]write addr: 0x00007ffc2444ffd8
+[WriteInstructionWriteOnly]write addr: 0x00007f800004ebe0
+[WriteInstructionWriteOnly]write addr: 0x0000562d5221c138
+[WriteInstructionWriteOnly]write addr: 0x0000562d5221ffc8
+inst code: MOV
+***
+***
+inst code: CALL_NEAR
+[ArielCore::createAllocateEvent]Generated an allocate event, vAddr(map)=94752651460928, length=16000 in level 0 from IP 29
+***
+opal node: 0 core: 0 request page address: 94752651460928 hint
+[WriteInstructionWriteOnly]write addr: 0x00007ffc24450090
+[WriteInstructionWriteOnly]write addr: 0x00007ffc24450068
+[WriteInstructionWriteOnly]write addr: 0x00007ffc24450060
+[WriteInstructionWriteOnly]write addr: 0x00007ffc24450058
+[WriteInstructionWriteOnly]write addr: 0x00007ffc24450050
+[WriteInstructionWriteOnly]write addr: 0x00007ffc24450048
+[WriteInstructionWriteOnly]write addr: 0x00007ffc24450040
+[WriteInstructionWriteOnly]write addr: 0x00007ffc24450038
+[WriteInstructionWriteOnly]write addr: 0x00007ffc24450030
+[WriteInstructionWriteOnly]write addr: 0x00007ffc24450028
+[WriteInstructionWriteOnly]write addr: 0x00007ffc24450020
+[WriteInstructionWriteOnly]write addr: 0x00007ffc24450018
+[WriteInstructionWriteOnly]write addr: 0x00007ffc2444ffe8
+[WriteInstructionWriteOnly]write addr: 0x00007ffc2444fff0
+[WriteInstructionWriteOnly]write addr: 0x00007ffc2444ffd0
+[WriteInstructionWriteOnly]write addr: 0x00007ffc2444ffe0
+[WriteInstructionWriteOnly]write addr: 0x00007ffc2444ffdc
+[WriteInstructionWriteOnly]write addr: 0x00007ffc2444fff8
+[WriteInstructionWriteOnly]write addr: 0x00007ffc2444fffc
+[WriteInstructionWriteOnly]write addr: 0x00007ffc24450000
+[WriteInstructionWriteOnly]write addr: 0x00007ffc24450004
+[WriteInstructionWriteOnly]write addr: 0x00007ffc2444ffb8
+[WriteInstructionWriteOnly]write addr: 0x00007ffc2444ffb8
+[WriteInstructionWriteOnly]write addr: 0x00007ffc2444ffb8
+[WriteInstructionWriteOnly]write addr: 0x00007ffc2444ff98
+[WriteInstructionWriteOnly]write addr: 0x00007ffc2444ff98
+[WriteInstructionWriteOnly]write addr: 0x00007ffc2444ff90
+[WriteInstructionWriteOnly]write addr: 0x00007ffc2444ffb0
+[WriteInstructionWriteOnly]write addr: 0x00007ffc2444ffd8
+[WriteInstructionWriteOnly]write addr: 0x00007f800004ebe0
+[WriteInstructionWriteOnly]write addr: 0x0000562d5221ffc8
+[WriteInstructionWriteOnly]write addr: 0x0000562d52223e58
+inst code: MOV
+***
+inst code: CALL_NEAR
+***
+[ArielCore::createAllocateEvent]Generated an allocate event, vAddr(map)=94752651476944, length=16000 in level 0 from IP 30
+opal node: 0 core: 0 request page address: 94752651476944 hint
+[WriteInstructionWriteOnly]write addr: 0x00007ffc24450098
+[WriteInstructionWriteOnly]write addr: 0x00007ffc24450068
+Allocating arrays of size 2000 elements.
+allocated address: a:24450088 b:24450090 c:24450098
+Done allocating arrays.
+Sum of arrays is: 6999500.000000
+Freeing arrays...
+Done.
+ARIEL: weight postalloc executed!
+SSTARIEL: Execution completed, shutting down.
+CORE ID: 0 PROCESSED AN EXIT EVENT
+ArielComponent[arielcpu.cc:263:finish] Ariel Processor Information:
+ArielComponent[arielcpu.cc:264:finish] Completed at: 1972881 nanoseconds.
+ArielComponent[arielcpu.cc:265:finish] Ariel Component Statistics (By Core)
+
+Ariel Memory Management Statistics:
+---------------------------------------------------------------------
+Page Table Sizes:
+- Map entries         62
+Page Table Coverages:
+- Bytes               253952
+
+
+------------------------------------------------------------
+Simulation Timing Information (Wall Clock Times):
+  Build time:                      0.231327 seconds
+  Run loop time:                   4.509459 seconds
+  Total time:                      4.914294 seconds
+
+Simulated time:                    1.97288 ms
+
+Simulation Resource Information:
+  Max Resident Set Size:           144.464 MB
+  Approx. Global Max RSS Size:     144.464 MB
+  Max Local Page Faults:           1 faults
+  Global Page Faults:              1 faults
+  Max Output Blocks:               552 blocks
+  Max Input Blocks:                0 blocks
+  Max mempool usage:               34.3409 MB
+  Global mempool usage:            34.3409 MB
+  Global active activities:        2820 activities
+  Current global TimeVortex depth: 4 entries
+  Max TimeVortex depth:            25 entries
+  Max Sync data size:              0 B
+  Global Sync data size:           0 B
+------------------------------------------------------------
+
+
+Simulation is complete, simulated time: 1.97288 ms

@@ -118,7 +118,7 @@ class ArielCore : public ComponentExtension {
         void finishCore();
         void createReadEvent(uint64_t addr, uint32_t size);
         void createWriteEvent(uint64_t addr, uint32_t size, const uint8_t* payload, bool isWeightWrite);
-        void createAllocateEvent(uint64_t vAddr, uint64_t length, uint32_t level, uint64_t ip);
+        void createAllocateEvent(uint64_t vAddr, uint64_t length, uint32_t level, uint64_t ip, bool wflag);
         void createMmapEvent(uint32_t fileID, uint64_t vAddr, uint64_t length, uint32_t level, uint64_t instPtr);
         void createNoOpEvent();
         void createFreeEvent(uint64_t vAddr);

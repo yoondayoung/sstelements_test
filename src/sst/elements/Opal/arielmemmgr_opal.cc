@@ -77,11 +77,13 @@ void MemoryManagerOpal::handleInterrupt(SST::Event *event) {
     }
 }
 
-bool MemoryManagerOpal::allocateMalloc(const uint64_t size, const uint32_t level, const uint64_t addr, const uint64_t ip, const uint32_t thread) {
+bool MemoryManagerOpal::allocateMalloc(const uint64_t size, const uint32_t level, const uint64_t addr, const uint64_t ip, const uint32_t thread, bool weightFlag) {
     OpalEvent * tse = new OpalEvent(OpalComponent::EventType::HINT, level, addr, size, thread);
-    opalLink[thread]->send(tse);
-    printf("**OPal****what is temp_translator??\n");
-    return temp_translator->allocateMalloc(size, level, addr, ip, thread);
+    // 여기서 addr이 왜 그냥 memWrite하는 주소랑 다른지
+    tse->setWeightFlag(weightFlag);
+    if (weightFlag == true) opalLink[thread]->send(tse);
+    // printf("**OPal****what is temp_translator??\n");
+    return temp_translator->allocateMalloc(size, level, addr, ip, thread, weightFlag);
 }
 
 bool MemoryManagerOpal::allocateMMAP(const uint64_t size, const uint32_t level, const uint64_t addr, const uint64_t ip, const uint32_t file, const uint32_t thread) {

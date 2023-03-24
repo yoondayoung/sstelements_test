@@ -144,6 +144,7 @@ struct ArielCommand {
             uint64_t vaddr;
             uint64_t alloc_len;
             uint32_t alloc_level;
+            bool isWeight;
         } mlm_map;
         struct {
             uint64_t vaddr;

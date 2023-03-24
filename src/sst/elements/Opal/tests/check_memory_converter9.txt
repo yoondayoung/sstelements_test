@@ -10,10 +10,10 @@ WARNING: Link name 'B1-internal_network-Ext_Mem_Net' is not valid
 SSTPythonModel: Construction of config graph with Python is complete.
  SST Core: #main() My rank is (0.0), on 1/1 nodes/threads
  SST Core: # ------------------------------------------------------------
- SST Core: # Graph construction took 0.040154 seconds.
+ SST Core: # Graph construction took 0.040375 seconds.
  SST Core: # Graph contains 20 components
- SST Core: # Graph partitioning took 9.05991e-06 seconds.
- SST Core: # Graph construction and partition raised RSS by 15984 KB
+ SST Core: # Graph partitioning took 1.09673e-05 seconds.
+ SST Core: # Graph construction and partition raised RSS by 16156 KB
  SST Core: # ------------------------------------------------------------
  SST Core: Signal handlers will be registered for USR1, USR2, INT and TERM...
  SST Core: Signal handler registration is completed
@@ -25,10 +25,10 @@ arielmemmgr opal is used!
 ArielComponent[arielcpu.cc:119:ArielCPU] Loaded memory manager: cpu:memmgr
 ArielComponent[arielcpu.cc:133:ArielCPU] Memory manager construction is completed.
 Pin3Frontend[frontend/pin3/pin3frontend.cc:81:Pin3Frontend] Model specifies that there are 0 application arguments
-Pin3Frontend[frontend/pin3/pin3frontend.cc:91:Pin3Frontend] Interception and instrumentation of multi-level memory and malloc/free calls is ENABLED.
+Pin3Frontend[frontend/pin3/pin3frontend.cc:88:Pin3Frontend] Interception and instrumentation of multi-level memory and malloc/free calls is DISABLED.
 Pin3Frontend[frontend/pin3/pin3frontend.cc:96:Pin3Frontend] Tracking the stack and dumping on malloc calls is ENABLED.
 Pin3Frontend[frontend/pin3/pin3frontend.cc:101:Pin3Frontend] Malloc map file is DISABLED
-Pin3Frontend[frontend/pin3/pin3frontend.cc:110:Pin3Frontend] Base pipe name: /tmp/sst_shmem_1672198-0-1804289383
+Pin3Frontend[frontend/pin3/pin3frontend.cc:110:Pin3Frontend] Base pipe name: /tmp/sst_shmem_1677980-0-1804289383
 Pin3Frontend[frontend/pin3/pin3frontend.cc:134:Pin3Frontend] Processing application arguments...
 Pin3Frontend[frontend/pin3/pin3frontend.cc:264:Pin3Frontend] Completed processing application arguments.
 Pin3Frontend[frontend/pin3/pin3frontend.cc:269:Pin3Frontend] Completed initialization of the Ariel CPU.
@@ -79,7 +79,7 @@ ExternalNVMmemContr, WARNING: Memories no longer inherit address regions from di
 ExtMemDc, Warning: getting region parameters (addr_range_start/end, interleave_step/size) from link subcomponent. In the future this will not be supported and region parameters should be declared in the directory's parameters instead.
 The value of tRCD is 300
 After initialization 
-SSTARIEL: Loading Ariel Tool to connect to SST on pipe: /tmp/sst_shmem_1672198-0-1804289383 max core count: 2
+SSTARIEL: Loading Ariel Tool to connect to SST on pipe: /tmp/sst_shmem_1677980-0-1804289383 max core count: 2
 SSTARIEL: Function profiling is disabled.
 ARIEL-SST: Did not find ARIEL_OVERRIDE_POOL in the environment, no override applies.
 ARIEL-SST PIN tool activating with 2 threads
@@ -94,369 +94,176 @@ Identified routine: weight_pre_malloc, replacing with Ariel equivalent...
 Replacement complete.
 Identified routine: weight_post_malloc, replacing with Ariel equivalent...
 Replacement complete.
-Identified routine: malloc/_malloc, replacing with Ariel equivalent...
-Identified routine: free/_free, replacing with Ariel equivalent...
 Identified routine: clock_gettime, replacing with Ariel equivalent...
 Replacement complete.
+Identified routine: clock_gettime, replacing with Ariel equivalent...
+Replacement complete.
+ARIEL: Enabling memory and instruction tracing from program control at simulated Ariel cycle 2704092.
  SST Core: # Starting main event loop
- SST Core: # Start time: 2023/03/24 at: 00:09:06
+ SST Core: # Start time: 2023/03/24 at: 00:37:21
 Pin3Frontend[frontend/pin3/pin3frontend.cc:276:init] Launching PIN...
-Pin3Frontend[frontend/pin3/pin3frontend.cc:332:forkPINChild] Executing PIN command: /home/ydy/local/packages/pin-3.22-98547-g7a303a835-gcc-linux/pin -follow_execv -ifeellucky -t /home/ydy/local/sst-elements/libexec/fesimple.so -w 1 -E 1 -p /tmp/sst_shmem_1672198-0-1804289383 -v 1 -t 0 -c 2 -s 0 -m 1 -k 1 -d 0 -- ./app/opal_test
+Pin3Frontend[frontend/pin3/pin3frontend.cc:332:forkPINChild] Executing PIN command: /home/ydy/local/packages/pin-3.22-98547-g7a303a835-gcc-linux/pin -follow_execv -ifeellucky -t /home/ydy/local/sst-elements/libexec/fesimple.so -w 1 -E 1 -p /tmp/sst_shmem_1677980-0-1804289383 -v 1 -t 0 -c 2 -s 0 -m 0 -k 1 -d 0 -- ./app/opal_test
 Pin3Frontend[frontend/pin3/pin3frontend.cc:281:init] Returned from launching PIN.  Waiting for child to attach.
 Pin3Frontend[frontend/pin3/pin3frontend.cc:284:init] Child has attached!
-[ArielCore::createAllocateEvent]Generated an allocate event, vAddr(map)=139911682736528, length=1441 in level 0 from IP 0
-handleAllocationEvent is used!
-**OPal****what is temp_translator??
-opal weight flag: 0, allc size: 1441
-opal node: 0 core: 0 request page address: 139911682736528 hint
-[ArielCore::createAllocateEvent]Generated an allocate event, vAddr(map)=139911682737984, length=1185 in level 0 from IP 1
-handleAllocationEvent is used!
-**OPal****what is temp_translator??
-opal weight flag: 0, allc size: 1185
-opal node: 0 core: 0 request page address: 139911682737984 hint
-[ArielCore::createAllocateEvent]Generated an allocate event, vAddr(map)=139911682739184, length=16 in level 0 from IP 2
-handleAllocationEvent is used!
-**OPal****what is temp_translator??
-opal weight flag: 0, allc size: 16
-opal node: 0 core: 0 request page address: 139911682739184 hint
-[ArielCore::createAllocateEvent]Generated an allocate event, vAddr(map)=139911682739200, length=334 in level 0 from IP 3
-handleAllocationEvent is used!
-**OPal****what is temp_translator??
-opal weight flag: 0, allc size: 334
-opal node: 0 core: 0 request page address: 139911682739200 hint
-[ArielCore::createAllocateEvent]Generated an allocate event, vAddr(map)=139911682739536, length=40 in level 0 from IP 4
-handleAllocationEvent is used!
-**OPal****what is temp_translator??
-opal weight flag: 0, allc size: 40
-opal node: 0 core: 0 request page address: 139911682739536 hint
-[ArielCore::createAllocateEvent]Generated an allocate event, vAddr(map)=139911682739584, length=480 in level 0 from IP 5
-handleAllocationEvent is used!
-**OPal****what is temp_translator??
-opal weight flag: 0, allc size: 480
-opal node: 0 core: 0 request page address: 139911682739584 hint
-[ArielCore::createAllocateEvent]Generated an allocate event, vAddr(map)=139911682740064, length=104 in level 0 from IP 6
-handleAllocationEvent is used!
-**OPal****what is temp_translator??
-opal weight flag: 0, allc size: 104
-opal node: 0 core: 0 request page address: 139911682740064 hint
-[ArielCore::createAllocateEvent]Generated an allocate event, vAddr(map)=139911338237952, length=60 in level 0 from IP 7
-handleAllocationEvent is used!
-**OPal****what is temp_translator??
-opal weight flag: 0, allc size: 60
-opal node: 0 core: 0 request page address: 139911338237952 hint
-[ArielCore::createAllocateEvent]Generated an allocate event, vAddr(map)=139911338238016, length=165 in level 0 from IP 8
-handleAllocationEvent is used!
-**OPal****what is temp_translator??
-opal weight flag: 0, allc size: 165
-opal node: 0 core: 0 request page address: 139911338238016 hint
-[ArielCore::createAllocateEvent]Generated an allocate event, vAddr(map)=139911338238192, length=54 in level 0 from IP 9
-handleAllocationEvent is used!
-**OPal****what is temp_translator??
-opal weight flag: 0, allc size: 54
-opal node: 0 core: 0 request page address: 139911338238192 hint
-[ArielCore::createAllocateEvent]Generated an allocate event, vAddr(map)=139911338238256, length=159 in level 0 from IP 10
-handleAllocationEvent is used!
-**OPal****what is temp_translator??
-opal weight flag: 0, allc size: 159
-opal node: 0 core: 0 request page address: 139911338238256 hint
-[ArielCore::createAllocateEvent]Generated an allocate event, vAddr(map)=139911338238416, length=37 in level 0 from IP 11
-handleAllocationEvent is used!
-**OPal****what is temp_translator??
-opal weight flag: 0, allc size: 37
-opal node: 0 core: 0 request page address: 139911338238416 hint
-[ArielCore::createAllocateEvent]Generated an allocate event, vAddr(map)=139911338238464, length=142 in level 0 from IP 12
-handleAllocationEvent is used!
-**OPal****what is temp_translator??
-opal weight flag: 0, allc size: 142
-opal node: 0 core: 0 request page address: 139911338238464 hint
-[ArielCore::createAllocateEvent]Generated an allocate event, vAddr(map)=139911338238608, length=105 in level 0 from IP 13
-handleAllocationEvent is used!
-**OPal****what is temp_translator??
-opal weight flag: 0, allc size: 105
-opal node: 0 core: 0 request page address: 139911338238608 hint
-[ArielCore::createAllocateEvent]Generated an allocate event, vAddr(map)=139911338238720, length=27 in level 0 from IP 14
-handleAllocationEvent is used!
-**OPal****what is temp_translator??
-opal weight flag: 0, allc size: 27
-opal node: 0 core: 0 request page address: 139911338238720 hint
-[ArielCore::createAllocateEvent]Generated an allocate event, vAddr(map)=139911338238752, length=132 in level 0 from IP 15
-handleAllocationEvent is used!
-**OPal****what is temp_translator??
-opal weight flag: 0, allc size: 132
-opal node: 0 core: 0 request page address: 139911338238752 hint
-ARIEL: Created a malloc of size: 1441 in Ariel (weight flag=0)
-ARIEL: Created a malloc of size: 1185 in Ariel (weight flag=0)
-ARIEL: Created a malloc of size: 16 in Ariel (weight flag=0)
-ARIEL: Created a malloc of size: 334 in Ariel (weight flag=0)
-ARIEL: Created a malloc of size: 40 in Ariel (weight flag=0)
-ARIEL: Created a malloc of size: 480 in Ariel (weight flag=0)
-ARIEL: Created a malloc of size: 104 in Ariel (weight flag=0)
-ARIEL: Created a malloc of size: 60 in Ariel (weight flag=0)
-ARIEL: Created a malloc of size: 165 in Ariel (weight flag=0)
-ARIEL: Created a malloc of size: 54 in Ariel (weight flag=0)
-ARIEL: Created a malloc of size: 159 in Ariel (weight flag=0)
-ARIEL: Created a malloc of size: 37 in Ariel (weight flag=0)
-ARIEL: Created a malloc of size: 142 in Ariel (weight flag=0)
-ARIEL: Created a malloc of size: 105 in Ariel (weight flag=0)
-ARIEL: Created a malloc of size: 27 in Ariel (weight flag=0)
-ARIEL: Created a malloc of size: 132 in Ariel (weight flag=0)
-ARIEL: Created a malloc of size: 32 [ArielCore::createAllocateEvent]Generated an allocate event, vAddr(map)=139911338238896, length=32 in level 0 from IP 16
-handleAllocationEvent is used!
-**OPal****what is temp_translator??
-opal weight flag: 0, allc size: 32
-opal node: 0 core: 0 request page address: 139911338238896 hint
-[ArielCore::createAllocateEvent]Generated an allocate event, vAddr(map)=139911338238928, length=1194 in level 0 from IP 17
-handleAllocationEvent is used!
-**OPal****what is temp_translator??
-opal weight flag: 0, allc size: 1194
-opal node: 0 core: 0 request page address: 139911338238928 hint
-[ArielCore::createAllocateEvent]Generated an allocate event, vAddr(map)=139911338240128, length=32 in level 0 from IP 18
-handleAllocationEvent is used!
-**OPal****what is temp_translator??
-opal weight flag: 0, allc size: 32
-opal node: 0 core: 0 request page address: 139911338240128 hint
-[ArielCore::createAllocateEvent]Generated an allocate event, vAddr(map)=139911338240160, length=40 in level 0 from IP 19
-handleAllocationEvent is used!
-**OPal****what is temp_translator??
-opal weight flag: 0, allc size: 40
-opal node: 0 core: 0 request page address: 139911338240160 hint
-[ArielCore::createAllocateEvent]Generated an allocate event, vAddr(map)=139911338240208, length=56 in level 0 from IP 20
-handleAllocationEvent is used!
-**OPal****what is temp_translator??
-opal weight flag: 0, allc size: 56
-opal node: 0 core: 0 request page address: 139911338240208 hint
-[ArielCore::createAllocateEvent]Generated an allocate event, vAddr(map)=139911338240272, length=96 in level 0 from IP 21
-handleAllocationEvent is used!
-**OPal****what is temp_translator??
-opal weight flag: 0, allc size: 96
-opal node: 0 core: 0 request page address: 139911338240272 hint
-[ArielCore::createAllocateEvent]Generated an allocate event, vAddr(map)=139911338240368, length=72 in level 0 from IP 22
-handleAllocationEvent is used!
-**OPal****what is temp_translator??
-opal weight flag: 0, allc size: 72
-opal node: 0 core: 0 request page address: 139911338240368 hint
-[ArielCore::createAllocateEvent]Generated an allocate event, vAddr(map)=139911338240448, length=840 in level 0 from IP 23
-handleAllocationEvent is used!
-**OPal****what is temp_translator??
-opal weight flag: 0, allc size: 840
-opal node: 0 core: 0 request page address: 139911338240448 hint
-[ArielCore::createAllocateEvent]Generated an allocate event, vAddr(map)=139911338241296, length=144 in level 0 from IP 24
-handleAllocationEvent is used!
-**OPal****what is temp_translator??
-opal weight flag: 0, allc size: 144
-opal node: 0 core: 0 request page address: 139911338241296 hint
-[ArielCore::createAllocateEvent]Generated an allocate event, vAddr(map)=139911338241440, length=1040 in level 0 from IP 25
-handleAllocationEvent is used!
-**OPal****what is temp_translator??
-opal weight flag: 0, allc size: 1040
-opal node: 0 core: 0 request page address: 139911338241440 hint
-[ArielCore::createAllocateEvent]Generated an allocate event, vAddr(map)=139911335997440, length=4232 in level 0 from IP 26
-handleAllocationEvent is used!
-**OPal****what is temp_translator??
-opal weight flag: 0, allc size: 4232
-opal node: 0 core: 0 request page address: 139911335997440 hint
-[ArielCore::createAllocateEvent]Generated an allocate event, vAddr(map)=139911336001680, length=272 in level 0 from IP 27
-handleAllocationEvent is used!
-**OPal****what is temp_translator??
-opal weight flag: 0, allc size: 272
-opal node: 0 core: 0 request page address: 139911336001680 hint
-Identified routine: malloc/_malloc, replacing with Ariel equivalent...
-Identified routine: free/_free, replacing with Ariel equivalent...
-Identified routine: malloc/_malloc, replacing with Ariel equivalent...
-Identified routine: clock_gettime, replacing with Ariel equivalent...
-Replacement complete.
-ARIEL: Enabling memory and instruction tracing from program control at simulated Ariel cycle 2784414.
-in Ariel (weight flag=0)
-ARIEL: Created a malloc of size: 1194 in Ariel (weight flag=0)
-ARIEL: Created a malloc of size: 32 in Ariel (weight flag=0)
-ARIEL: Created a malloc of size: 40 in Ariel (weight flag=0)
-ARIEL: Created a malloc of size: 56 in Ariel (weight flag=0)
-ARIEL: Created a malloc of size: 96 in Ariel (weight flag=0)
-ARIEL: Created a malloc of size: 72 in Ariel (weight flag=0)
-ARIEL: Created a malloc of size: 840 in Ariel (weight flag=0)
-ARIEL: Created a malloc of size: 144 in Ariel (weight flag=0)
-ARIEL: Created a malloc of size: 1040 in Ariel (weight flag=0)
-ARIEL: Created a malloc of size: 4232 in Ariel (weight flag=0)
-ARIEL: Created a malloc of size: 272 in Ariel (weight flag=0)
 opal weight flag: 0, allc size: 4096
 opal weight flag: 0, allc size: 4096
 opal Node: 0 core 0 response page address: 255 allocated shared address: 134217728 pages:  level: 3
 opal weight flag: 0, allc size: 4096
-opal Node: 0 core 0 response page address: 131059 allocated shared address: 268435456 pages:  level: 2
+opal Node: 0 core 0 response page address: 131057 allocated shared address: 268435456 pages:  level: 2
 opal weight flag: 0, allc size: 4096
-opal Node: 0 core 0 response page address: 67102340 allocated local address: 4096 pages: 1 level: 1
+opal Node: 0 core 0 response page address: 67101267 allocated local address: 4096 pages: 1 level: 1
 opal weight flag: 0, allc size: 4096
-opal Node: 0 core 0 response page address: 34356398587 allocated shared address: 134221824 pages:  level: 0
+opal Node: 0 core 0 response page address: 34355849116 allocated shared address: 134221824 pages:  level: 0
 opal weight flag: 0, allc size: 4096
-opal Node: 0 core 0 response page address: 171 allocated shared address: 268439552 pages:  level: 3
+opal Node: 0 core 0 response page address: 170 allocated shared address: 268439552 pages:  level: 3
 opal weight flag: 0, allc size: 4096
-opal Node: 0 core 0 response page address: 87613 allocated local address: 8192 pages: 1 level: 2
+opal Node: 0 core 0 response page address: 87474 allocated local address: 8192 pages: 1 level: 2
 opal weight flag: 0, allc size: 4096
-opal Node: 0 core 0 response page address: 44858338 allocated shared address: 134225920 pages:  level: 1
+opal Node: 0 core 0 response page address: 44786878 allocated shared address: 134225920 pages:  level: 1
 opal weight flag: 0, allc size: 4096
-opal Node: 0 core 0 response page address: 22967469154 allocated shared address: 268443648 pages:  level: 0
+opal Node: 0 core 0 response page address: 22930881825 allocated shared address: 268443648 pages:  level: 0
 opal weight flag: 0, allc size: 4096
-opal Node: 0 core 0 response page address: 254 allocated local address: 12288 pages: 1 level: 3
+opal Node: 0 core 0 response page address: 130591 allocated local address: 12288 pages: 1 level: 2
 opal weight flag: 0, allc size: 4096
-opal Node: 0 core 0 response page address: 130302 allocated shared address: 134230016 pages:  level: 2
+opal Node: 0 core 0 response page address: 66862780 allocated shared address: 134230016 pages:  level: 1
 opal weight flag: 0, allc size: 4096
-opal Node: 0 core 0 response page address: 66714923 allocated shared address: 268447744 pages:  level: 1
+opal Node: 0 core 0 response page address: 34233743518 allocated shared address: 268447744 pages:  level: 0
 opal weight flag: 0, allc size: 4096
-opal Node: 0 core 0 response page address: 34158041015 allocated local address: 16384 pages: 1 level: 0
+opal Node: 0 core 0 response page address: 34233743395 allocated local address: 16384 pages: 1 level: 0
 opal weight flag: 0, allc size: 4096
-opal Node: 0 core 0 response page address: 34158040583 allocated shared address: 134234112 pages:  level: 0
+opal Node: 0 core 0 response page address: 34233743397 allocated shared address: 134234112 pages:  level: 0
 opal weight flag: 0, allc size: 4096
-opal Node: 0 core 0 response page address: 34158040585 allocated shared address: 268451840 pages:  level: 0
+opal Node: 0 core 0 response page address: 34355849115 allocated shared address: 268451840 pages:  level: 0
 opal weight flag: 0, allc size: 4096
-opal Node: 0 core 0 response page address: 34158040584 allocated local address: 20480 pages: 1 level: 0
+opal Node: 0 core 0 response page address: 34233743396 allocated local address: 20480 pages: 1 level: 0
 opal weight flag: 0, allc size: 4096
-opal Node: 0 core 0 response page address: 22967469153 allocated shared address: 134238208 pages:  level: 0
+opal Node: 0 core 0 response page address: 22930881824 allocated shared address: 134238208 pages:  level: 0
 opal weight flag: 0, allc size: 4096
-opal Node: 0 core 0 response page address: 34158040589 allocated shared address: 268455936 pages:  level: 0
+opal Node: 0 core 0 response page address: 34233743401 allocated shared address: 268455936 pages:  level: 0
 opal weight flag: 0, allc size: 4096
-opal Node: 0 core 0 response page address: 34158040586 allocated local address: 24576 pages: 1 level: 0
+opal Node: 0 core 0 response page address: 34233743398 allocated local address: 24576 pages: 1 level: 0
 opal weight flag: 0, allc size: 4096
-opal Node: 0 core 0 response page address: 34158040581 allocated shared address: 134242304 pages:  level: 0
+opal Node: 0 core 0 response page address: 34233743393 allocated shared address: 134242304 pages:  level: 0
 opal weight flag: 0, allc size: 4096
-opal Node: 0 core 0 response page address: 66715089 allocated shared address: 268460032 pages:  level: 1
+opal Node: 0 core 0 response page address: 66862946 allocated shared address: 268460032 pages:  level: 1
 opal weight flag: 0, allc size: 4096
-opal Node: 0 core 0 response page address: 34158125667 allocated local address: 28672 pages: 1 level: 0
+opal Node: 0 core 0 response page address: 34233828471 allocated local address: 28672 pages: 1 level: 0
 opal weight flag: 0, allc size: 4096
-opal Node: 0 core 0 response page address: 34158125666 allocated shared address: 134246400 pages:  level: 0
+opal Node: 0 core 0 response page address: 34233828470 allocated shared address: 134246400 pages:  level: 0
 opal weight flag: 0, allc size: 4096
-opal Node: 0 core 0 response page address: 34356398586 allocated shared address: 268464128 pages:  level: 0
+opal Node: 0 core 0 response page address: 66862781 allocated shared address: 268464128 pages:  level: 1
 opal weight flag: 0, allc size: 4096
-opal Node: 0 core 0 response page address: 66714924 allocated local address: 32768 pages: 1 level: 1
+opal Node: 0 core 0 response page address: 34233744369 allocated local address: 32768 pages: 1 level: 0
 opal weight flag: 0, allc size: 4096
-opal Node: 0 core 0 response page address: 34158041562 allocated shared address: 134250496 pages:  level: 0
+opal Node: 0 core 0 response page address: 66862779 allocated shared address: 134250496 pages:  level: 1
 opal weight flag: 0, allc size: 4096
-opal Node: 0 core 0 response page address: 66714922 allocated shared address: 268468224 pages:  level: 1
+opal Node: 0 core 0 response page address: 34233742937 allocated shared address: 268468224 pages:  level: 0
 opal weight flag: 0, allc size: 4096
-opal Node: 0 core 0 response page address: 34158040125 allocated local address: 36864 pages: 1 level: 0
+opal Node: 0 core 0 response page address: 34233742908 allocated local address: 36864 pages: 1 level: 0
 opal weight flag: 0, allc size: 4096
-opal Node: 0 core 0 response page address: 34158040096 allocated shared address: 134254592 pages:  level: 0
+opal Node: 0 core 0 response page address: 34233742927 allocated shared address: 134254592 pages:  level: 0
 opal weight flag: 0, allc size: 4096
-opal Node: 0 core 0 response page address: 34158040115 allocated shared address: 268472320 pages:  level: 0
+opal Node: 0 core 0 response page address: 34233742923 allocated shared address: 268472320 pages:  level: 0
 opal weight flag: 0, allc size: 4096
-opal Node: 0 core 0 response page address: 34158040111 allocated local address: 40960 pages: 1 level: 0
+opal Node: 0 core 0 response page address: 34233828472 allocated local address: 40960 pages: 1 level: 0
 opal weight flag: 0, allc size: 4096
-opal Node: 0 core 0 response page address: 34158125668 allocated shared address: 134258688 pages:  level: 0
+opal Node: 0 core 0 response page address: 22930881822 allocated shared address: 134258688 pages:  level: 0
 opal weight flag: 0, allc size: 4096
-opal Node: 0 core 0 response page address: 22967469151 allocated shared address: 268476416 pages:  level: 0
+opal Node: 0 core 0 response page address: 34233742904 allocated shared address: 268476416 pages:  level: 0
 opal weight flag: 0, allc size: 4096
-opal Node: 0 core 0 response page address: 34158040092 allocated local address: 45056 pages: 1 level: 0
+opal Node: 0 core 0 response page address: 34233828425 allocated local address: 45056 pages: 1 level: 0
 opal weight flag: 0, allc size: 4096
-opal Node: 0 core 0 response page address: 34158125621 allocated shared address: 134262784 pages:  level: 0
+opal Node: 0 core 0 response page address: 34233828461 allocated shared address: 134262784 pages:  level: 0
 opal weight flag: 0, allc size: 4096
-opal Node: 0 core 0 response page address: 34158125657 allocated shared address: 268480512 pages:  level: 0
+opal Node: 0 core 0 response page address: 34233742905 allocated shared address: 268480512 pages:  level: 0
 opal weight flag: 0, allc size: 4096
-opal Node: 0 core 0 response page address: 34158040093 allocated local address: 49152 pages: 1 level: 0
+opal Node: 0 core 0 response page address: 34233742909 allocated local address: 49152 pages: 1 level: 0
 opal weight flag: 0, allc size: 4096
-opal Node: 0 core 0 response page address: 34158040097 allocated shared address: 134266880 pages:  level: 0
+opal Node: 0 core 0 response page address: 34233742906 allocated shared address: 134266880 pages:  level: 0
 opal weight flag: 0, allc size: 4096
-opal Node: 0 core 0 response page address: 34158040094 allocated shared address: 268484608 pages:  level: 0
+opal Node: 0 core 0 response page address: 34233742910 allocated shared address: 268484608 pages:  level: 0
 opal weight flag: 0, allc size: 4096
-opal Node: 0 core 0 response page address: 34158040098 allocated local address: 53248 pages: 1 level: 0
+opal Node: 0 core 0 response page address: 34233742911 allocated local address: 53248 pages: 1 level: 0
 opal weight flag: 0, allc size: 4096
-opal Node: 0 core 0 response page address: 34158040099 allocated shared address: 134270976 pages:  level: 0
+opal Node: 0 core 0 response page address: 34233742912 allocated shared address: 134270976 pages:  level: 0
 opal weight flag: 0, allc size: 4096
-opal Node: 0 core 0 response page address: 34158040100 allocated shared address: 268488704 pages:  level: 0
+opal Node: 0 core 0 response page address: 34233742913 allocated shared address: 268488704 pages:  level: 0
 opal weight flag: 0, allc size: 4096
-opal Node: 0 core 0 response page address: 34158040101 allocated local address: 57344 pages: 1 level: 0
+opal Node: 0 core 0 response page address: 34233742914 allocated local address: 57344 pages: 1 level: 0
 opal weight flag: 0, allc size: 4096
-opal Node: 0 core 0 response page address: 34158040102 allocated shared address: 134275072 pages:  level: 0
+opal Node: 0 core 0 response page address: 34233742915 allocated shared address: 134275072 pages:  level: 0
 opal weight flag: 0, allc size: 4096
-opal Node: 0 core 0 response page address: 34158040103 allocated shared address: 268492800 pages:  level: 0
+opal Node: 0 core 0 response page address: 34233742907 allocated shared address: 268492800 pages:  level: 0
 opal weight flag: 0, allc size: 4096
-opal Node: 0 core 0 response page address: 34158040095 allocated local address: 61440 pages: 1 level: 0
+opal Node: 0 core 0 response page address: 34233742916 allocated local address: 61440 pages: 1 level: 0
 opal weight flag: 0, allc size: 4096
-opal Node: 0 core 0 response page address: 34158040104 allocated shared address: 134279168 pages:  level: 0
+opal Node: 0 core 0 response page address: 34233742917 allocated shared address: 134279168 pages:  level: 0
 opal weight flag: 0, allc size: 4096
-opal Node: 0 core 0 response page address: 34158040105 allocated shared address: 268496896 pages:  level: 0
+opal Node: 0 core 0 response page address: 34233742918 allocated shared address: 268496896 pages:  level: 0
 opal weight flag: 0, allc size: 4096
-opal Node: 0 core 0 response page address: 34158040106 allocated local address: 65536 pages: 1 level: 0
+opal Node: 0 core 0 response page address: 34233742919 allocated local address: 65536 pages: 1 level: 0
 opal weight flag: 0, allc size: 4096
-opal Node: 0 core 0 response page address: 34158040107 allocated shared address: 134283264 pages:  level: 0
+opal Node: 0 core 0 response page address: 34233742920 allocated shared address: 134283264 pages:  level: 0
 opal weight flag: 0, allc size: 4096
-opal Node: 0 core 0 response page address: 34158040108 allocated shared address: 268500992 pages:  level: 0
+opal Node: 0 core 0 response page address: 34233742921 allocated shared address: 268500992 pages:  level: 0
 opal weight flag: 0, allc size: 4096
-opal Node: 0 core 0 response page address: 34158040109 allocated local address: 69632 pages: 1 level: 0
+opal Node: 0 core 0 response page address: 34233743399 allocated local address: 69632 pages: 1 level: 0
 opal weight flag: 0, allc size: 4096
-opal Node: 0 core 0 response page address: 34158040587 allocated shared address: 134287360 pages:  level: 0
+opal Node: 0 core 0 response page address: 44786892 allocated shared address: 134287360 pages:  level: 1
 opal weight flag: 0, allc size: 4096
-opal Node: 0 core 0 response page address: 44858346 allocated shared address: 268505088 pages:  level: 1
+opal Node: 0 core 0 response page address: 22930888970 allocated shared address: 268505088 pages:  level: 0
 opal weight flag: 0, allc size: 4096
-opal Node: 0 core 0 response page address: 22967473317 allocated local address: 73728 pages: 1 level: 0
+opal Node: 0 core 0 response page address: 22930888971 allocated local address: 73728 pages: 1 level: 0
 opal weight flag: 0, allc size: 4096
-opal Node: 0 core 0 response page address: 22967473318 allocated shared address: 134291456 pages:  level: 0
+opal Node: 0 core 0 response page address: 34233743334 allocated shared address: 134291456 pages:  level: 0
 opal weight flag: 0, allc size: 4096
-opal Node: 0 core 0 response page address: 34158040522 allocated shared address: 268509184 pages:  level: 0
-opal weight flag: 0, allc size: 4096
-opal Node: 0 core 0 response page address: 34158040532 allocated local address: 77824 pages: 1 level: 0
+opal Node: 0 core 0 response page address: 34233743344 allocated shared address: 268509184 pages:  level: 0
 opal weight flag: 1, allc size: 4096
-opal Node: 0 core 0 response page address: 22967473322 allocated shared address: 134295552 pages:  level: 0
-[ArielCore::createAllocateEvent]Generated an allocate event, vAddr(map)=94074770711216, length=16000 in level 0 from IP 28
-handleAllocationEvent is used!
-**OPal****what is temp_translator??
-opal weight flag: 0, allc size: 16000
-opal node: 0 core: 0 request page address: 94074770711216 hint
-[ArielCore::createAllocateEvent]Generated an allocate event, vAddr(map)=94074770727232, length=16000 in level 0 from IP 29
-handleAllocationEvent is used!
-**OPal****what is temp_translator??
-opal weight flag: 0, allc size: 16000
-opal node: 0 core: 0 request page address: 94074770727232 hint
+opal Node: 0 core 0 response page address: 22930888975 allocated local address: 77824 pages: 1 level: 0
 opal weight flag: 1, allc size: 4096
-opal Node: 0 core 0 response page address: 22967473325 allocated shared address: 268513280 pages:  level: 0
-[ArielCore::createAllocateEvent]Generated an allocate event, vAddr(map)=94074770743248, length=16000 in level 0 from IP 30
-handleAllocationEvent is used!
-**OPal****what is temp_translator??
-opal weight flag: 1, allc size: 16000
-opal node: 0 core: 0 request page address: 94074770743248 hint
+opal Node: 0 core 0 response page address: 22930888978 allocated shared address: 134295552 pages:  level: 0
 opal weight flag: 1, allc size: 4096
-opal Node: 0 core 0 response page address: 22967473329 allocated local address: 81920 pages: 1 level: 0
+opal Node: 0 core 0 response page address: 22930888982 allocated shared address: 268513280 pages:  level: 0
 opal weight flag: 0, allc size: 4096
-opal Node: 0 core 0 response page address: 22967473326 allocated shared address: 134299648 pages:  level: 0
+opal Node: 0 core 0 response page address: 22930888979 allocated local address: 81920 pages: 1 level: 0
 opal weight flag: 0, allc size: 4096
-opal Node: 0 core 0 response page address: 22967473319 allocated shared address: 268517376 pages:  level: 0
+opal Node: 0 core 0 response page address: 22930888972 allocated shared address: 134299648 pages:  level: 0
 opal weight flag: 0, allc size: 4096
-opal Node: 0 core 0 response page address: 22967473323 allocated local address: 86016 pages: 1 level: 0
+opal Node: 0 core 0 response page address: 22930888976 allocated shared address: 268517376 pages:  level: 0
 opal weight flag: 0, allc size: 4096
-opal Node: 0 core 0 response page address: 22967473327 allocated shared address: 134303744 pages:  level: 0
+opal Node: 0 core 0 response page address: 22930888980 allocated local address: 86016 pages: 1 level: 0
 opal weight flag: 0, allc size: 4096
-opal Node: 0 core 0 response page address: 22967473320 allocated shared address: 268521472 pages:  level: 0
+opal Node: 0 core 0 response page address: 22930888973 allocated shared address: 134303744 pages:  level: 0
 opal weight flag: 0, allc size: 4096
-opal Node: 0 core 0 response page address: 22967473324 allocated local address: 90112 pages: 1 level: 0
+opal Node: 0 core 0 response page address: 22930888977 allocated shared address: 268521472 pages:  level: 0
 opal weight flag: 0, allc size: 4096
-opal Node: 0 core 0 response page address: 22967473328 allocated shared address: 134307840 pages:  level: 0
+opal Node: 0 core 0 response page address: 22930888981 allocated local address: 90112 pages: 1 level: 0
 opal weight flag: 0, allc size: 4096
-opal Node: 0 core 0 response page address: 22967473321 allocated shared address: 268525568 pages:  level: 0
+opal Node: 0 core 0 response page address: 22930888974 allocated shared address: 134307840 pages:  level: 0
 opal weight flag: 0, allc size: 4096
-opal Node: 0 core 0 response page address: 34158040536 allocated local address: 94208 pages: 1 level: 0
+opal Node: 0 core 0 response page address: 34233743348 allocated shared address: 268525568 pages:  level: 0
 opal weight flag: 0, allc size: 4096
-opal Node: 0 core 0 response page address: 34158040517 allocated shared address: 134311936 pages:  level: 0
+opal Node: 0 core 0 response page address: 34233743329 allocated local address: 94208 pages: 1 level: 0
 opal weight flag: 0, allc size: 4096
-opal Node: 0 core 0 response page address: 34158040503 allocated shared address: 268529664 pages:  level: 0
+opal Node: 0 core 0 response page address: 34233743315 allocated shared address: 134311936 pages:  level: 0
 opal weight flag: 0, allc size: 4096
-opal Node: 0 core 0 response page address: 34158040529 allocated local address: 98304 pages: 1 level: 0
+opal Node: 0 core 0 response page address: 34233743341 allocated shared address: 268529664 pages:  level: 0
 opal weight flag: 0, allc size: 4096
-opal Node: 0 core 0 response page address: 22967469155 allocated shared address: 134316032 pages:  level: 0
+opal Node: 0 core 0 response page address: 22930881826 allocated local address: 98304 pages: 1 level: 0
 opal weight flag: 0, allc size: 4096
-opal Node: 0 core 0 response page address: 34158040580 allocated shared address: 268533760 pages:  level: 0
+opal Node: 0 core 0 response page address: 34233743392 allocated shared address: 134316032 pages:  level: 0
 Allocating arrays of size 2000 elements.
-allocated address: a:d09fbf78 b:d09fbf80 c:d09fbf88
+allocated address: a:4a79c598 b:4a79c5a0 c:4a79c5a8
 Done allocating arrays.
 Sum of arrays is: 6999500.000000
 Freeing arrays...
 Done.
 ARIEL: weight premalloc executed!
-ARIEL: Created a malloc of size: 16000 in Ariel (weight flag=1)
-ARIEL: Created a malloc of size: 16000 in Ariel (weight flag=1)
-ARIEL: Created a malloc of size: 16000 in Ariel (weight flag=1)
 ARIEL: weight postalloc executed!
 SSTARIEL: Execution completed, shutting down.
 CORE ID: 0 PROCESSED AN EXIT EVENT
 ArielComponent[arielcpu.cc:263:finish] Ariel Processor Information:
-ArielComponent[arielcpu.cc:264:finish] Completed at: 1961625 nanoseconds.
+ArielComponent[arielcpu.cc:264:finish] Completed at: 1935222 nanoseconds.
 ArielComponent[arielcpu.cc:265:finish] Ariel Component Statistics (By Core)
 
 Ariel Memory Management Statistics:
@@ -469,27 +276,27 @@ Page Table Coverages:
 
 ------------------------------------------------------------
 Simulation Timing Information (Wall Clock Times):
-  Build time:                      0.231068 seconds
-  Run loop time:                   4.513505 seconds
-  Total time:                      4.915807 seconds
+  Build time:                      0.230320 seconds
+  Run loop time:                   4.520921 seconds
+  Total time:                      4.925818 seconds
 
-Simulated time:                    1.96163 ms
+Simulated time:                    1.93522 ms
 
 Simulation Resource Information:
-  Max Resident Set Size:           144.464 MB
-  Approx. Global Max RSS Size:     144.464 MB
+  Max Resident Set Size:           144.68 MB
+  Approx. Global Max RSS Size:     144.68 MB
   Max Local Page Faults:           1 faults
   Global Page Faults:              1 faults
-  Max Output Blocks:               576 blocks
+  Max Output Blocks:               552 blocks
   Max Input Blocks:                0 blocks
   Max mempool usage:               34.3409 MB
   Global mempool usage:            34.3409 MB
-  Global active activities:        3146 activities
+  Global active activities:        2822 activities
   Current global TimeVortex depth: 4 entries
-  Max TimeVortex depth:            34 entries
+  Max TimeVortex depth:            30 entries
   Max Sync data size:              0 B
   Global Sync data size:           0 B
 ------------------------------------------------------------
 
 
-Simulation is complete, simulated time: 1.96163 ms
+Simulation is complete, simulated time: 1.93522 ms

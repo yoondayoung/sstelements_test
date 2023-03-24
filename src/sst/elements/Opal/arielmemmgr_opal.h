@@ -60,7 +60,7 @@ class MemoryManagerOpal : public ArielComponent::ArielMemoryManager {
         void printStats();
 
         /* Call through to Opal */
-        bool allocateMalloc(const uint64_t size, const uint32_t level, const uint64_t virtualAddress, const uint64_t instructionPointer, const uint32_t thread);
+        bool allocateMalloc(const uint64_t size, const uint32_t level, const uint64_t virtualAddress, const uint64_t instructionPointer, const uint32_t thread, bool weightFlag);
         bool allocateMMAP(const uint64_t size, const uint32_t level, const uint64_t virtualAddress, const uint64_t instructionPointer, const uint32_t file, const uint32_t thread);
         void freeMalloc(const uint64_t vAddr);
         void freeMMAP(const uint32_t file);

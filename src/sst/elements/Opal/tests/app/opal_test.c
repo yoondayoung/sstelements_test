@@ -20,6 +20,19 @@ extern "C" {
         void ariel_enable() { printf("Inside Ariel"); }
         void weight_pre_malloc() { printf("weight pre malloc calling in opal_test.c\n"); }
         void weight_post_malloc() {}
+        void* mlm_malloc(size_t size, int level)
+{
+	if(size == 0)
+      {
+		printf("ZERO BYTE MALLOC\n");
+		void* bt_entries[64];
+		exit(-1);
+	}
+
+	printf("Performing a mlm Malloc for size %llu\n", size);
+
+	return malloc(size);
+}
 }
 
 
@@ -36,7 +49,7 @@ int main(int argc, char* argv[]) {
         double* c = (double*) malloc(sizeof(double) * LENGTH);
         weight_post_malloc();
         
-        printf("allocated address: a:%x b:%x c:%x\n", &a, &b, &c);
+        printf("allocated address: a:%x b:%x c:%x\n", a, b, c);
         printf("Done allocating arrays.\n");
 
         int i;

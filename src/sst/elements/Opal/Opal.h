@@ -151,7 +151,7 @@ namespace SST
 					OpalEvent *ev =  static_cast<OpalComponent::OpalEvent*> (e);
 					// SST::MemHierarchy::MemEventBase *ev2 =  static_cast<SST::MemHierarchy::MemEventBase*> (e);
 					// printf("opal event type: %d\n", ev->getType());
-					printf("opal weight flag: %d, allc size: %d\n", ev->getWeightFlag(), ev->getSize());
+					// printf("opal weight flag: %d, allc size: %d\n", ev->getWeightFlag(), ev->getSize());
 					ev->setNodeId(nodeId);
 					ev->setCoreId(coreId);
 					opalBase->requestQ.push(ev);

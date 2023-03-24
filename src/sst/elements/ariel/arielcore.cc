@@ -239,6 +239,7 @@ void ArielCore::commitWriteEvent(const uint64_t address,
         // Actually send the event to the cache
         // to do: req에 isWeight 정보 담기
         // printf("cur weight flag:::%d, original::::%d\n", req->getWeightFlag(), weightWriteFlag);
+        // printf("[commitWriteEvent] Paddr: %x, Vaddr: %x, size: %d\n", address, virtAddress, length);
         cacheLink->send(req);
     }
 }
@@ -687,10 +688,10 @@ void ArielCore::createReadEvent(uint64_t address, uint32_t length) {
     ARIEL_CORE_VERBOSE(4, output->verbose(CALL_INFO, 4, 0, "Generated a READ event, addr=%" PRIu64 ", length=%" PRIu32 "\n", address, length));
 }
 
-void ArielCore::createAllocateEvent(uint64_t vAddr, uint64_t length, uint32_t level, uint64_t instPtr) {
-    printf( "[ArielCore::createAllocateEvent]Generated an allocate event, vAddr(map)=%ld, length=%ld in level %d from IP %ld\n",
-                    vAddr, length, level, instPtr);
-    ArielAllocateEvent* ev = new ArielAllocateEvent(vAddr, length, level, instPtr, false);
+void ArielCore::createAllocateEvent(uint64_t vAddr, uint64_t length, uint32_t level, uint64_t instPtr, bool wflag) {
+    // printf( "[ArielCore::createAllocateEvent]Generated an allocate event, vAddr(map)=%x, length=%ld in level %d from IP %ld\n",
+                    // vAddr, length, level, instPtr);
+    ArielAllocateEvent* ev = new ArielAllocateEvent(vAddr, length, level, instPtr, wflag);
     coreQ->push(ev);
 
     ARIEL_CORE_VERBOSE(2, output->verbose(CALL_INFO, 2, 0, "Generated an allocate event, vAddr(map)=%" PRIu64 ", length=%" PRIu64 " in level %" PRIu32 " from IP %" PRIx64 "\n",
@@ -714,6 +715,7 @@ void ArielCore::createFreeEvent(uint64_t vAddr) {
 }
 
 void ArielCore::createWriteEvent(uint64_t address, uint32_t length, const uint8_t* payload, bool isWeightWrite) {
+    // std::cout << "createWrite size:" << length << std::endl;
     ArielWriteEvent* ev = new ArielWriteEvent(address, length, payload, isWeightWrite);
     coreQ->push(ev); // todo : weight allocation인거 알리기
     ARIEL_CORE_VERBOSE(4, output->verbose(CALL_INFO, 4, 0, "Generated a WRITE event, addr=%" PRIu64 ", length=%" PRIu32 "\n", address, length));
@@ -932,7 +934,7 @@ bool ArielCore::refillQueue() {
                 break;
 
             case ARIEL_ISSUE_TLM_MAP:
-                createAllocateEvent(ac.mlm_map.vaddr, ac.mlm_map.alloc_len, ac.mlm_map.alloc_level, ac.instPtr);
+                createAllocateEvent(ac.mlm_map.vaddr, ac.mlm_map.alloc_len, ac.mlm_map.alloc_level, ac.instPtr, ac.mlm_map.isWeight);
                 break;
 
             case ARIEL_ISSUE_TLM_FREE:
@@ -1148,8 +1150,8 @@ void ArielCore::handleMmapEvent(ArielMmapEvent* aEv) {
 void ArielCore::handleAllocationEvent(ArielAllocateEvent* aEv) {
     output->verbose(CALL_INFO, 2, 0, "Handling a memory allocation event, vAddr=%" PRIu64 ", length=%" PRIu64 ", at level=%" PRIu32 " with malloc ID=%" PRIu64 "\n",
                 aEv->getVirtualAddress(), aEv->getAllocationLength(), aEv->getAllocationLevel(), aEv->getInstructionPointer());
-    printf("handleAllocationEvent is used!\n");
-    memmgr->allocateMalloc(aEv->getAllocationLength(), aEv->getAllocationLevel(), aEv->getVirtualAddress(), aEv->getInstructionPointer(), coreID);
+    // printf("handleAllocationEvent is used!\n");
+    memmgr->allocateMalloc(aEv->getAllocationLength(), aEv->getAllocationLevel(), aEv->getVirtualAddress(), aEv->getInstructionPointer(), coreID, aEv->getIsWeightAllocation());
 }
 
 void ArielCore::handleFlushEvent(ArielFlushEvent *flEv) {
