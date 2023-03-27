@@ -28,6 +28,7 @@
 #include <stdint.h>
 #include <poll.h>
 #include <queue>
+// #include <vector>
 
 #include <sst/core/sst_types.h>
 #include <sst/core/event.h>
@@ -72,6 +73,9 @@ namespace SST
 				std::queue<OpalEvent*> requestQ; // stores page fault requests, hints and shootdown acknowledgement events from all the cores
 
 				std::map<int, std::pair<std::vector<int>*, std::vector<uint64_t>* > > mmapFileIdHints; // used to store reserved memory which is useful for inter-node communication
+
+				// to get weight allocation hints (weight alloc 해야되는 주소 저장)
+				std::vector<uint64_t> wAllocHints;
 		};
 
 		class MemoryPrivateInfo

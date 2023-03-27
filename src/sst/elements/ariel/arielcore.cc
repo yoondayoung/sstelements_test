@@ -239,7 +239,7 @@ void ArielCore::commitWriteEvent(const uint64_t address,
         // Actually send the event to the cache
         // to do: req에 isWeight 정보 담기
         // printf("cur weight flag:::%d, original::::%d\n", req->getWeightFlag(), weightWriteFlag);
-        // printf("[commitWriteEvent] Paddr: %x, Vaddr: %x, size: %d\n", address, virtAddress, length);
+        // printf("[commitWriteEvent] Paddr: %lx, Vaddr: %lx, size: %d\n", address, virtAddress, length);
         cacheLink->send(req);
     }
 }
@@ -716,6 +716,7 @@ void ArielCore::createFreeEvent(uint64_t vAddr) {
 
 void ArielCore::createWriteEvent(uint64_t address, uint32_t length, const uint8_t* payload, bool isWeightWrite) {
     // std::cout << "createWrite size:" << length << std::endl;
+    // printf("[createWriteEvent] write addr: %lx, createWrite size:%d\n", address, length);
     ArielWriteEvent* ev = new ArielWriteEvent(address, length, payload, isWeightWrite);
     coreQ->push(ev); // todo : weight allocation인거 알리기
     ARIEL_CORE_VERBOSE(4, output->verbose(CALL_INFO, 4, 0, "Generated a WRITE event, addr=%" PRIu64 ", length=%" PRIu32 "\n", address, length));
@@ -1053,10 +1054,12 @@ void ArielCore::handleReadRequest(ArielReadEvent* rEv) {
 void ArielCore::handleWriteRequest(ArielWriteEvent* wEv) {
     ARIEL_CORE_VERBOSE(4, output->verbose(CALL_INFO, 4, 0, "Core %" PRIu32 " processing a write event...\n", coreID));
     // printf("Core %d processing a write event... in arielcore.cc/handleWriteRequest\n", coreID);
+    
     const uint64_t writeAddress = wEv->getAddress();
     const uint64_t writeLength  = std::min((uint64_t) wEv->getLength(), cacheLineSize); // Trim to cacheline size (occurs rarely for instructions such as xsave and fxsave)
     // weight flag 정보
     bool weightWriteFlag = wEv->getIsWeight();
+    //printf("[handleWriteRequest] write addr: %lx, createWrite size:%d\n", writeAddress, writeLength);
 
     // No longer neccessary due to trimming above
 /*    if(writeLength > cacheLineSize) {

@@ -378,8 +378,10 @@ VOID WriteInstructionRead(ADDRINT* address, UINT32 readSize, THREADID thr, ADDRI
 VOID WriteInstructionWrite(ADDRINT* address, UINT32 writeSize, THREADID thr, ADDRINT ip,
             UINT32 instClass, UINT32 simdOpWidth)
 {
+    
     // std::cout << "[WriteInstructionWrite] createWrite size:" << writeSize << std::endl;
     const uint64_t addr64 = (uint64_t) address;
+    // printf("[WriteInstructionWrite] write addr: %lx, createWrite size:%d\n", addr64, writeSize);
     ArielCommand ac;
 
     ac.command = ARIEL_PERFORM_WRITE;
@@ -476,7 +478,7 @@ VOID WriteInstructionWriteOnly(THREADID thr, ADDRINT* writeAddr, UINT32 writeSiz
         if(thr < core_count) {
             if (first)
                 WriteStartInstructionMarker(thr, ip);
-            // if (isWeightFlag==true) std::cout << "[WriteInstructionWriteOnly]write addr: " << writeAddr << " size: " << writeSize << std::endl;
+            // std::cout << "[WriteInstructionWriteOnly]write addr: " << writeAddr << " size: " << writeSize << std::endl;
             WriteInstructionWrite(writeAddr, writeSize,  thr, ip, instClass, simdOpWidth);
             if (last)
                 WriteEndInstructionMarker(thr, ip);
@@ -2045,7 +2047,7 @@ int main(int argc, char *argv[])
     
     PIN_StartProgram();
 
-    sleep(2);
+    sleep(10);
 
     return 0;
 }

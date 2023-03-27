@@ -130,8 +130,6 @@ mlm_malloc:
 .LC9:
 	.string	"Sum of arrays is: %f\n"
 .LC10:
-	.string	"Freeing arrays..."
-.LC11:
 	.string	"Done."
 	.text
 	.globl	main
@@ -155,14 +153,17 @@ main:
 	movl	$0, %eax
 	call	printf@PLT
 	call	weight_pre_malloc
+	movl	$1, %esi
 	movl	$16000, %edi
-	call	malloc@PLT
+	call	mlm_malloc
 	movq	%rax, -24(%rbp)
+	movl	$1, %esi
 	movl	$16000, %edi
-	call	malloc@PLT
+	call	mlm_malloc
 	movq	%rax, -16(%rbp)
+	movl	$1, %esi
 	movl	$16000, %edi
-	call	malloc@PLT
+	call	mlm_malloc
 	movq	%rax, -8(%rbp)
 	call	weight_post_malloc
 	movq	-8(%rbp), %rcx
@@ -174,42 +175,42 @@ main:
 	call	printf@PLT
 	leaq	.LC6(%rip), %rdi
 	call	puts@PLT
-	movl	$0, -40(%rbp)
+	movl	$0, -44(%rbp)
 .L10:
-	cmpl	$1999, -40(%rbp)
+	cmpl	$1999, -44(%rbp)
 	jg	.L9
-	movl	-40(%rbp), %eax
+	movl	-44(%rbp), %eax
 	cltq
 	leaq	0(,%rax,8), %rdx
 	movq	-24(%rbp), %rax
 	addq	%rdx, %rax
-	cvtsi2sdl	-40(%rbp), %xmm0
+	cvtsi2sdl	-44(%rbp), %xmm0
 	movsd	%xmm0, (%rax)
 	movl	$2000, %eax
-	subl	-40(%rbp), %eax
+	subl	-44(%rbp), %eax
 	movl	%eax, %ecx
-	movl	-40(%rbp), %eax
+	movl	-44(%rbp), %eax
 	cltq
 	leaq	0(,%rax,8), %rdx
 	movq	-16(%rbp), %rax
 	addq	%rdx, %rax
 	cvtsi2sdl	%ecx, %xmm0
 	movsd	%xmm0, (%rax)
-	movl	-40(%rbp), %eax
+	movl	-44(%rbp), %eax
 	cltq
 	leaq	0(,%rax,8), %rdx
 	movq	-8(%rbp), %rax
 	addq	%rdx, %rax
 	pxor	%xmm0, %xmm0
 	movsd	%xmm0, (%rax)
-	addl	$1, -40(%rbp)
+	addl	$1, -44(%rbp)
 	jmp	.L10
 .L9:
-	movl	$0, -40(%rbp)
+	movl	$0, -44(%rbp)
 .L12:
-	cmpl	$1999, -40(%rbp)
+	cmpl	$1999, -44(%rbp)
 	jg	.L11
-	movl	-40(%rbp), %eax
+	movl	-44(%rbp), %eax
 	cltq
 	leaq	0(,%rax,8), %rdx
 	movq	-24(%rbp), %rax
@@ -217,7 +218,7 @@ main:
 	movsd	(%rax), %xmm0
 	movapd	%xmm0, %xmm1
 	addsd	%xmm0, %xmm1
-	movl	-40(%rbp), %eax
+	movl	-44(%rbp), %eax
 	cltq
 	leaq	0(,%rax,8), %rdx
 	movq	-16(%rbp), %rax
@@ -225,23 +226,23 @@ main:
 	movsd	(%rax), %xmm2
 	movsd	.LC8(%rip), %xmm0
 	mulsd	%xmm2, %xmm0
-	movl	-40(%rbp), %eax
+	movl	-44(%rbp), %eax
 	cltq
 	leaq	0(,%rax,8), %rdx
 	movq	-8(%rbp), %rax
 	addq	%rdx, %rax
 	addsd	%xmm1, %xmm0
 	movsd	%xmm0, (%rax)
-	addl	$1, -40(%rbp)
+	addl	$1, -44(%rbp)
 	jmp	.L12
 .L11:
 	pxor	%xmm0, %xmm0
 	movsd	%xmm0, -32(%rbp)
-	movl	$0, -40(%rbp)
+	movl	$0, -44(%rbp)
 .L14:
-	cmpl	$1999, -40(%rbp)
+	cmpl	$1999, -44(%rbp)
 	jg	.L13
-	movl	-40(%rbp), %eax
+	movl	-44(%rbp), %eax
 	cltq
 	leaq	0(,%rax,8), %rdx
 	movq	-8(%rbp), %rax
@@ -250,7 +251,7 @@ main:
 	movsd	-32(%rbp), %xmm1
 	addsd	%xmm1, %xmm0
 	movsd	%xmm0, -32(%rbp)
-	addl	$1, -40(%rbp)
+	addl	$1, -44(%rbp)
 	jmp	.L14
 .L13:
 	movq	-32(%rbp), %rax
@@ -258,18 +259,14 @@ main:
 	leaq	.LC9(%rip), %rdi
 	movl	$1, %eax
 	call	printf@PLT
+	movl	$0, -40(%rbp)
+.L16:
+	cmpl	$9999, -40(%rbp)
+	jg	.L15
+	addl	$1, -40(%rbp)
+	jmp	.L16
+.L15:
 	leaq	.LC10(%rip), %rdi
-	call	puts@PLT
-	movq	-24(%rbp), %rax
-	movq	%rax, %rdi
-	call	free@PLT
-	movq	-16(%rbp), %rax
-	movq	%rax, %rdi
-	call	free@PLT
-	movq	-8(%rbp), %rax
-	movq	%rax, %rdi
-	call	free@PLT
-	leaq	.LC11(%rip), %rdi
 	call	puts@PLT
 	movl	$0, %eax
 	leave

@@ -130,7 +130,9 @@ void Opal::setNextMemPool( int node, int fault_level )
 	switch(nodeInfo[node]->memoryAllocationPolicy)
 	{
 	case 9:
-		// weight에 해당하는 data일 경우에만 local memory
+		// weight에 해당하는 data일 경우에만 local memory -> remote memory가 여러 개일 경우 생각해봐야됨
+		nodeInfo[node]->allocatedmempool = 0;
+		break;
 	case 8:
 		//alternate allocation policy 1:16
 		nodeInfo[node]->nextallocmem = ( nodeInfo[node]->nextallocmem + 1 ) % 17;
@@ -455,14 +457,29 @@ bool Opal::processRequest(int node, int coreId, uint64_t vAddress, int fault_lev
 			response = allocateFromReservedMemory(node, response.address, vAddress, pages);
 
 		else {
-			// todo: weight 메모리인지 아닌지 확인
-			if( !nodeInfo[node]->allocatedmempool ) {
-				response = allocateLocalMemory(node, coreId, vAddress, fault_level, pages);
-				// std::cerr << getName() << " Node: " << node << " core " << coreId << " response page address: " << vAddress << " allocated local address: " << response.address << " pages: "<< pages << " level: " << fault_level  << std::endl;
+			if(nodeInfo[node]->memoryAllocationPolicy==9){
+				// todo: weight 메모리인지 아닌지 확인 -> weight alloc 주소 벡터에서 확인
+				if (std::find(opalBase->wAllocHints.begin(), opalBase->wAllocHints.end(), vAddress)!= opalBase->wAllocHints.end()){
+					nodeInfo[node]->allocatedmempool = 1;
+					response = allocateSharedMemory(node, coreId, vAddress, fault_level, pages);
+					printf("[Opal.cc] response page address: %lx, allocated shared address: %lx, pages: %d \n", vAddress, response.address, pages);
+					// std::cerr << getName() << " Node: " << node << " core " << coreId << " response page address: " << vAddress << " allocated shared address: " << response.address << " pages: " << " level: " << fault_level << std::endl;
+				}
+				else{
+					response = allocateLocalMemory(node, coreId, vAddress, fault_level, pages);
+					printf("[Opal.cc] response page address: %lx, allocated local address: %lx, pages: %d \n", vAddress, response.address, pages);
+					// std::cerr << getName() << " Node: " << node << " core " << coreId << " response page address: " << vAddress << " allocated local address: " << response.address << " pages: "<< pages << " level: " << fault_level  << std::endl;
+				}
 			}
-			else {
-				response = allocateSharedMemory(node, coreId, vAddress, fault_level, pages);
-				// std::cerr << getName() << " Node: " << node << " core " << coreId << " response page address: " << vAddress << " allocated shared address: " << response.address << " pages: " << " level: " << fault_level << std::endl;
+			else{
+				if( !nodeInfo[node]->allocatedmempool ) {
+					response = allocateLocalMemory(node, coreId, vAddress, fault_level, pages);
+					// std::cerr << getName() << " Node: " << node << " core " << coreId << " response page address: " << vAddress << " allocated local address: " << response.address << " pages: "<< pages << " level: " << fault_level  << std::endl;
+				}
+				else {
+					response = allocateSharedMemory(node, coreId, vAddress, fault_level, pages);
+					// std::cerr << getName() << " Node: " << node << " core " << coreId << " response page address: " << vAddress << " allocated shared address: " << response.address << " pages: " << " level: " << fault_level << std::endl;
+				}
 			}
 		}
 	}
@@ -494,8 +511,11 @@ bool Opal::tick(SST::Cycle_t x)
 			switch(ev->getType()) {
 			case SST::OpalComponent::EventType::HINT:
 			{
-				std::cerr << getName().c_str() << " node: " << ev->getNodeId() << " core: "<< ev->getCoreId() << " request page address: " << ev->getAddress() << " hint" << std::endl;
+				uint64_t tmp_addr = ev->getAddress() >> 12;
+				printf("[Opal.cc] request page address: %lx, size: %d, hint! \n", tmp_addr, ev->getSize());
+				//std::cerr << getName().c_str() << " node: " << ev->getNodeId() << " core: "<< ev->getCoreId() << " request page address: " << ev->getAddress() << " hint" << std::endl;
 				// weight allocation 벡터에 넣기 (processWeightAllocHint)
+				opalBase->wAllocHints.push_back(tmp_addr);
 			}
 			break;
 

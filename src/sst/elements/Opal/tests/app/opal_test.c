@@ -44,9 +44,9 @@ int main(int argc, char* argv[]) {
 
         printf("Allocating arrays of size %d elements.\n", LENGTH);
         weight_pre_malloc();
-        double* a = (double*) malloc(sizeof(double) * LENGTH);
-        double* b = (double*) malloc(sizeof(double) * LENGTH);
-        double* c = (double*) malloc(sizeof(double) * LENGTH);
+        double* a = (double*) mlm_malloc(sizeof(double) * LENGTH, 1);
+        double* b = (double*) mlm_malloc(sizeof(double) * LENGTH, 1);
+        double* c = (double*) mlm_malloc(sizeof(double) * LENGTH, 1);
         weight_post_malloc();
         
         printf("allocated address: a:%x b:%x c:%x\n", a, b, c);
@@ -73,11 +73,13 @@ int main(int argc, char* argv[]) {
         }
 
         printf("Sum of arrays is: %f\n", sum);
-        printf("Freeing arrays...\n");
+        // printf("Freeing arrays...\n");
 
-        free(a);
-        free(b);
-        free(c);
+        // free(a);
+        // free(b);
+        // free(c);
+
+        for (int ii=0; ii<10000; ii++);
 
         printf("Done.\n");
 }

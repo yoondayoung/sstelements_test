@@ -1,0 +1,319 @@
+No protocol specified
+No protocol specified
+SST-Core: Configuration Library Path will read from: /home/ydy/local/sst-core/lib/sst:/home/ydy/local/sst-core/lib/sstcore:/home/ydy/local/sst-elements/lib/sst-elements-library:/home/ydy/scratch/src/sst-elements/src/sst/elements/osseous
+SSTPythonModel: Creating config graph for SST using Python model...
+WARNING: Component name 'Bridge:internal_network-Ext_Mem_Net' is not valid
+WARNING: Link name 'B0-internal_network-Ext_Mem_Net' is not valid
+WARNING: Link name 'B0-internal_network-Ext_Mem_Net' is not valid
+WARNING: Link name 'B1-internal_network-Ext_Mem_Net' is not valid
+WARNING: Link name 'B1-internal_network-Ext_Mem_Net' is not valid
+SSTPythonModel: Construction of config graph with Python is complete.
+ SST Core: #main() My rank is (0.0), on 1/1 nodes/threads
+ SST Core: # ------------------------------------------------------------
+ SST Core: # Graph construction took 0.037563 seconds.
+ SST Core: # Graph contains 20 components
+ SST Core: # Graph partitioning took 5.96046e-06 seconds.
+ SST Core: # Graph construction and partition raised RSS by 16016 KB
+ SST Core: # ------------------------------------------------------------
+ SST Core: Signal handlers will be registered for USR1, USR2, INT and TERM...
+ SST Core: Signal handler registration is completed
+ SST Core:  : StatisticOutputCSV enabled...
+ArielComponent[arielcpu.cc:37:ArielCPU] Creating Ariel component...
+ArielComponent[arielcpu.cc:43:ArielCPU] Configuring for 2 cores...
+ArielComponent[arielcpu.cc:46:ArielCPU] Configuring for check addresses = no
+arielmemmgr opal is used!
+ArielComponent[arielcpu.cc:119:ArielCPU] Loaded memory manager: cpu:memmgr
+ArielComponent[arielcpu.cc:133:ArielCPU] Memory manager construction is completed.
+Pin3Frontend[frontend/pin3/pin3frontend.cc:81:Pin3Frontend] Model specifies that there are 0 application arguments
+Pin3Frontend[frontend/pin3/pin3frontend.cc:91:Pin3Frontend] Interception and instrumentation of multi-level memory and malloc/free calls is ENABLED.
+Pin3Frontend[frontend/pin3/pin3frontend.cc:96:Pin3Frontend] Tracking the stack and dumping on malloc calls is ENABLED.
+Pin3Frontend[frontend/pin3/pin3frontend.cc:101:Pin3Frontend] Malloc map file is DISABLED
+Pin3Frontend[frontend/pin3/pin3frontend.cc:110:Pin3Frontend] Base pipe name: /tmp/sst_shmem_2141565-0-1804289383
+Pin3Frontend[frontend/pin3/pin3frontend.cc:134:Pin3Frontend] Processing application arguments...
+Pin3Frontend[frontend/pin3/pin3frontend.cc:264:Pin3Frontend] Completed processing application arguments.
+Pin3Frontend[frontend/pin3/pin3frontend.cc:269:Pin3Frontend] Completed initialization of the Ariel CPU.
+ArielComponent[arielcpu.cc:169:ArielCPU] Registering ArielCPU clock at 2GHz
+ArielComponent[arielcpu.cc:173:ArielCPU] Clocks registered.
+ArielComponent[arielcpu.cc:175:ArielCPU] Creating core to cache links...
+ArielComponent[arielcpu.cc:177:ArielCPU] Creating processor cores and cache links...
+ArielComponent[arielcpu.cc:179:ArielCPU] Configuring cores and cache links...
+ArielComponent[arielcpu.cc:233:ArielCPU] Completed initialization of the Ariel RTL Link.
+ArielComponent[arielcpu.cc:233:ArielCPU] Completed initialization of the Ariel RTL Link.
+ArielComponent[arielcpu.cc:245:ArielCPU] Completed initialization of the Ariel CPU.
+Initialized with 2 cores
+Before initialization 
+Assigning the PTW correctly
+mmu:pagefaulthandler register handler
+Assigning the PTW correctly
+mmu:pagefaulthandler register handler
+After initialization 
+opalNumber of Shared Memory Pools: 1
+Pool start: 134217728 size: 2097152 frame size: 4 mem tech: 0
+opalConfiguring Shared mempool0
+Pool start: 0 size: 131072 frame size: 4 mem tech: 0
+allocation policy: 9
+clock: 2GHz
+l2cache_0: No MSHR lookup latency provided (mshr_latency_cycles)...intrapolated to 2 cycles.
+l2cache_1: No MSHR lookup latency provided (mshr_latency_cycles)...intrapolated to 2 cycles.
+l2cache_2: No MSHR lookup latency provided (mshr_latency_cycles)...intrapolated to 2 cycles.
+l2cache_3: No MSHR lookup latency provided (mshr_latency_cycles)...intrapolated to 2 cycles.
+l3cache: No MSHR lookup latency provided (mshr_latency_cycles)...intrapolated to 3 cycles.
+local_memory, WARNING: loading backend in legacy mode (from parameter set). Instead, load backend into this controller's 'backend' slot via ctrl.setSubComponent() in configuration.
+0:TimingDRAM::TimingDRAM():52:mc=0: number of channels: 2
+0:TimingDRAM::TimingDRAM():53:mc=0: address mapper:     memHierarchy.roundRobinAddrMapper
+0:TimingDRAM:Channel:Channel():111:mc=0:chan=0: max pending trans: 32
+0:TimingDRAM:Channel:Channel():112:mc=0:chan=0: number of ranks:   2
+0:TimingDRAM:Rank:Rank():221:mc=0:chan=0:rank=0: number of banks: 16
+0:TimingDRAM:Bank:Bank():289:mc=0:chan=0:rank=0:bank=0: CL:           14
+0:TimingDRAM:Bank:Bank():290:mc=0:chan=0:rank=0:bank=0: CL_WR:        12
+0:TimingDRAM:Bank:Bank():291:mc=0:chan=0:rank=0:bank=0: RCD:          14
+0:TimingDRAM:Bank:Bank():292:mc=0:chan=0:rank=0:bank=0: TRP:          14
+0:TimingDRAM:Bank:Bank():293:mc=0:chan=0:rank=0:bank=0: dataCycles:   2
+0:TimingDRAM:Bank:Bank():294:mc=0:chan=0:rank=0:bank=0: transactionQ: memHierarchy.fifoTransactionQ
+0:TimingDRAM:Bank:Bank():295:mc=0:chan=0:rank=0:bank=0: pagePolicy:   memHierarchy.simplePagePolicy
+local_memory, WARNING: Memories no longer inherit address regions from directories and no region parameters (addr_range_start, addr_range_end, interleave_size, interleave_step) were detected. All addresses will map to this memory: if this is intended, you may ignore this warning or set addr_range_start to 0 in your input deck to eliminate this warning.
+dc, Warning: getting region parameters (addr_range_start/end, interleave_step/size) from link subcomponent. In the future this will not be supported and region parameters should be declared in the directory's parameters instead.
+ExternalNVMmemContr, WARNING: Memories no longer inherit address regions from directories and no region parameters (addr_range_start, addr_range_end, interleave_size, interleave_step) were detected. All addresses will map to this memory: if this is intended, you may ignore this warning or set addr_range_start to 0 in your input deck to eliminate this warning.
+ExtMemDc, Warning: getting region parameters (addr_range_start/end, interleave_step/size) from link subcomponent. In the future this will not be supported and region parameters should be declared in the directory's parameters instead.
+The value of tRCD is 300
+After initialization 
+SSTARIEL: Loading Ariel Tool to connect to SST on pipe: /tmp/sst_shmem_2141565-0-1804289383 max core count: 2
+SSTARIEL: Function profiling is disabled.
+ARIEL-SST: Did not find ARIEL_OVERRIDE_POOL in the environment, no override applies.
+ARIEL-SST PIN tool activating with 2 threads
+SSTARIEL: Performing write tracing (this is an expensive operation.)
+ARIEL: Default memory pool set to 0
+ARIEL: Tool is configured to suspend profiling until program control
+ARIEL: Starting program. (with pin3)
+keepMallocstrackTrace: 1
+Identified routine: ariel_enable, replacing with Ariel equivalent...
+Replacement complete.
+Identified routine: weight_pre_malloc, replacing with Ariel equivalent...
+Replacement complete.
+Identified routine: weight_post_malloc, replacing with Ariel equivalent...
+Replacement complete.
+Identified routine: mlm_malloc, replacing with Ariel equivalent...
+Replacement complete. (0x55b8eea6e207)
+Identified routine: malloc/_malloc, replacing with Ariel equivalent...
+Identified routine: free/_free, replacing with Ariel equivalent...
+Identified routine: clock_gettime, replacing with Ariel equivalent...
+Replacement complete.
+Identified routine: malloc/_malloc, replacing with Ariel equivalent...
+Identified routine: free/_free, replacing with Ariel equivalent...
+Identified routine: malloc/_malloc, replacing with Ariel equivalent...
+Identified routine: clock_gettime, replacing with Ariel equivalent...
+Replacement complete.
+ARIEL: Enabling memory and instruction tracing from program control at simulated Ariel cycle 2722980.
+ SST Core: # Starting main event loop
+ SST Core: # Start time: 2023/03/27 at: 14:40:40
+Pin3Frontend[frontend/pin3/pin3frontend.cc:276:init] Launching PIN...
+Pin3Frontend[frontend/pin3/pin3frontend.cc:332:forkPINChild] Executing PIN command: /home/ydy/local/packages/pin-3.22-98547-g7a303a835-gcc-linux/pin -follow_execv -ifeellucky -t /home/ydy/local/sst-elements/libexec/fesimple.so -w 1 -E 1 -p /tmp/sst_shmem_2141565-0-1804289383 -v 1 -t 0 -c 2 -s 0 -m 1 -k 1 -d 0 -- ./app/opal_test
+Pin3Frontend[frontend/pin3/pin3frontend.cc:281:init] Returned from launching PIN.  Waiting for child to attach.
+Pin3Frontend[frontend/pin3/pin3frontend.cc:284:init] Child has attached!
+[pagefault handler] vaddr: 7fff1ce3d0b8, size: 4096
+[pagefault handler] vaddr: ff, size: 4096
+[Opal.cc] response page address: ff, allocated local address: 1000, pages: 1 
+[pagefault handler] vaddr: 1fffc, size: 4096
+[Opal.cc] response page address: 1fffc, allocated local address: 2000, pages: 1 
+[pagefault handler] vaddr: 3fff8e7, size: 4096
+[Opal.cc] response page address: 3fff8e7, allocated local address: 3000, pages: 1 
+[pagefault handler] vaddr: 7fff1ce3d, size: 4096
+[Opal.cc] response page address: 7fff1ce3d, allocated local address: 4000, pages: 1 
+[pagefault handler] vaddr: ab, size: 4096
+[Opal.cc] response page address: ab, allocated local address: 5000, pages: 1 
+[pagefault handler] vaddr: 156e3, size: 4096
+[Opal.cc] response page address: 156e3, allocated local address: 6000, pages: 1 
+[pagefault handler] vaddr: 2adc775, size: 4096
+[Opal.cc] response page address: 2adc775, allocated local address: 7000, pages: 1 
+[pagefault handler] vaddr: 55b8eea70, size: 4096
+[Opal.cc] response page address: 55b8eea70, allocated local address: 8000, pages: 1 
+[pagefault handler] vaddr: fe, size: 4096
+[Opal.cc] response page address: fe, allocated local address: 9000, pages: 1 
+[pagefault handler] vaddr: 1fc8a, size: 4096
+[Opal.cc] response page address: 1fc8a, allocated local address: a000, pages: 1 
+[pagefault handler] vaddr: 3f91403, size: 4096
+[Opal.cc] response page address: 3f91403, allocated local address: b000, pages: 1 
+[pagefault handler] vaddr: 7f2280733, size: 4096
+[Opal.cc] response page address: 7f2280733, allocated local address: c000, pages: 1 
+[pagefault handler] vaddr: 7fff1ce3c, size: 4096
+[Opal.cc] response page address: 7fff1ce3c, allocated local address: d000, pages: 1 
+[pagefault handler] vaddr: 3f91402, size: 4096
+[Opal.cc] response page address: 3f91402, allocated local address: e000, pages: 1 
+[pagefault handler] vaddr: 7f2280585, size: 4096
+[Opal.cc] response page address: 7f2280585, allocated local address: f000, pages: 1 
+[pagefault handler] vaddr: 7f2280587, size: 4096
+[Opal.cc] response page address: 7f2280587, allocated local address: 10000, pages: 1 
+[pagefault handler] vaddr: 55b8eea6f, size: 4096
+[Opal.cc] response page address: 55b8eea6f, allocated local address: 11000, pages: 1 
+[pagefault handler] vaddr: 7f2280586, size: 4096
+[Opal.cc] response page address: 7f2280586, allocated local address: 12000, pages: 1 
+[pagefault handler] vaddr: 7f228058b, size: 4096
+[Opal.cc] response page address: 7f228058b, allocated local address: 13000, pages: 1 
+[pagefault handler] vaddr: 7f2280588, size: 4096
+[Opal.cc] response page address: 7f2280588, allocated local address: 14000, pages: 1 
+[pagefault handler] vaddr: 7f2280583, size: 4096
+[Opal.cc] response page address: 7f2280583, allocated local address: 15000, pages: 1 
+[pagefault handler] vaddr: 3f914a8, size: 4096
+[Opal.cc] response page address: 3f914a8, allocated local address: 16000, pages: 1 
+[pagefault handler] vaddr: 7f22951e2, size: 4096
+[Opal.cc] response page address: 7f22951e2, allocated local address: 17000, pages: 1 
+[pagefault handler] vaddr: 7f22951e1, size: 4096
+[Opal.cc] response page address: 7f22951e1, allocated local address: 18000, pages: 1 
+[pagefault handler] vaddr: 7fff1ce3b, size: 4096
+[Opal.cc] response page address: 7fff1ce3b, allocated local address: 19000, pages: 1 
+[pagefault handler] vaddr: 3f91404, size: 4096
+[Opal.cc] response page address: 3f91404, allocated local address: 1a000, pages: 1 
+[pagefault handler] vaddr: 7f2280933, size: 4096
+[Opal.cc] response page address: 7f2280933, allocated local address: 1b000, pages: 1 
+[pagefault handler] vaddr: 3f91401, size: 4096
+[Opal.cc] response page address: 3f91401, allocated local address: 1c000, pages: 1 
+[pagefault handler] vaddr: 7f22803bb, size: 4096
+[Opal.cc] response page address: 7f22803bb, allocated local address: 1d000, pages: 1 
+[pagefault handler] vaddr: 7f228039e, size: 4096
+[Opal.cc] response page address: 7f228039e, allocated local address: 1e000, pages: 1 
+[pagefault handler] vaddr: 7f22803b1, size: 4096
+[Opal.cc] response page address: 7f22803b1, allocated local address: 1f000, pages: 1 
+[pagefault handler] vaddr: 7f22803ad, size: 4096
+[Opal.cc] response page address: 7f22803ad, allocated local address: 20000, pages: 1 
+[pagefault handler] vaddr: 7f22951e3, size: 4096
+[Opal.cc] response page address: 7f22951e3, allocated local address: 21000, pages: 1 
+[pagefault handler] vaddr: 55b8eea6d, size: 4096
+[Opal.cc] response page address: 55b8eea6d, allocated local address: 22000, pages: 1 
+[pagefault handler] vaddr: 7f228039a, size: 4096
+[Opal.cc] response page address: 7f228039a, allocated local address: 23000, pages: 1 
+[pagefault handler] vaddr: 7f22951b4, size: 4096
+[Opal.cc] response page address: 7f22951b4, allocated local address: 24000, pages: 1 
+[pagefault handler] vaddr: 7f22951d8, size: 4096
+[Opal.cc] response page address: 7f22951d8, allocated local address: 25000, pages: 1 
+[pagefault handler] vaddr: 7f228039b, size: 4096
+[Opal.cc] response page address: 7f228039b, allocated local address: 26000, pages: 1 
+[pagefault handler] vaddr: 7f228039f, size: 4096
+[Opal.cc] response page address: 7f228039f, allocated local address: 27000, pages: 1 
+[pagefault handler] vaddr: 7f228039c, size: 4096
+[Opal.cc] response page address: 7f228039c, allocated local address: 28000, pages: 1 
+[pagefault handler] vaddr: 7f22803a0, size: 4096
+[Opal.cc] response page address: 7f22803a0, allocated local address: 29000, pages: 1 
+[pagefault handler] vaddr: 7f22803a1, size: 4096
+[Opal.cc] response page address: 7f22803a1, allocated local address: 2a000, pages: 1 
+[pagefault handler] vaddr: 7f22803a2, size: 4096
+[Opal.cc] response page address: 7f22803a2, allocated local address: 2b000, pages: 1 
+[pagefault handler] vaddr: 7f22803a3, size: 4096
+[Opal.cc] response page address: 7f22803a3, allocated local address: 2c000, pages: 1 
+[pagefault handler] vaddr: 7f22803a4, size: 4096
+[Opal.cc] response page address: 7f22803a4, allocated local address: 2d000, pages: 1 
+[pagefault handler] vaddr: 7f22803a5, size: 4096
+[Opal.cc] response page address: 7f22803a5, allocated local address: 2e000, pages: 1 
+[pagefault handler] vaddr: 7f228039d, size: 4096
+[Opal.cc] response page address: 7f228039d, allocated local address: 2f000, pages: 1 
+[pagefault handler] vaddr: 7f22803a6, size: 4096
+[Opal.cc] response page address: 7f22803a6, allocated local address: 30000, pages: 1 
+[pagefault handler] vaddr: 7f22803a7, size: 4096
+[Opal.cc] response page address: 7f22803a7, allocated local address: 31000, pages: 1 
+[pagefault handler] vaddr: 7f22803a8, size: 4096
+[Opal.cc] response page address: 7f22803a8, allocated local address: 32000, pages: 1 
+[pagefault handler] vaddr: 7f22803a9, size: 4096
+[Opal.cc] response page address: 7f22803a9, allocated local address: 33000, pages: 1 
+[pagefault handler] vaddr: 7f22803aa, size: 4096
+[Opal.cc] response page address: 7f22803aa, allocated local address: 34000, pages: 1 
+[pagefault handler] vaddr: 7f22803ab, size: 4096
+[Opal.cc] response page address: 7f22803ab, allocated local address: 35000, pages: 1 
+[pagefault handler] vaddr: 7f2280589, size: 4096
+[Opal.cc] response page address: 7f2280589, allocated local address: 36000, pages: 1 
+[pagefault handler] vaddr: 2adc77c, size: 4096
+[Opal.cc] response page address: 2adc77c, allocated local address: 37000, pages: 1 
+[pagefault handler] vaddr: 55b8ef85c, size: 4096
+[Opal.cc] response page address: 55b8ef85c, allocated local address: 38000, pages: 1 
+[pagefault handler] vAllocating arrays of size 2000 elements.
+allocated address: a:80199000 b:800c0000 c:80099000
+Done allocating arrays.
+Sum of arrays is: 6999500.000000
+Done.
+ARIEL: weight premalloc executed!
+ARIEL: weight postalloc executed!
+SSTARIEL: Execution completed, shutting down.
+addr: 55b8ef85d, size: 4096
+[Opal.cc] response page address: 55b8ef85d, allocated local address: 39000, pages: 1 
+[pagefault handler] vaddr: 7f2280548, size: 4096
+[Opal.cc] response page address: 7f2280548, allocated local address: 3a000, pages: 1 
+[pagefault handler] vaddr: 7f2280552, size: 4096
+[Opal.cc] response page address: 7f2280552, allocated local address: 3b000, pages: 1 
+[Opal.cc] request page address: 7f2280199, size: 16384, hint! 
+[Opal.cc] request page address: 7f22800c0, size: 16384, hint! 
+[Opal.cc] request page address: 7f2280099, size: 16384, hint! 
+[pagefault handler] vaddr: 3f91400, size: 4096
+[Opal.cc] response page address: 3f91400, allocated local address: 3c000, pages: 1 
+[pagefault handler] vaddr: 7f2280199, size: 4096
+[Opal.cc] response page address: 7f2280199, allocated shared address: 8000000, pages: 1 
+[pagefault handler] vaddr: 7f22800c0, size: 4096
+[Opal.cc] response page address: 7f22800c0, allocated shared address: 8001000, pages: 1 
+[pagefault handler] vaddr: 7f2280099, size: 4096
+[Opal.cc] response page address: 7f2280099, allocated shared address: 8002000, pages: 1 
+[pagefault handler] vaddr: 7f228019a, size: 4096
+[Opal.cc] response page address: 7f228019a, allocated local address: 3d000, pages: 1 
+[pagefault handler] vaddr: 7f22800c1, size: 4096
+[Opal.cc] response page address: 7f22800c1, allocated local address: 3e000, pages: 1 
+[pagefault handler] vaddr: 7f228009a, size: 4096
+[Opal.cc] response page address: 7f228009a, allocated local address: 3f000, pages: 1 
+[pagefault handler] vaddr: 7f228019b, size: 4096
+[Opal.cc] response page address: 7f228019b, allocated local address: 40000, pages: 1 
+[pagefault handler] vaddr: 7f22800c2, size: 4096
+[Opal.cc] response page address: 7f22800c2, allocated local address: 41000, pages: 1 
+[pagefault handler] vaddr: 7f228009b, size: 4096
+[Opal.cc] response page address: 7f228009b, allocated local address: 42000, pages: 1 
+[pagefault handler] vaddr: 7f228019c, size: 4096
+[Opal.cc] response page address: 7f228019c, allocated local address: 43000, pages: 1 
+[pagefault handler] vaddr: 7f22800c3, size: 4096
+[Opal.cc] response page address: 7f22800c3, allocated local address: 44000, pages: 1 
+[pagefault handler] vaddr: 7f228009c, size: 4096
+[Opal.cc] response page address: 7f228009c, allocated local address: 45000, pages: 1 
+[pagefault handler] vaddr: 7f2280556, size: 4096
+[Opal.cc] response page address: 7f2280556, allocated local address: 46000, pages: 1 
+[pagefault handler] vaddr: 7f2280543, size: 4096
+[Opal.cc] response page address: 7f2280543, allocated local address: 47000, pages: 1 
+[pagefault handler] vaddr: 7f2280535, size: 4096
+[Opal.cc] response page address: 7f2280535, allocated local address: 48000, pages: 1 
+[pagefault handler] vaddr: 7f228054f, size: 4096
+[Opal.cc] response page address: 7f228054f, allocated local address: 49000, pages: 1 
+[pagefault handler] vaddr: 55b8eea71, size: 4096
+[Opal.cc] response page address: 55b8eea71, allocated local address: 4a000, pages: 1 
+[pagefault handler] vaddr: 7f2280582, size: 4096
+[Opal.cc] response page address: 7f2280582, allocated local address: 4b000, pages: 1 
+CORE ID: 0 PROCESSED AN EXIT EVENT
+ArielComponent[arielcpu.cc:263:finish] Ariel Processor Information:
+ArielComponent[arielcpu.cc:264:finish] Completed at: 1932678 nanoseconds.
+ArielComponent[arielcpu.cc:265:finish] Ariel Component Statistics (By Core)
+
+Ariel Memory Management Statistics:
+---------------------------------------------------------------------
+Page Table Sizes:
+- Map entries         63
+Page Table Coverages:
+- Bytes               258048
+
+
+------------------------------------------------------------
+Simulation Timing Information (Wall Clock Times):
+  Build time:                      0.190942 seconds
+  Run loop time:                   4.610368 seconds
+  Total time:                      4.897731 seconds
+
+Simulated time:                    1.93268 ms
+
+Simulation Resource Information:
+  Max Resident Set Size:           128.124 MB
+  Approx. Global Max RSS Size:     128.124 MB
+  Max Local Page Faults:           1 faults
+  Global Page Faults:              1 faults
+  Max Output Blocks:               544 blocks
+  Max Input Blocks:                0 blocks
+  Max mempool usage:               34.3409 MB
+  Global mempool usage:            34.3409 MB
+  Global active activities:        577 activities
+  Current global TimeVortex depth: 4 entries
+  Max TimeVortex depth:            21 entries
+  Max Sync data size:              0 B
+  Global Sync data size:           0 B
+------------------------------------------------------------
+
+
+Simulation is complete, simulated time: 1.93268 ms
