@@ -152,20 +152,17 @@ main:
 	leaq	.LC4(%rip), %rdi
 	movl	$0, %eax
 	call	printf@PLT
-	call	weight_pre_malloc
 	movl	$1, %esi
 	movl	$16000, %edi
 	call	mlm_malloc
 	movq	%rax, -24(%rbp)
-	movl	$1, %esi
 	movl	$16000, %edi
-	call	mlm_malloc
+	call	malloc@PLT
 	movq	%rax, -16(%rbp)
 	movl	$1, %esi
 	movl	$16000, %edi
 	call	mlm_malloc
 	movq	%rax, -8(%rbp)
-	call	weight_post_malloc
 	movq	-8(%rbp), %rcx
 	movq	-16(%rbp), %rdx
 	movq	-24(%rbp), %rax

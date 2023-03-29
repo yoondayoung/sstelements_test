@@ -1,0 +1,150 @@
+No protocol specified
+No protocol specified
+SST-Core: Configuration Library Path will read from: /home/ydy/local/sst-core/lib/sst:/home/ydy/local/sst-core/lib/sstcore:/home/ydy/local/sst-elements/lib/sst-elements-library:/home/ydy/scratch/src/sst-elements/src/sst/elements/osseous
+0 2
+1 2
+2 2
+3 2
+SSTPythonModel: Creating config graph for SST using Python model...
+WARNING: Component name 'Bridge:internal_network-Bridge' is not valid
+WARNING: Link name 'B0-internal_network-Bridge' is not valid
+WARNING: Link name 'B0-internal_network-Bridge' is not valid
+WARNING: Link name 'B1-internal_network-Bridge' is not valid
+WARNING: Link name 'B1-internal_network-Bridge' is not valid
+WARNING: Component name 'Bridge:Ext_Mem_Net-Bridge' is not valid
+WARNING: Link name 'B0-Ext_Mem_Net-Bridge' is not valid
+WARNING: Link name 'B0-Ext_Mem_Net-Bridge' is not valid
+WARNING: Link name 'B1-Ext_Mem_Net-Bridge' is not valid
+WARNING: Link name 'B1-Ext_Mem_Net-Bridge' is not valid
+SSTPythonModel: Construction of config graph with Python is complete.
+ SST Core: #main() My rank is (0.0), on 1/1 nodes/threads
+ SST Core: # ------------------------------------------------------------
+ SST Core: # Graph construction took 0.039976 seconds.
+ SST Core: # Graph contains 22 components
+ SST Core: # Graph partitioning took 8.10623e-06 seconds.
+ SST Core: # Graph construction and partition raised RSS by 16064 KB
+ SST Core: # ------------------------------------------------------------
+ SST Core: Signal handlers will be registered for USR1, USR2, INT and TERM...
+ SST Core: Signal handler registration is completed
+ SST Core:  : StatisticOutputCSV enabled...
+ArielComponent[arielcpu.cc:37:ArielCPU] Creating Ariel component...
+ArielComponent[arielcpu.cc:43:ArielCPU] Configuring for 2 cores...
+ArielComponent[arielcpu.cc:46:ArielCPU] Configuring for check addresses = no
+arielmemmgr opal is used!
+ArielComponent[arielcpu.cc:119:ArielCPU] Loaded memory manager: cpu:memmgr
+ArielComponent[arielcpu.cc:133:ArielCPU] Memory manager construction is completed.
+Pin3Frontend[frontend/pin3/pin3frontend.cc:81:Pin3Frontend] Model specifies that there are 0 application arguments
+Pin3Frontend[frontend/pin3/pin3frontend.cc:88:Pin3Frontend] Interception and instrumentation of multi-level memory and malloc/free calls is DISABLED.
+Pin3Frontend[frontend/pin3/pin3frontend.cc:96:Pin3Frontend] Tracking the stack and dumping on malloc calls is DISABLED.
+Pin3Frontend[frontend/pin3/pin3frontend.cc:101:Pin3Frontend] Malloc map file is DISABLED
+Pin3Frontend[frontend/pin3/pin3frontend.cc:110:Pin3Frontend] Base pipe name: /tmp/sst_shmem_2184826-0-1804289383
+Pin3Frontend[frontend/pin3/pin3frontend.cc:134:Pin3Frontend] Processing application arguments...
+Pin3Frontend[frontend/pin3/pin3frontend.cc:264:Pin3Frontend] Completed processing application arguments.
+Pin3Frontend[frontend/pin3/pin3frontend.cc:269:Pin3Frontend] Completed initialization of the Ariel CPU.
+ArielComponent[arielcpu.cc:169:ArielCPU] Registering ArielCPU clock at 2GHz
+ArielComponent[arielcpu.cc:173:ArielCPU] Clocks registered.
+ArielComponent[arielcpu.cc:175:ArielCPU] Creating core to cache links...
+ArielComponent[arielcpu.cc:177:ArielCPU] Creating processor cores and cache links...
+ArielComponent[arielcpu.cc:179:ArielCPU] Configuring cores and cache links...
+ArielComponent[arielcpu.cc:233:ArielCPU] Completed initialization of the Ariel RTL Link.
+ArielComponent[arielcpu.cc:233:ArielCPU] Completed initialization of the Ariel RTL Link.
+ArielComponent[arielcpu.cc:245:ArielCPU] Completed initialization of the Ariel CPU.
+Initialized with 2 cores
+Before initialization 
+Assigning the PTW correctly
+mmu:pagefaulthandler register handler
+Assigning the PTW correctly
+mmu:pagefaulthandler register handler
+After initialization 
+opalNumber of Shared Memory Pools: 1
+Pool start: 134217728 size: 2097152 frame size: 4 mem tech: 0
+opalConfiguring Shared mempool0
+Pool start: 0 size: 131072 frame size: 4 mem tech: 0
+allocation policy: 1
+clock: 2GHz
+l2cache_0: No MSHR lookup latency provided (mshr_latency_cycles)...intrapolated to 2 cycles.
+l2cache_1: No MSHR lookup latency provided (mshr_latency_cycles)...intrapolated to 2 cycles.
+l2cache_2: No MSHR lookup latency provided (mshr_latency_cycles)...intrapolated to 2 cycles.
+l2cache_3: No MSHR lookup latency provided (mshr_latency_cycles)...intrapolated to 2 cycles.
+l3cache: No MSHR lookup latency provided (mshr_latency_cycles)...intrapolated to 3 cycles.
+local_memory, WARNING: loading backend in legacy mode (from parameter set). Instead, load backend into this controller's 'backend' slot via ctrl.setSubComponent() in configuration.
+0:TimingDRAM::TimingDRAM():52:mc=0: number of channels: 2
+0:TimingDRAM::TimingDRAM():53:mc=0: address mapper:     memHierarchy.roundRobinAddrMapper
+0:TimingDRAM:Channel:Channel():111:mc=0:chan=0: max pending trans: 32
+0:TimingDRAM:Channel:Channel():112:mc=0:chan=0: number of ranks:   2
+0:TimingDRAM:Rank:Rank():221:mc=0:chan=0:rank=0: number of banks: 16
+0:TimingDRAM:Bank:Bank():289:mc=0:chan=0:rank=0:bank=0: CL:           14
+0:TimingDRAM:Bank:Bank():290:mc=0:chan=0:rank=0:bank=0: CL_WR:        12
+0:TimingDRAM:Bank:Bank():291:mc=0:chan=0:rank=0:bank=0: RCD:          14
+0:TimingDRAM:Bank:Bank():292:mc=0:chan=0:rank=0:bank=0: TRP:          14
+0:TimingDRAM:Bank:Bank():293:mc=0:chan=0:rank=0:bank=0: dataCycles:   2
+0:TimingDRAM:Bank:Bank():294:mc=0:chan=0:rank=0:bank=0: transactionQ: memHierarchy.fifoTransactionQ
+0:TimingDRAM:Bank:Bank():295:mc=0:chan=0:rank=0:bank=0: pagePolicy:   memHierarchy.simplePagePolicy
+local_memory, WARNING: Memories no longer inherit address regions from directories and no region parameters (addr_range_start, addr_range_end, interleave_size, interleave_step) were detected. All addresses will map to this memory: if this is intended, you may ignore this warning or set addr_range_start to 0 in your input deck to eliminate this warning.
+dc, Warning: getting region parameters (addr_range_start/end, interleave_step/size) from link subcomponent. In the future this will not be supported and region parameters should be declared in the directory's parameters instead.
+ExternalNVMmemContr, WARNING: Memories no longer inherit address regions from directories and no region parameters (addr_range_start, addr_range_end, interleave_size, interleave_step) were detected. All addresses will map to this memory: if this is intended, you may ignore this warning or set addr_range_start to 0 in your input deck to eliminate this warning.
+ExtMemDc, Warning: getting region parameters (addr_range_start/end, interleave_step/size) from link subcomponent. In the future this will not be supported and region parameters should be declared in the directory's parameters instead.
+The value of tRCD is 300
+After initialization 
+SSTARIEL: Loading Ariel Tool to connect to SST on pipe: /tmp/sst_shmem_2184826-0-1804289383 max core count: 2
+SSTARIEL: Function profiling is disabled.
+ARIEL-SST: Did not find ARIEL_OVERRIDE_POOL in the environment, no override applies.
+ARIEL-SST PIN tool activating with 2 threads
+ARIEL: Default memory pool set to 0
+ARIEL: Tool is configured to suspend profiling until program control
+ARIEL: Starting program. (with pin3)
+keepMallocstrackTrace: 0
+Identified routine: ariel_enable, replacing with Ariel equivalent...
+Replacement complete.
+Identified routine: clock_gettime, replacing with Ariel equivalent...
+Replacement complete.
+Identified routine: clock_gettime, replacing with Ariel equivalent...
+Replacement complete.
+ARIEL: Enabling memory and instruction tracing from program control at simulated Ariel cycle 9586374.
+Example passed on CPU.
+SSTARIEL: Execution completed, shutting down.
+ SST Core: # Starting main event loop
+ SST Core: # Start time: 2023/03/27 at: 17:10:02
+Pin3Frontend[frontend/pin3/pin3frontend.cc:276:init] Launching PIN...
+Pin3Frontend[frontend/pin3/pin3frontend.cc:332:forkPINChild] Executing PIN command: /home/ydy/local/packages/pin-3.22-98547-g7a303a835-gcc-linux/pin -follow_execv -ifeellucky -t /home/ydy/local/sst-elements/libexec/fesimple.so -w 0 -E 1 -p /tmp/sst_shmem_2184826-0-1804289383 -v 1 -t 0 -c 2 -s 0 -m 0 -k 0 -d 0 -- ./app/inference_test_base
+Pin3Frontend[frontend/pin3/pin3frontend.cc:281:init] Returned from launching PIN.  Waiting for child to attach.
+Pin3Frontend[frontend/pin3/pin3frontend.cc:284:init] Child has attached!
+CORE ID: 0 PROCESSED AN EXIT EVENT
+ArielComponent[arielcpu.cc:263:finish] Ariel Processor Information:
+ArielComponent[arielcpu.cc:264:finish] Completed at: 172817920 nanoseconds.
+ArielComponent[arielcpu.cc:265:finish] Ariel Component Statistics (By Core)
+
+Ariel Memory Management Statistics:
+---------------------------------------------------------------------
+Page Table Sizes:
+- Map entries         4623
+Page Table Coverages:
+- Bytes               18935808
+
+
+------------------------------------------------------------
+Simulation Timing Information (Wall Clock Times):
+  Build time:                      0.196771 seconds
+  Run loop time:                   1222.665936 seconds
+  Total time:                      1222.975758 seconds
+
+Simulated time:                    172.818 ms
+
+Simulation Resource Information:
+  Max Resident Set Size:           179.396 MB
+  Approx. Global Max RSS Size:     179.396 MB
+  Max Local Page Faults:           1 faults
+  Global Page Faults:              1 faults
+  Max Output Blocks:               1128 blocks
+  Max Input Blocks:                0 blocks
+  Max mempool usage:               67.8953 MB
+  Global mempool usage:            67.8953 MB
+  Global active activities:        407222 activities
+  Current global TimeVortex depth: 8 entries
+  Max TimeVortex depth:            94 entries
+  Max Sync data size:              0 B
+  Global Sync data size:           0 B
+------------------------------------------------------------
+
+
+Simulation is complete, simulated time: 172.818 ms

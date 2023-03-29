@@ -76,6 +76,7 @@ namespace SST
 
 				// to get weight allocation hints (weight alloc 해야되는 주소 저장)
 				std::vector<uint64_t> wAllocHints;
+				std::vector<uint32_t> wAllocPageHints;
 		};
 
 		class MemoryPrivateInfo

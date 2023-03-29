@@ -15,7 +15,7 @@ cores = 2*2
 #os.environ['OMP_NUM_THREADS'] = str(cores/2)
 
 
-local_memory_capacity = 128  	# Size of memory in MBs
+local_memory_capacity = 2048  	# Size of memory in MBs
 shared_memory_capacity = 2048	# 2GB
 shared_memory = 1
 page_size = 4 # In KB 
@@ -33,8 +33,10 @@ ariel.addParams({
     "corecount" : cores//2,
     "arielmode" : 0,
     "appargcount" : 0,
-    "max_insts" : 10000,
-    "executable" : "./app/opal_test",
+    "arielinterceptcalls": 1,
+#     "max_insts" : 10000,
+#     "executable" : "./app/opal_test",
+    "executable" : "./app/inference_test_mlmmalloc",
     "node" : 0,
     "launchparamcount" : 1,
     "launchparam0" : "-ifeellucky",
@@ -124,7 +126,7 @@ opal.addParams({
 	"shared_mem.mempool0.frame_size": page_size,
 	"shared_mem.mempool0.mem_type"	: 0,
 	"node0.cores" 			: cores//2,
-	"node0.allocation_policy" 	: 1,
+	"node0.allocation_policy" 	: 9,
 	"node0.page_migration" 		: 0,
 	"node0.page_migration_policy" 	: 0,
 	"node0.num_pages_to_migrate" 	: 0,
@@ -145,7 +147,8 @@ l1_params = {
         "access_latency_cycles": 4,
        	"L1": 1,
         "verbose": 30,
-        "maxRequestDelay" : "1000000",
+        # "maxRequestDelay" : "1000000",
+        "maxRequestDelay" : "2000000",
 }
 
 l2_params = {

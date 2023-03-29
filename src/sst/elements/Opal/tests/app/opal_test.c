@@ -43,11 +43,11 @@ int main(int argc, char* argv[]) {
 	ariel_enable();
 
         printf("Allocating arrays of size %d elements.\n", LENGTH);
-        weight_pre_malloc();
+        // weight_pre_malloc();
         double* a = (double*) mlm_malloc(sizeof(double) * LENGTH, 1);
-        double* b = (double*) mlm_malloc(sizeof(double) * LENGTH, 1);
+        double* b = (double*) malloc(sizeof(double) * LENGTH);
         double* c = (double*) mlm_malloc(sizeof(double) * LENGTH, 1);
-        weight_post_malloc();
+        // weight_post_malloc();
         
         printf("allocated address: a:%x b:%x c:%x\n", a, b, c);
         printf("Done allocating arrays.\n");

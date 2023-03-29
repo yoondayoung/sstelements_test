@@ -80,6 +80,6 @@ void PageFaultHandler::allocatePage(const uint32_t thread, const uint32_t level,
     tse->setWeightFlag(weightFlag);
     // for weight allocation
     opalLink[thread]->send(tse); 
-    printf("[pagefault handler] vaddr: %lx, size: %ld\n", virtualAddress, size);
+    // printf("[pagefault handler] vaddr: %lx, size: %ld\n", virtualAddress, size);
 }
 

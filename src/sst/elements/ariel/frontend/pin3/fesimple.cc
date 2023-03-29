@@ -977,7 +977,7 @@ void* ariel_mlm_malloc(size_t size, int level) {
     ac.command = ARIEL_ISSUE_TLM_MAP;
     ac.mlm_map.vaddr = virtualAddress;
     ac.mlm_map.alloc_len = allocationLength;
-    ac.mlm_map.isWeight = isWeightFlag;
+    ac.mlm_map.isWeight = true;
 
     if(shouldOverride) {
         ac.mlm_map.alloc_level = overridePool;
@@ -1742,7 +1742,8 @@ VOID InstrumentRoutine(RTN rtn, VOID* args)
         AFUNPTR ret = RTN_Replace(rtn, (AFUNPTR) ariel_mlm_malloc);
         fprintf(stderr,"Replacement complete. (%p)\n", ret);
         return;
-    } else if ((InterceptMemAllocations.Value() > 0) && RTN_Name(rtn) == "mlm_free") {
+    } 
+    else if ((InterceptMemAllocations.Value() > 0) && RTN_Name(rtn) == "mlm_free") {
         fprintf(stderr,"Identified routine: mlm_free, replacing with Ariel equivalent...\n");
         RTN_Replace(rtn, (AFUNPTR) ariel_mlm_free);
         fprintf(stderr, "Replacement complete.\n");
@@ -1752,37 +1753,39 @@ VOID InstrumentRoutine(RTN rtn, VOID* args)
         RTN_Replace(rtn, (AFUNPTR) ariel_mlm_set_pool);
         fprintf(stderr, "Replacement complete.\n");
         return;
-    } else if ((InterceptMemAllocations.Value() > 0) && (
-                RTN_Name(rtn) == "malloc" || RTN_Name(rtn) == "_malloc" || RTN_Name(rtn) == "__libc_malloc" || RTN_Name(rtn) == "__libc_memalign" || RTN_Name(rtn) == "_gfortran_malloc")) {
+    }
+    // else if ((InterceptMemAllocations.Value() > 0) && (
+    //             RTN_Name(rtn) == "malloc" || RTN_Name(rtn) == "_malloc" || RTN_Name(rtn) == "__libc_malloc" || RTN_Name(rtn) == "__libc_memalign" || RTN_Name(rtn) == "_gfortran_malloc")) {
 
-        fprintf(stderr, "Identified routine: malloc/_malloc, replacing with Ariel equivalent...\n");
-        RTN_Open(rtn);
+    //     fprintf(stderr, "Identified routine: malloc/_malloc, replacing with Ariel equivalent...\n");
+    //     RTN_Open(rtn);
 
-        RTN_InsertCall(rtn, IPOINT_BEFORE,
-            (AFUNPTR) ariel_premalloc_instrument,
-                IARG_FUNCARG_ENTRYPOINT_VALUE, 0,
-                IARG_INST_PTR,
-                IARG_END);
+    //     RTN_InsertCall(rtn, IPOINT_BEFORE,
+    //         (AFUNPTR) ariel_premalloc_instrument,
+    //             IARG_FUNCARG_ENTRYPOINT_VALUE, 0,
+    //             IARG_INST_PTR,
+    //             IARG_END);
 
-        RTN_InsertCall(rtn, IPOINT_AFTER,
-                       (AFUNPTR) ariel_postmalloc_instrument,
-                       IARG_FUNCRET_EXITPOINT_VALUE,
-                       IARG_END);
+    //     RTN_InsertCall(rtn, IPOINT_AFTER,
+    //                    (AFUNPTR) ariel_postmalloc_instrument,
+    //                    IARG_FUNCRET_EXITPOINT_VALUE,
+    //                    IARG_END);
 
-        RTN_Close(rtn);
-    } else if ((InterceptMemAllocations.Value() > 0) && (
-                RTN_Name(rtn) == "free" || RTN_Name(rtn) == "_free" || RTN_Name(rtn) == "__libc_free" || RTN_Name(rtn) == "_gfortran_free")) {
+    //     RTN_Close(rtn);
+    // } else if ((InterceptMemAllocations.Value() > 0) && (
+    //             RTN_Name(rtn) == "free" || RTN_Name(rtn) == "_free" || RTN_Name(rtn) == "__libc_free" || RTN_Name(rtn) == "_gfortran_free")) {
 
-        fprintf(stderr, "Identified routine: free/_free, replacing with Ariel equivalent...\n");
-        RTN_Open(rtn);
+    //     fprintf(stderr, "Identified routine: free/_free, replacing with Ariel equivalent...\n");
+    //     RTN_Open(rtn);
 
-        RTN_InsertCall(rtn, IPOINT_BEFORE,
-            (AFUNPTR) ariel_postfree_instrument,
-                IARG_FUNCARG_ENTRYPOINT_VALUE, 0,
-                IARG_END);
+    //     RTN_InsertCall(rtn, IPOINT_BEFORE,
+    //         (AFUNPTR) ariel_postfree_instrument,
+    //             IARG_FUNCARG_ENTRYPOINT_VALUE, 0,
+    //             IARG_END);
 
-        RTN_Close(rtn);
-    } else if (RTN_Name(rtn) == "ariel_output_stats" || RTN_Name(rtn) == "_ariel_output_stats" || RTN_Name(rtn) == "__arielfort_MOD_ariel_output_stats") {
+    //     RTN_Close(rtn);
+    // } 
+    else if (RTN_Name(rtn) == "ariel_output_stats" || RTN_Name(rtn) == "_ariel_output_stats" || RTN_Name(rtn) == "__arielfort_MOD_ariel_output_stats") {
         fprintf(stderr, "Identified routine: ariel_output_stats, replacing with Ariel equivalent..\n");
         RTN_Replace(rtn, (AFUNPTR) mapped_ariel_output_stats);
         fprintf(stderr, "Replacement complete\n");

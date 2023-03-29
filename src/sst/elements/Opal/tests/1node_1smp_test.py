@@ -15,7 +15,7 @@ cores = 2*2
 #os.environ['OMP_NUM_THREADS'] = str(cores/2)
 
 
-local_memory_capacity = 128  	# Size of memory in MBs
+local_memory_capacity = 128  	# Size of memory in MBs (원래: 128)
 shared_memory_capacity = 2048	# 2GB
 shared_memory = 1
 page_size = 4 # In KB 
@@ -32,15 +32,15 @@ ariel.addParams({
     "pipetimeout" : 0,
     "corecount" : cores//2,
     "arielmode" : 0,
-    "arielstack" : 1, # Should keep shadow stack and dump on malloc calls. 1 = enabled, 0 = disabled
-    "writepayloadtrace": 1, # Perform write tracing (i.e copy values directly into SST memory operations) (0 = disabled, 1 = enabled)
+#     "arielstack" : 1, # Should keep shadow stack and dump on malloc calls. 1 = enabled, 0 = disabled
+#     "writepayloadtrace": 1, # Perform write tracing (i.e copy values directly into SST memory operations) (0 = disabled, 1 = enabled)
     "arielinterceptcalls": 1,  # Should intercept multi-level memory allocations, mallocs, and frees, 1 = start enabled, 0 = start disabled
 #     "mallocmapfile" : "/home/ydy/scratch/src/sst-elements/src/sst/elements/Opal/tests/mallocmap.txt", #Should intercept ariel_malloc_flag() and interpret using a malloc map: specify filename or leave blank for disabled
     "appargcount" : 0,
 #     "max_insts" : 10000,
-#     "executable" : "./app/inference_test",
+    "executable" : "./app/training_test_mlmmalloc",
 #     "executable" : "./app/cpu-rnn-inference-int8-cpp",
-    "executable" : "./app/opal_test",
+#     "executable" : "./app/opal_test",
 #     "executable" : "./app/training_test",
     "node" : 0,
     "launchparamcount" : 1,
@@ -135,7 +135,7 @@ opal.addParams({
 # 	"shared_mem.mempool1.frame_size": page_size,
 # 	"shared_mem.mempool1.mem_type"	: 0,
 	"node0.cores" 			: cores//2,
-	"node0.allocation_policy" 	: 9,
+	"node0.allocation_policy" 	: 0,
 	"node0.page_migration" 		: 0,
 	"node0.page_migration_policy" 	: 0,
 	"node0.num_pages_to_migrate" 	: 0,
@@ -158,7 +158,7 @@ l1_params = {
        	"L1": 1,
         "verbose": 30,
         # "maxRequestDelay" : "1000000",
-        # "maxRequestDelay" : "2000000",
+        "maxRequestDelay" : "2000000",
 }
 
 l2_params = {
@@ -289,7 +289,7 @@ l3_ring_link.connect( (l3_link, "port", "300ps"), (internal_network.rtr, "port%d
 mem = sst.Component("local_memory", "memHierarchy.MemController")	
 mem.addParams({
 	"clock"   : "1.2GHz",
-      "prefetcher" : "cassini.StridePrefetcher",
+#       "prefetcher" : "cassini.StridePrefetcher",
 	"backing" : "none",
 	"backend" : "memHierarchy.timingDRAM",
 	"backend.id" : 0,
